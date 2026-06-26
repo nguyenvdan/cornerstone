@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ---- Cornerstone project ----
+# Cached raw scrapes are large + regenerable; do NOT commit them.
+data/raw/
+data/interim/
+# Committed reproducible dataset lives in data/processed/ (force-add below).
+!data/processed/
+!data/processed/**
