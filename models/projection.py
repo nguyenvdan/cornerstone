@@ -30,6 +30,8 @@ from dataclasses import dataclass, field
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import Ridge
+from sklearn.preprocessing import StandardScaler
 
 from pipelines import config
 
@@ -38,12 +40,16 @@ from .features import FEATURE_DISPLAY, SIMILARITY_FEATURES
 
 
 def vorp_feature_weights(prospects: pd.DataFrame, floor: float = 0.1) -> dict[str, float]:
-    """Weight each feature by |correlation with career VORP| on matured classes.
+    """Weight each feature by its multivariate predictive contribution to VORP.
 
-    This turns the comparables metric from "pure profile similarity" into
-    "similarity in the dimensions that relate to NBA value" — emphasizing age,
-    steal rate and playmaking over near-noise features like FT%/3P%. A floor
-    keeps every feature contributing something.
+    Uses the absolute standardized Ridge coefficients of career VORP on the
+    feature set (matured classes only). This turns the comparables metric from
+    "pure profile similarity" into "similarity in the dimensions that relate to
+    NBA value", and — unlike marginal correlations — it shares credit correctly
+    across collinear stats (pts/usage/efg). A cross-validated bake-off picked
+    Ridge weighting over correlation weighting and over gradient-boosted /
+    engineered-feature variants (those overfit or added noise). A floor keeps
+    every feature contributing something.
     """
     mat = prospects[
         prospects["has_college_stats"]
@@ -54,12 +60,10 @@ def vorp_feature_weights(prospects: pd.DataFrame, floor: float = 0.1) -> dict[st
     X = mat[SIMILARITY_FEATURES].astype(float)
     X = X.fillna(X.median())
     vorp = mat["career_vorp"].astype(float).to_numpy()
-    weights: dict[str, float] = {}
-    for f in SIMILARITY_FEATURES:
-        col = X[f].to_numpy()
-        c = 0.0 if col.std() == 0 else abs(np.corrcoef(col, vorp)[0, 1])
-        weights[f] = float(max(c, floor))
-    return weights
+    Xs = StandardScaler().fit_transform(X.values)
+    coef = np.abs(Ridge(alpha=10.0).fit(Xs, vorp).coef_)
+    coef = coef / coef.mean()
+    return {f: float(max(coef[j], floor)) for j, f in enumerate(SIMILARITY_FEATURES)}
 
 
 def weighted_percentile(values: np.ndarray, weights: np.ndarray, q: float) -> float:
