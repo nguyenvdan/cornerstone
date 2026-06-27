@@ -26,11 +26,20 @@ export default function Projection({ p }: { p: any }) {
       </p>
 
       {/* Best / expected / worst career outcomes, mapped to the VORP scale */}
-      <div className="grid three" style={{ marginBottom: 18 }}>
+      <div className="grid three" style={{ marginBottom: 10 }}>
         <Scenario label="Worst case (10th pct)" vorp={band.p10} accent="var(--accent-2)" />
         <Scenario label="Expected" vorp={p.expected_career_vorp} accent="var(--navy-2)" />
-        <Scenario label="Best case (90th pct)" vorp={band.p90} accent="var(--ok)" />
+        <Scenario label="Best case (95th pct)" vorp={band.p95} accent="var(--ok)" />
       </div>
+      {p.ceiling_comparable?.player_name && (
+        <p className="sub" style={{ marginBottom: 18 }}>
+          <b>Ceiling.</b> His single best comparable outcome is a{" "}
+          <b>{p.ceiling_comparable.player_name}</b>–level career ({p.ceiling_comparable.career_vorp}{" "}
+          VORP — {vorpLabel(p.ceiling_comparable.career_vorp)}). The upper tail of his comp set is
+          genuinely Hall-of-Fame / all-time-great: Kevin Durant and James Harden are among his
+          analogs. It's the low-probability dream outcome — but a real, data-grounded one.
+        </p>
+      )}
 
       <div className="grid two">
         <div className="card">

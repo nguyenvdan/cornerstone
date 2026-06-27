@@ -100,6 +100,7 @@ class Projection:
     swing_factors: list[SwingFactor] = field(default_factory=list)
     key_uncertainties: list[str] = field(default_factory=list)
     top_comparables: list[dict] = field(default_factory=list)
+    ceiling_comparable: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         d = self.__dict__.copy()
@@ -323,8 +324,17 @@ class ProjectionModel:
         cv = meta["career_vorp"].to_numpy(float)
         cmask = ~np.isnan(cv)
         cv_band = {f"p{q}": round(weighted_percentile(cv[cmask], weights[cmask], q), 1)
-                   for q in (10, 25, 50, 75, 90)}
+                   for q in (10, 25, 50, 75, 90, 95, 99)}
         expected_vorp = round(float(np.average(cv[cmask], weights=weights[cmask])), 1)
+
+        # The single best realized outcome among his comparables = his data-grounded
+        # ceiling ("if everything breaks right, this is who he becomes").
+        ceil_i = int(np.argmax(np.where(cmask, cv, -np.inf)))
+        ceiling_comparable = {
+            "player_name": meta["player_name"].iloc[ceil_i],
+            "career_vorp": round(float(cv[ceil_i]), 1),
+            "outcome_tier": meta["outcome_tier"].iloc[ceil_i],
+        }
 
         pb = meta["peak_bpm"].to_numpy(float)
         pmask = ~np.isnan(pb)
@@ -370,6 +380,7 @@ class ProjectionModel:
             swing_factors=swings,
             key_uncertainties=notes,
             top_comparables=top,
+            ceiling_comparable=ceiling_comparable,
         )
 
 
