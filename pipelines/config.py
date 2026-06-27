@@ -24,6 +24,18 @@ DRAFT_YEARS = list(range(DRAFT_START, DRAFT_END + 1))
 # Number of early NBA seasons used to summarize a "development trajectory".
 OUTCOME_WINDOW = 5
 
+# Start-year of the most recently completed NBA season (2025-26 -> 2025). Used
+# to tell whether a comparable's Nth pro season has actually elapsed yet, so the
+# projection can distinguish "didn't play (= replacement value 0)" from "season
+# hasn't happened yet (= genuinely unknown)" and avoid survivorship bias.
+LAST_SEASON_START = 2025
+
+# Draft classes at/under this year have had >= ~6 NBA seasons to mature by
+# 2025-26, so their outcome tiers are final. The projection model draws its
+# comparable *outcomes* only from matured classes, otherwise recent draftees
+# look like "busts" purely because their careers are still young.
+MATURE_DRAFT_CUTOFF = 2019
+
 # ---- Scraping etiquette -------------------------------------------------
 # Basketball Reference asks for <= 20 requests/minute. We stay well under.
 USER_AGENT = "cornerstone-research/0.1 (personal player-development project)"

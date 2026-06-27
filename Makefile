@@ -19,6 +19,10 @@ dybantsa:
 comparables:
 	uv run python -m models.comparables
 
+# Phase 3: probabilistic development projection (tiers, curve, swing factors).
+project:
+	uv run python -m models.projection
+
 test:
 	uv run pytest -q
 

@@ -47,7 +47,7 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for module responsibilities and data fl
 | 0 | Scaffolding | ✅ done |
 | 1 | Data pipeline (fetch → clean → join → version) | ✅ done |
 | 2 | Comparables engine (embedding similarity) | ✅ done |
-| 3 | Probabilistic outcome model | ⏳ planned |
+| 3 | Probabilistic outcome model | ✅ done |
 | 4 | Back-testing / calibration | ⏳ planned |
 | 5 | Roster-fit engine | ⏳ planned |
 | 6 | Agentic orchestration | ⏳ planned |
@@ -66,6 +66,7 @@ make data-sample           # quick 2-year build (~2 min) to verify the pipeline
 make data                  # full 2003-2022 universe (first run ~1.5-2 hr; cached after)
 make dybantsa              # build AJ Dybantsa's pre-draft profile row
 make comparables           # Dybantsa's top historical analogs (Phase 2)
+make project               # Dybantsa's probabilistic projection (Phase 3)
 make test                  # unit tests
 ```
 

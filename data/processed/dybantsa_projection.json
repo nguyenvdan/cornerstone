@@ -1,0 +1,175 @@
+{
+  "prospect_name": "AJ Dybantsa",
+  "n_comparables": 75,
+  "tier_probabilities": {
+    "bust": 0.34,
+    "rotation": 0.245,
+    "starter": 0.214,
+    "all_star": 0.131,
+    "superstar": 0.07
+  },
+  "p_starter_plus": 0.415,
+  "p_star_plus": 0.201,
+  "modal_tier": "bust",
+  "expected_career_vorp": 7.9,
+  "career_vorp_band": {
+    "p10": -1.2,
+    "p25": -0.1,
+    "p50": 1.3,
+    "p75": 7.5,
+    "p90": 18.6
+  },
+  "peak_bpm_band": {
+    "p10": -2.7,
+    "p50": 1.2,
+    "p90": 5.6
+  },
+  "season_curve": [
+    {
+      "season": 1,
+      "n_comps": 75,
+      "p10": -0.81,
+      "p25": -0.3,
+      "p50": -0.1,
+      "p75": 0.2,
+      "p90": 1.28
+    },
+    {
+      "season": 2,
+      "n_comps": 75,
+      "p10": -0.41,
+      "p25": -0.18,
+      "p50": 0.1,
+      "p75": 0.76,
+      "p90": 1.8
+    },
+    {
+      "season": 3,
+      "n_comps": 75,
+      "p10": -0.3,
+      "p25": 0.0,
+      "p50": 0.2,
+      "p75": 1.2,
+      "p90": 3.4
+    },
+    {
+      "season": 4,
+      "n_comps": 75,
+      "p10": -0.3,
+      "p25": -0.1,
+      "p50": 0.1,
+      "p75": 1.39,
+      "p90": 3.4
+    },
+    {
+      "season": 5,
+      "n_comps": 75,
+      "p10": -0.11,
+      "p25": 0.0,
+      "p50": 0.2,
+      "p75": 1.39,
+      "p90": 5.28
+    }
+  ],
+  "swing_factors": [
+    {
+      "feature": "coll_stl_per_g",
+      "display": "college steals/game",
+      "effect_vorp": 2.43,
+      "direction": "raises"
+    },
+    {
+      "feature": "age_at_draft",
+      "display": "age at draft",
+      "effect_vorp": -2.29,
+      "direction": "lowers"
+    },
+    {
+      "feature": "coll_usg_pct",
+      "display": "college usage%",
+      "effect_vorp": 0.65,
+      "direction": "raises"
+    },
+    {
+      "feature": "coll_ft_pct",
+      "display": "college FT%",
+      "effect_vorp": 0.64,
+      "direction": "raises"
+    },
+    {
+      "feature": "coll_ts_pct",
+      "display": "college TS%",
+      "effect_vorp": 0.6,
+      "direction": "raises"
+    },
+    {
+      "feature": "coll_pts_per_g",
+      "display": "college points/game",
+      "effect_vorp": 0.52,
+      "direction": "raises"
+    }
+  ],
+  "key_uncertainties": [
+    "80% career-VORP interval spans -1.2 to 18.6 (median 1.3) \u2014 a wide range driven by how differently the comparables developed.",
+    "P(starter or better) = 42%; P(all-star or better) = 20%; P(bust) = 34%. The projection is a distribution, not a single outcome.",
+    "College box-score profiles are weak predictors of NBA stardom, so the uncertainty here is real, not hidden \u2014 comparables also don't capture team fit, health, or development environment."
+  ],
+  "top_comparables": [
+    {
+      "player_name": "James Harden",
+      "draft_year": 2009,
+      "similarity": 72.7,
+      "outcome_tier": "superstar",
+      "career_vorp": 87.9
+    },
+    {
+      "player_name": "Alec Burks",
+      "draft_year": 2011,
+      "similarity": 72.5,
+      "outcome_tier": "starter",
+      "career_vorp": 6.6
+    },
+    {
+      "player_name": "RJ Barrett",
+      "draft_year": 2019,
+      "similarity": 71.4,
+      "outcome_tier": "rotation",
+      "career_vorp": 1.8
+    },
+    {
+      "player_name": "James Anderson",
+      "draft_year": 2010,
+      "similarity": 68.9,
+      "outcome_tier": "bust",
+      "career_vorp": -0.8
+    },
+    {
+      "player_name": "O.J. Mayo",
+      "draft_year": 2008,
+      "similarity": 68.1,
+      "outcome_tier": "starter",
+      "career_vorp": 4.7
+    },
+    {
+      "player_name": "Jarrett Culver",
+      "draft_year": 2019,
+      "similarity": 67.4,
+      "outcome_tier": "bust",
+      "career_vorp": -1.6
+    },
+    {
+      "player_name": "Jamal Murray",
+      "draft_year": 2016,
+      "similarity": 67.2,
+      "outcome_tier": "all_star",
+      "career_vorp": 16.5
+    },
+    {
+      "player_name": "T.J. Warren",
+      "draft_year": 2014,
+      "similarity": 66.6,
+      "outcome_tier": "starter",
+      "career_vorp": 4.1
+    }
+  ]
+}

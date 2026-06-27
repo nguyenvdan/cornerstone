@@ -76,7 +76,18 @@ class ComparablesEngine:
     def __init__(self) -> None:
         self.scaler_: StandardScaler | None = None
 
-    def fit(self, prospects: pd.DataFrame) -> ComparablesEngine:
+    def fit(
+        self,
+        prospects: pd.DataFrame,
+        feature_weights: dict[str, float] | np.ndarray | None = None,
+    ) -> ComparablesEngine:
+        """Fit on the historical universe.
+
+        ``feature_weights`` (optional, one per SIMILARITY_FEATURES) scales the
+        standardized distance per feature, so similarity can emphasize the
+        features that actually relate to NBA outcomes (supervised metric
+        weighting). Default = uniform (pure profile similarity).
+        """
         college = prospects[prospects["has_college_stats"]].copy()
         college = college[college["coll_pts_per_g"].notna()]
         college = college.drop_duplicates(subset="player_id").set_index("player_id")
@@ -85,10 +96,22 @@ class ComparablesEngine:
         self.medians_ = raw.median()
         raw = raw.fillna(self.medians_)
 
+        # Per-feature distance weights (normalized to mean 1 to keep the overall
+        # distance scale stable); stored as sqrt for Euclidean weighting.
+        if feature_weights is None:
+            w = np.ones(len(SIMILARITY_FEATURES))
+        elif isinstance(feature_weights, dict):
+            w = np.array([feature_weights.get(f, 1.0) for f in SIMILARITY_FEATURES], float)
+        else:
+            w = np.asarray(feature_weights, float)
+        w = w / w.mean()
+        self.feature_weights_ = w
+        self._w_sqrt = np.sqrt(w)
+
         self.raw_ = raw                                    # imputed, unscaled
         self.meta_ = college[META_COLUMNS]
         self.scaler_ = StandardScaler().fit(raw.values)
-        self.Z_ = self.scaler_.transform(raw.values)      # (n, f)
+        self.Z_ = self.scaler_.transform(raw.values) * self._w_sqrt   # (n, f)
         self.ids_ = raw.index.to_numpy()
 
         # Scale at which the match score halves: the median pairwise distance.
@@ -105,7 +128,7 @@ class ComparablesEngine:
     def _vectorize(self, prospect: pd.Series) -> np.ndarray:
         raw = prospect.reindex(SIMILARITY_FEATURES).astype(float)
         raw = raw.fillna(self.medians_)
-        return self.scaler_.transform(raw.values.reshape(1, -1))[0]
+        return self.scaler_.transform(raw.values.reshape(1, -1))[0] * self._w_sqrt
 
     def _score(self, distance: float) -> float:
         # 100 at distance 0, 50 at the median pairwise distance, smooth decay.
