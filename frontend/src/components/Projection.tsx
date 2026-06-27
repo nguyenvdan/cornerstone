@@ -7,9 +7,30 @@ const RADAR: { key: string; label: string }[] = [
   { key: "playmaking", label: "Playmaking" },
   { key: "spacing", label: "Shooting" },
   { key: "perimeter_defense", label: "Perimeter D" },
-  { key: "rim_protection", label: "Interior D" },
+  { key: "rim_protection", label: "Rim Protect" },
   { key: "rebounding", label: "Rebounding" },
 ];
+
+// AJ's measured combine metrics, as height/position-adjusted percentiles.
+const COMBINE_RADAR: { key: string; label: string }[] = [
+  { key: "vertical_pct", label: "Explosive" },
+  { key: "wingspan_pct", label: "Length" },
+  { key: "reach_pct", label: "Reach" },
+  { key: "height_pct", label: "Pos. Size" },
+];
+
+function RadarLegend() {
+  return (
+    <div style={{ display: "flex", gap: 18, justifyContent: "center", marginTop: 2,
+      fontSize: 11, color: "var(--muted)", fontFamily: "var(--font-display)",
+      textTransform: "uppercase", letterSpacing: "0.04em" }}>
+      <span><span style={{ display: "inline-block", width: 14, height: 2,
+        background: "var(--ink)", verticalAlign: "middle", marginRight: 5 }} />AJ</span>
+      <span><span style={{ display: "inline-block", width: 14, height: 0,
+        borderTop: "2px dashed var(--avg)", verticalAlign: "middle", marginRight: 5 }} />Average</span>
+    </div>
+  );
+}
 
 // Color only carries meaning: green = star upside, red = bust, gray = the middle.
 const TIER_COLOR: Record<string, string> = {
@@ -110,34 +131,34 @@ export default function Projection({ p }: { p: any }) {
           <div className="card">
             <h3>Skill profile <span style={{ color: "var(--muted)", fontWeight: 400,
               textTransform: "none", letterSpacing: 0 }}>— percentile vs prospects</span></h3>
-            <Radar data={RADAR.map((r) => ({ label: r.label, value: p.skill_profile[r.key] }))} />
+            <Radar label="Skill profile radar"
+              data={RADAR.map((r) => ({ label: r.label, value: p.skill_profile[r.key] }))} />
+            <RadarLegend />
             <div className="note">
-              Elite shot creation & playmaking; average shooting; low rim protection — the
-              profile of a primary scoring wing who needs spacing & rim help around him.
+              Elite shot creation & playmaking, solid rebounding. "Rim Protect" is a center
+              skill he isn't asked to provide — not a flaw for a scoring wing. He needs
+              spacing & rim help around him.
             </div>
           </div>
         )}
 
         {p.combine && (
           <div className="card">
-            <h3>Combine athletic profile <span className="pill superstar" style={{ fontSize: 11 }}>
+            <h3>Combine athleticism <span className="pill superstar" style={{ fontSize: 11 }}>
               {Math.round(p.combine.athleticism_pct)}th pct athlete</span></h3>
-            <div className="grid three" style={{ gap: 10, marginBottom: 6 }}>
+            <div className="grid three" style={{ gap: 10, marginBottom: 2 }}>
               <Measurable label="Height (no shoes)" value={inchesToFeet(p.combine.height_no_shoes_in)} />
               <Measurable label="Wingspan" value={inchesToFeet(p.combine.wingspan_in)} />
               <Measurable label="Max vertical" value={`${p.combine.max_vertical_in}"`}
                 sub="combine-best" highlight />
             </div>
-            <Bar label="Vertical" value={Math.round(p.combine.vertical_pct)} suffix="th"
-              color="var(--pos)" />
-            <Bar label="Length" value={Math.round(p.combine.wingspan_pct)} suffix="th"
-              color="var(--ink-2)" />
-            <Bar label="Pos. size" value={Math.round(p.combine.height_pct)} suffix="th"
-              color="var(--pos)" />
+            <Radar label="Combine athleticism radar"
+              data={COMBINE_RADAR.map((r) => ({ label: r.label, value: p.combine[r.key] }))} />
+            <RadarLegend />
             <div className="note">
-              Height-adjusted: explosiveness & length scored vs same-height players, size vs
-              position. A 42" vertical on a 6'8" frame is 99th-pct explosive — his length is
-              only average for his height.
+              Height-adjusted: explosiveness & length vs same-height players, size vs position.
+              A 42" vertical on a 6'8" frame is 99th-pct explosive; his length is average for
+              his height.
             </div>
           </div>
         )}

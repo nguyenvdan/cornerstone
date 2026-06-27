@@ -46,10 +46,10 @@
         "team": "WAS",
         "cornerstone": "AJ Dybantsa"
       },
-      "result_summary": "fit_score=73.1"
+      "result_summary": "fit_score=72.7"
     }
   ],
-  "report_markdown": "# Scouting & strategy report: AJ Dybantsa\n_Question: Analyze the Wizards' path with AJ Dybantsa as their cornerstone._\n\n## Profile  _(from lookup_prospect)_\nBYU, age 19.56, 6'9\", 25.5 pts / 6.8 reb / 3.7 ast.\n\n## Historical comparables  _(from find_comparables)_\n- **James Harden** (2009) \u2014 similarity 72.8, became a superstar (career VORP 87.9); alike on college blocks/game, college eFG%.\n- **James Anderson** (2010) \u2014 similarity 71.2, became a bust (career VORP -0.8); alike on college 3P%, college TS%.\n- **Alec Burks** (2011) \u2014 similarity 70.7, became a starter (career VORP 6.6); alike on college steals/game, college blocks/game.\n- **RJ Barrett** (2019) \u2014 similarity 70.0, became a rotation (career VORP 1.8); alike on college minutes/game, college blocks/game.\n- **T.J. Warren** (2014) \u2014 similarity 68.4, became a starter (career VORP 4.1); alike on college eFG%, college minutes/game.\n\nAcross the analog set the outcomes range widely (all_star, bust, rotation, starter, superstar), which is the basis for the uncertainty below.\n\n## Development projection  _(from project_development)_\n- **P(starter or better): 71%**, P(all-star or better): 50%, P(bust): 11%.\n- Expected career VORP **16.2**, with an honest 80% range of -0.4 to 36.7 (median 9.6).\n- Biggest swing factors: college steals/game (\u2191), age at draft (\u2193), college assists/game (\u2191).\n\n> 80% career-VORP interval spans -0.4 to 36.7 (median 9.6) \u2014 a wide range driven by how differently the comparables developed.\n\n## Roster fit & build path  _(from evaluate_roster_fit)_\n- WAS fit around AJ Dybantsa: **73.1/100**.\n- Biggest unmet needs: **perimeter defense, rim protection, spacing**.\n- Recommended complementary archetypes: Defensive Anchor Big (fills rim protection, perimeter defense); 3&D Wing (fills perimeter defense, spacing); Two-Way Wing (fills perimeter defense, spacing).\n\n## Bottom line\nAJ Dybantsa profiles as a 71%-likely starter-or-better with real star upside (P(all-star+) 50%) but genuine bust risk (11%) \u2014 a wide distribution, not a sure thing. To maximize his value, WAS should prioritize perimeter defense, rim protection \u2014 a Defensive Anchor Big is the highest-leverage add.",
+  "report_markdown": "# Scouting & strategy report: AJ Dybantsa\n_Question: Analyze the Wizards' path with AJ Dybantsa as their cornerstone._\n\n## Profile  _(from lookup_prospect)_\nBYU, age 19.56, 6'9\", 25.5 pts / 6.8 reb / 3.7 ast.\n\n## Historical comparables  _(from find_comparables)_\n- **James Harden** (2009) \u2014 similarity 72.8, became a superstar (career VORP 87.9); alike on college blocks/game, college eFG%.\n- **James Anderson** (2010) \u2014 similarity 71.2, became a bust (career VORP -0.8); alike on college 3P%, college TS%.\n- **Alec Burks** (2011) \u2014 similarity 70.7, became a starter (career VORP 6.6); alike on college steals/game, college blocks/game.\n- **RJ Barrett** (2019) \u2014 similarity 70.0, became a rotation (career VORP 1.8); alike on college minutes/game, college blocks/game.\n- **T.J. Warren** (2014) \u2014 similarity 68.4, became a starter (career VORP 4.1); alike on college eFG%, college minutes/game.\n\nAcross the analog set the outcomes range widely (all_star, bust, rotation, starter, superstar), which is the basis for the uncertainty below.\n\n## Development projection  _(from project_development)_\n- **P(starter or better): 71%**, P(all-star or better): 50%, P(bust): 11%.\n- Expected career VORP **16.2**, with an honest 80% range of -0.4 to 36.7 (median 9.6).\n- Biggest swing factors: college steals/game (\u2191), age at draft (\u2193), college assists/game (\u2191).\n\n> 80% career-VORP interval spans -0.4 to 36.7 (median 9.6) \u2014 a wide range driven by how differently the comparables developed.\n\n## Roster fit & build path  _(from evaluate_roster_fit)_\n- WAS fit around AJ Dybantsa: **72.7/100**.\n- Biggest unmet needs: **perimeter defense, rim protection, spacing**.\n- Recommended complementary archetypes: Defensive Anchor Big (fills rim protection, perimeter defense); 3&D Wing (fills perimeter defense, spacing); Two-Way Wing (fills perimeter defense, spacing).\n\n## Bottom line\nAJ Dybantsa profiles as a 71%-likely starter-or-better with real star upside (P(all-star+) 50%) but genuine bust risk (11%) \u2014 a wide distribution, not a sure thing. To maximize his value, WAS should prioritize perimeter defense, rim protection \u2014 a Defensive Anchor Big is the highest-leverage add.",
   "tool_results": {
     "lookup_prospect": {
       "player_name": "AJ Dybantsa",
@@ -416,11 +416,11 @@
     "evaluate_roster_fit": {
       "team": "WAS",
       "cornerstone": "AJ Dybantsa",
-      "fit_score": 73.1,
+      "fit_score": 72.7,
       "cornerstone_supply": {
         "shot_creation": 97.9,
         "playmaking": 77.1,
-        "spacing": 31.2,
+        "spacing": 45.7,
         "rim_protection": 20.0,
         "rebounding": 61.0,
         "perimeter_defense": 46.8
@@ -440,9 +440,9 @@
         },
         {
           "skill": "spacing",
-          "need": 95.6,
+          "need": 75.4,
           "roster_supply": 79.6,
-          "gap": 19.5
+          "gap": 15.4
         },
         {
           "skill": "rebounding",
@@ -479,7 +479,7 @@
         },
         {
           "archetype": "3&D Wing",
-          "score": 41.6,
+          "score": 38.2,
           "fills": [
             "perimeter_defense",
             "spacing"
@@ -487,7 +487,7 @@
         },
         {
           "archetype": "Two-Way Wing",
-          "score": 38.0,
+          "score": 35.1,
           "fills": [
             "perimeter_defense",
             "spacing"
@@ -495,7 +495,7 @@
         },
         {
           "archetype": "Stretch Big",
-          "score": 35.5,
+          "score": 32.0,
           "fills": [
             "spacing",
             "rim_protection"

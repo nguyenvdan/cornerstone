@@ -202,12 +202,13 @@
     "athleticism_pct": 75.9,
     "vertical_pct": 99.4,
     "wingspan_pct": 34.1,
+    "reach_pct": 29.5,
     "height_pct": 94.1
   },
   "skill_profile": {
     "shot_creation": 97.9,
     "playmaking": 77.1,
-    "spacing": 31.2,
+    "spacing": 45.7,
     "rim_protection": 20.0,
     "rebounding": 61.0,
     "perimeter_defense": 46.8

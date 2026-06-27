@@ -13,8 +13,9 @@ export function Bar({
   );
 }
 
-/** Spider/radar chart of skill percentiles (0-100). */
-export function Radar({ data }: { data: { label: string; value: number }[] }) {
+/** Spider/radar chart of skill percentiles (0-100), with an "average" overlay. */
+export function Radar({ data, avg = 50, label = "Skill profile radar" }:
+  { data: { label: string; value: number }[]; avg?: number; label?: string }) {
   const W = 360, H = 300, cx = 180, cy = 150, R = 100;
   const n = data.length;
   const ang = (i: number) => (Math.PI * 2 * i) / n - Math.PI / 2;
@@ -27,7 +28,7 @@ export function Radar({ data }: { data: { label: string; value: number }[] }) {
   const shape = data.map((d, i) => pt(i, (clamp(d.value) / 100) * R).join(",")).join(" ");
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="Skill profile radar">
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={label}>
       {[25, 50, 75, 100].map((rv) => (
         <polygon key={rv} points={ring(rv)} fill="none" stroke="var(--line)" strokeWidth={1} />
       ))}
@@ -35,7 +36,10 @@ export function Radar({ data }: { data: { label: string; value: number }[] }) {
         const [x, y] = pt(i, R);
         return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--line)" strokeWidth={1} />;
       })}
-      <polygon points={shape} fill="var(--ink)" fillOpacity={0.08}
+      {/* average reference (amber) */}
+      <polygon points={ring(avg)} fill="none" stroke="var(--avg)" strokeWidth={1.5}
+        strokeDasharray="4 3" />
+      <polygon points={shape} fill="var(--ink)" fillOpacity={0.09}
         stroke="var(--ink)" strokeWidth={2} />
       {data.map((d, i) => {
         const [x, y] = pt(i, (clamp(d.value) / 100) * R);

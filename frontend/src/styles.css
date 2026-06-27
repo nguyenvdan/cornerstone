@@ -13,6 +13,7 @@
   --pos: #15803d;          /* good: stars, upside, "raises" */
   --pos-soft: #4f9d6e;
   --neg: #be123c;          /* bad: bust, downside, gaps */
+  --avg: #d9a300;          /* amber: the "average" reference on radars */
 
   /* Legacy aliases (so components map cleanly onto the new system). */
   --navy: var(--ink);

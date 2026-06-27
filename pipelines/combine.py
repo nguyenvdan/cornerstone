@@ -131,9 +131,11 @@ def build_combine(prospects: pd.DataFrame) -> pd.DataFrame:
     h = pool["height_no_shoes"].to_numpy()
     vp = _banded_pct(h, pool["vertical_max"].to_numpy(), h)
     wp = _banded_pct(h, pool["wingspan"].to_numpy(), h)
+    rp = _banded_pct(h, pool["standing_reach"].to_numpy(), h)
     hp = _position_pct(pool["pos_group"].to_numpy(), h)
     pool["vertical_pct"] = vp.round(1)
     pool["wingspan_pct"] = wp.round(1)
+    pool["reach_pct"] = rp.round(1)
     pool["height_pct"] = hp.round(1)
     pool["athleticism_pct"] = np.nanmean(np.vstack([vp, wp, hp]), axis=0).round(1)
 
@@ -146,6 +148,7 @@ def build_combine(prospects: pd.DataFrame) -> pd.DataFrame:
         out_rows.append({"player_id": pid, "athleticism_pct": float(r["athleticism_pct"]),
                          "vertical_pct": float(r["vertical_pct"]),
                          "wingspan_pct": float(r["wingspan_pct"]),
+                         "reach_pct": float(r["reach_pct"]),
                          "height_pct": float(r["height_pct"]),
                          "wingspan": float(r["wingspan"]), "vertical_max": float(r["vertical_max"]),
                          "length": round(float(r["length"]), 1)})

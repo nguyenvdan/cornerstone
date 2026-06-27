@@ -484,6 +484,7 @@ def main() -> int:
             "athleticism_pct": float(a["athleticism_pct"]) if len(arow) else None,
             "vertical_pct": float(a["vertical_pct"]) if len(arow) else None,
             "wingspan_pct": float(a["wingspan_pct"]) if len(arow) else None,
+            "reach_pct": float(a["reach_pct"]) if len(arow) else None,
             "height_pct": float(a["height_pct"]) if len(arow) else None,
         }
 

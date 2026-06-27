@@ -87,18 +87,28 @@ class RosterFitReport:
         return d
 
 
+def _pctile(college: pd.DataFrame, col: str, val: object) -> float | None:
+    ref = college[col].dropna().to_numpy()
+    if val is None or (isinstance(val, float) and np.isnan(val)) or len(ref) == 0:
+        return None
+    return 100.0 * float((ref < val).mean())
+
+
 def cornerstone_skill_supply(prospect: pd.Series, prospects: pd.DataFrame) -> dict[str, float]:
     """Estimate the cornerstone's skill supply as percentiles vs the prospect
     universe (a projected *role tendency*, not NBA production)."""
     college = prospects[prospects["has_college_stats"]]
     supply: dict[str, float] = {}
     for skill, col in _COLLEGE_SKILL_SOURCE.items():
-        ref = college[col].dropna().to_numpy()
-        val = prospect.get(col)
-        if val is None or np.isnan(val) or len(ref) == 0:
-            supply[skill] = 50.0
-        else:
-            supply[skill] = round(100.0 * (ref < val).mean(), 1)
+        p = _pctile(college, col, prospect.get(col))
+        supply[skill] = round(p, 1) if p is not None else 50.0
+    # Shooting is more than 3P% on a freshman sample: free-throw % is a strong,
+    # well-established predictor of shooting development. Blend the two.
+    f3 = _pctile(college, "coll_fg3_pct", prospect.get("coll_fg3_pct"))
+    ft = _pctile(college, "coll_ft_pct", prospect.get("coll_ft_pct"))
+    parts = [x for x in (f3, ft) if x is not None]
+    if parts:
+        supply["spacing"] = round(sum(parts) / len(parts), 1)
     return supply
 
 
