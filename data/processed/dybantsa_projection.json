@@ -179,6 +179,18 @@
     "career_vorp": 92.2,
     "outcome_tier": "superstar"
   },
+  "projected_peak_per36": {
+    "n": 74,
+    "pts": 20.36,
+    "reb": 6.11,
+    "ast": 4.24,
+    "stl": 1.23,
+    "blk": 0.65,
+    "fg3m": 1.85,
+    "fg_pct": 0.46,
+    "fg3_pct": 0.35,
+    "ts_pct": 0.56
+  },
   "model_mode": "scouting-informed",
   "adjustments": [
     "Draft capital: conditioned on his #1-overall draft slot (Washington, 2026) \u2014 top picks historically bust far less than the average drafted player. This is the lever the back-test found carries the most signal.",

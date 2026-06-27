@@ -83,8 +83,9 @@ def main() -> int:
     print(f"\nHeld-out cohorts {HOLDOUT_YEARS.start}-{HOLDOUT_YEARS.stop - 1} "
           f"({scout['n_prospects']} prospects):")
     for name, m in holdout.items():
+        w = f"{m['within1']:.3f}" if m["within1"] is not None else "  —  "
         print(f"  {name:16s} AUC {m['auc']:.3f}  ECE {m['ece']:.3f}  "
-              f"Spearman {m['spearman']:.3f}  within1 {m['within1']:.3f}")
+              f"Spearman {m['spearman']:.3f}  within1 {w}")
 
     out = {"tune_years": [TUNE_YEARS.start, TUNE_YEARS.stop - 1],
            "holdout_years": [HOLDOUT_YEARS.start, HOLDOUT_YEARS.stop - 1],

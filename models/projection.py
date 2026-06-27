@@ -101,6 +101,7 @@ class Projection:
     key_uncertainties: list[str] = field(default_factory=list)
     top_comparables: list[dict] = field(default_factory=list)
     ceiling_comparable: dict = field(default_factory=dict)
+    projected_peak_per36: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         d = self.__dict__.copy()
@@ -168,6 +169,14 @@ class ProjectionModel:
         self.engine = engine
         self.k = k
         self.bandwidth_rank = bandwidth_rank
+
+        # Peak per-36 production of the comparable universe (for the projected
+        # peak stat line). Loaded once if the table exists.
+        self._peak36 = None
+        p36_path = config.PROCESSED / "peak_per36.parquet"
+        if p36_path.exists():
+            self._peak36 = pd.read_parquet(p36_path).drop_duplicates(
+                "player_id").set_index("player_id")
 
         # Measured combine athleticism (partial coverage), used as a reweight.
         self._ath = {}
@@ -309,6 +318,27 @@ class ProjectionModel:
             )
         return curve
 
+    def _peak_per36(self, ids: list[str], weights: np.ndarray) -> dict:
+        """Similarity-weighted projected peak per-36 line from the comparables."""
+        if self._peak36 is None:
+            return {}
+        have = [(i, w) for i, w in zip(ids, weights, strict=False) if i in self._peak36.index]
+        if len(have) < 8:
+            return {}
+        sub_ids, sub_w = zip(*have, strict=False)
+        rows = self._peak36.loc[list(sub_ids)]
+        w = np.array(sub_w)
+        out = {"n": len(have)}
+        for col, label in [("pts36", "pts"), ("trb36", "reb"), ("ast36", "ast"),
+                           ("stl36", "stl"), ("blk36", "blk"), ("fg3_36", "fg3m"),
+                           ("fg_pct", "fg_pct"), ("fg3_pct", "fg3_pct"),
+                           ("peak_ts_pct", "ts_pct")]:
+            v = rows[col].to_numpy(float)
+            m = ~np.isnan(v)
+            if m.any():
+                out[label] = round(float(np.average(v[m], weights=w[m])), 2)
+        return out
+
     # -- public API --------------------------------------------------------
     def project(
         self,
@@ -390,6 +420,7 @@ class ProjectionModel:
             key_uncertainties=notes,
             top_comparables=top,
             ceiling_comparable=ceiling_comparable,
+            projected_peak_per36=self._peak_per36(ids, weights),
         )
 
 

@@ -155,6 +155,18 @@ def test_context_defaults_off_leave_model_unchanged(prospects):
 
 
 @pytestmark_data
+@pytest.mark.skipif(not (config.PROCESSED / "peak_per36.parquet").exists(),
+                    reason="peak per-36 not built")
+def test_projected_peak_per36_is_sensible(prospects):
+    dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
+    pk = ProjectionModel(prospects, context=dybantsa_context()).project(
+        dyb, include_curve=False, include_swing=False).projected_peak_per36
+    assert pk and pk["n"] >= 8
+    assert 10 < pk["pts"] < 35          # a plausible peak scoring rate per 36
+    assert 0.3 < pk["ts_pct"] < 0.75    # plausible shooting efficiency
+
+
+@pytestmark_data
 def test_dybantsa_projection_sensible():
     dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
     proj = ProjectionModel(pd.read_parquet(PROSPECTS)).project(dyb)

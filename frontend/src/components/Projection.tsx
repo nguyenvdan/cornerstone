@@ -61,16 +61,43 @@ export default function Projection({ p }: { p: any }) {
       <div className="grid three" style={{ marginBottom: 10 }}>
         <Scenario label="Worst case (10th pct)" vorp={band.p10} accent="var(--accent-2)" />
         <Scenario label="Expected" vorp={p.expected_career_vorp} accent="var(--navy-2)" />
-        <Scenario label="Best case (95th pct)" vorp={band.p95} accent="var(--ok)" />
+        <Scenario label="Ceiling (99th pct)" vorp={band.p99} accent="var(--ok)" />
       </div>
       {p.ceiling_comparable?.player_name && (
         <p className="sub" style={{ marginBottom: 18 }}>
-          <b>Ceiling.</b> His single best comparable outcome is a{" "}
-          <b>{p.ceiling_comparable.player_name}</b>–level career ({p.ceiling_comparable.career_vorp}{" "}
-          VORP — {vorpLabel(p.ceiling_comparable.career_vorp)}). The upper tail of his comp set is
-          genuinely Hall-of-Fame / all-time-great: Kevin Durant and James Harden are among his
-          analogs. It's the low-probability dream outcome — but a real, data-grounded one.
+          <b>Reading the range.</b> A <b>strong</b> outcome (75th pct) is multiple-All-Star
+          territory ({band.p75} VORP). The <b>ceiling</b> (99th pct, {band.p99} VORP) lands right
+          at his single best comparable — a <b>{p.ceiling_comparable.player_name}</b>–level,
+          all-time-great career ({p.ceiling_comparable.career_vorp} VORP). Durant and Harden are
+          genuinely among his analogs; that ceiling is a low-probability (~1-in-100) dream, but a
+          real, data-grounded one.
         </p>
+      )}
+
+      {p.projected_peak_per36?.pts && (
+        <div className="card" style={{ marginBottom: 16 }}>
+          <h3>Projected peak production <span style={{ color: "var(--muted)", fontWeight: 400,
+            textTransform: "none", letterSpacing: 0 }}>— per 36 minutes, at his peak</span></h3>
+          <div style={{ display: "flex", gap: 0, flexWrap: "wrap", borderTop: "1px solid var(--line)" }}>
+            {[["PTS", p.projected_peak_per36.pts], ["REB", p.projected_peak_per36.reb],
+              ["AST", p.projected_peak_per36.ast], ["STL", p.projected_peak_per36.stl],
+              ["BLK", p.projected_peak_per36.blk]].map(([lbl, v]) => (
+              <div key={lbl as string} style={{ flex: 1, minWidth: 90, padding: "14px 18px 14px 0" }}>
+                <div style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 30,
+                  letterSpacing: "-0.02em" }}>{(v as number).toFixed(1)}</div>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: 11, color: "var(--muted)",
+                  textTransform: "uppercase", letterSpacing: "0.1em" }}>{lbl}</div>
+              </div>
+            ))}
+          </div>
+          <div className="note">
+            Shooting {(p.projected_peak_per36.fg_pct * 100).toFixed(0)}% FG /{" "}
+            {(p.projected_peak_per36.fg3_pct * 100).toFixed(0)}% 3P /{" "}
+            {(p.projected_peak_per36.ts_pct * 100).toFixed(0)}% TS. Similarity-weighted from the
+            peak seasons of his {p.projected_peak_per36.n} comparables — a fringe-All-Star scoring
+            wing line.
+          </div>
+        </div>
       )}
 
       <div className="grid two">

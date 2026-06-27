@@ -39,6 +39,10 @@ roster-fit:
 combine:
 	uv run python -m pipelines.combine
 
+# Peak per-36 production of the comparable universe (from cached player pages).
+per36:
+	uv run python -m pipelines.per36
+
 # Enriched predictors: recruiting rank (RSCI), combine, conference SOS, age-vs-class.
 recruiting:
 	uv run python -m pipelines.recruiting
