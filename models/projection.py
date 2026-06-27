@@ -107,6 +107,33 @@ class Projection:
         return d
 
 
+POWER_CONFERENCES = {
+    "Big 12", "SEC", "ACC", "Big Ten", "Big East", "Pac-12", "Pac-10", "Amer",
+}
+
+
+@dataclass
+class ProjectionContext:
+    """Optional, scouting-informed signals layered onto the profile projection.
+
+    All default off, so the base ProjectionModel (used by the Phase 4 back-test)
+    stays a pure, leakage-controlled profile model. Turned on, these add *real*
+    pre-draft signal the profile-only model deliberately ignores.
+    """
+    draft_prior: bool = False          # weight comparables toward a similar draft slot
+    draft_bandwidth: float = 8.0       # picks; smaller = tighter to the prospect's slot
+    archetype_anchors: tuple[str, ...] = ()   # scout-named comps defining an archetype
+    archetype_blend: float = 0.0       # 0..1 nudge of the query toward that archetype
+    competition_match: bool = False    # compare to players who faced similar competition
+    competition_penalty: float = 0.6   # weight multiplier for a competition-tier mismatch
+    age_weight_boost: float = 1.0      # extra emphasis on (young) age at draft
+    candidate_pool: int = 220          # pool to reweight before trimming to k
+
+
+def _is_power(conf: object) -> bool:
+    return isinstance(conf, str) and conf in POWER_CONFERENCES
+
+
 class ProjectionModel:
     def __init__(
         self,
@@ -115,7 +142,9 @@ class ProjectionModel:
         k: int = 75,
         bandwidth_rank: int = 10,
         mature_only: bool = True,
+        context: ProjectionContext | None = None,
     ) -> None:
+        self.context = context or ProjectionContext()
         universe = prospects.drop_duplicates("player_id")
         # Draw comparable outcomes only from matured draft classes so that recent
         # draftees with still-developing careers don't bias the projection down.
@@ -126,22 +155,66 @@ class ProjectionModel:
         self.outcomes = universe.set_index("player_id")
         if engine is None:
             weights = vorp_feature_weights(prospects)
+            if self.context.age_weight_boost != 1.0:
+                weights = dict(weights)
+                weights["age_at_draft"] *= self.context.age_weight_boost
             engine = ComparablesEngine().fit(universe, feature_weights=weights)
         self.engine = engine
         self.k = k
-        # Adaptive-kernel bandwidth = distance to this-ranked nearest neighbor,
-        # so the ~N closest analogs carry most of the weight and the long tail
-        # tapers off (instead of dragging the projection toward the base rate).
         self.bandwidth_rank = bandwidth_rank
 
+        # Archetype centroid (raw feature space), averaged over the scout-named
+        # anchors that exist in the matured universe.
+        self._archetype = None
+        if self.context.archetype_anchors and self.context.archetype_blend > 0:
+            anchors = self.outcomes[
+                self.outcomes["player_name"].isin(self.context.archetype_anchors)
+            ]
+            if not anchors.empty:
+                feats = anchors[SIMILARITY_FEATURES].astype(float)
+                self._archetype = feats.fillna(self.engine.medians_).mean()
+
     # -- helpers -----------------------------------------------------------
+    def _effective_query(self, prospect: pd.Series) -> pd.Series:
+        """Optionally nudge the query toward the scouting archetype centroid."""
+        if self._archetype is None or self.context.archetype_blend <= 0:
+            return prospect
+        b = self.context.archetype_blend
+        base = prospect.reindex(SIMILARITY_FEATURES).astype(float).fillna(self.engine.medians_)
+        blended = (1 - b) * base + b * self._archetype
+        q = prospect.copy()
+        for f in SIMILARITY_FEATURES:
+            q[f] = blended[f]
+        return q
+
     def _neighbors(self, prospect: pd.Series):
+        ctx = self.context
+        query = self._effective_query(prospect)
         pid = prospect.get("player_id")
-        comps = self.engine.get_comparables(prospect, k=self.k, exclude_player_id=pid)
+        active = ctx.draft_prior or ctx.competition_match
+        pool = ctx.candidate_pool if active else self.k
+        comps = self.engine.get_comparables(query, k=pool, exclude_player_id=pid)
         d = np.array([c.distance for c in comps])
+        ids = [c.player_id for c in comps]
         h = max(float(d[min(self.bandwidth_rank - 1, len(d) - 1)]), 1e-6)
         weights = np.exp(-0.5 * (d / h) ** 2)
-        ids = [c.player_id for c in comps]
+
+        if ctx.draft_prior and prospect.get("draft_pick") is not None \
+                and not pd.isna(prospect.get("draft_pick")):
+            picks = self.outcomes.loc[ids, "draft_pick"].to_numpy(float)
+            pp = float(prospect["draft_pick"])
+            dp = np.where(np.isnan(picks), 5.0, picks - pp)
+            weights = weights * np.exp(-0.5 * (dp / ctx.draft_bandwidth) ** 2)
+        if ctx.competition_match and isinstance(prospect.get("coll_conf"), str):
+            same = np.array([_is_power(c) == _is_power(prospect["coll_conf"])
+                             for c in self.outcomes.loc[ids, "coll_conf"]])
+            weights = weights * np.where(same, 1.0, ctx.competition_penalty)
+
+        if active and len(ids) > self.k:  # trim the reweighted pool back to k
+            top = np.argsort(weights)[::-1][: self.k]
+            comps = [comps[i] for i in top]
+            ids = [ids[i] for i in top]
+            weights = weights[top]
         return comps, ids, weights
 
     def _expected_career_vorp(self, prospect: pd.Series) -> float:
@@ -151,13 +224,18 @@ class ProjectionModel:
         return float(np.average(v[mask], weights=w[mask]))
 
     def _swing_factors(self, prospect: pd.Series, n: int = 6) -> list[SwingFactor]:
-        base = prospect.reindex(SIMILARITY_FEATURES).astype(float).fillna(self.engine.medians_)
+        # Keep the full row (draft_pick, conference, id) so any active context
+        # still applies while we perturb individual features.
+        base = prospect.copy()
+        for feat in SIMILARITY_FEATURES:
+            if pd.isna(base.get(feat)):
+                base[feat] = self.engine.medians_[feat]
         factors: list[SwingFactor] = []
         for j, feat in enumerate(SIMILARITY_FEATURES):
             sd = float(self.engine.scaler_.scale_[j])
             up, dn = base.copy(), base.copy()
-            up[feat] += sd
-            dn[feat] -= sd
+            up[feat] = float(up[feat]) + sd
+            dn[feat] = float(dn[feat]) - sd
             effect = (self._expected_career_vorp(up) - self._expected_career_vorp(dn)) / 2.0
             factors.append(
                 SwingFactor(
@@ -282,13 +360,45 @@ def _bar(p: float, width: int = 24) -> str:
     return "█" * int(round(p * width)) + "·" * (width - int(round(p * width)))
 
 
+# Scout-named playstyle comps that exist within the 2003-2022 data window
+# (Tracy McGrady is outside it — drafted 1997 from high school).
+DYBANTSA_ARCHETYPE = ("Jaylen Brown", "Jayson Tatum", "Shai Gilgeous-Alexander")
+
+
+def dybantsa_context() -> ProjectionContext:
+    """Scouting-informed context for AJ Dybantsa: layers in the real pre-draft
+    signals the profile-only model ignores."""
+    return ProjectionContext(
+        draft_prior=True, draft_bandwidth=8.0,
+        archetype_anchors=DYBANTSA_ARCHETYPE, archetype_blend=0.3,
+        competition_match=True, competition_penalty=0.6,
+        age_weight_boost=2.0,
+    )
+
+
+DYBANTSA_ADJUSTMENTS = [
+    "Draft capital: conditioned on his projected #1 / elite draft slot — top picks "
+    "historically bust far less than the average drafted player.",
+    f"Scouting archetype: query nudged toward {', '.join(DYBANTSA_ARCHETYPE)} (his "
+    "scout-cited comps), using the FULL outcome distribution of similar wings — "
+    "cautionary cases (e.g. Wiggins, Barrett) included, not just the stars.",
+    "Strength of competition: credited for producing in the Big 12 (a power "
+    "conference), comparing him to players who faced similar competition.",
+    "Age weighting: extra emphasis on how young he is for his production.",
+]
+
+
 def main() -> int:
     prospects = pd.read_parquet(config.PROCESSED / "prospects.parquet")
-    model = ProjectionModel(prospects)
     dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
+
+    base = ProjectionModel(prospects).project(dyb, include_curve=False, include_swing=False)
+    model = ProjectionModel(prospects, context=dybantsa_context())
     proj = model.project(dyb)
 
-    print(f"AJ Dybantsa — probabilistic projection (from {proj.n_comparables} comparables)\n")
+    print(f"AJ Dybantsa — SCOUTING-INFORMED projection (from {proj.n_comparables} comparables)")
+    print(f"  [profile-only baseline: P(starter+) {base.p_starter_plus:.0%}, "
+          f"P(all-star+) {base.p_star_plus:.0%}, P(bust) {base.tier_probabilities['bust']:.0%}]\n")
     print("Outcome tier probabilities:")
     for tier in reversed(config.TIER_ORDER):
         p = proj.tier_probabilities[tier]
@@ -312,12 +422,22 @@ def main() -> int:
         arrow = "↑" if sf.direction == "raises" else "↓"
         print(f"  {arrow} {sf.display:24s} {sf.effect_vorp:+.2f}")
 
-    print("\nKey uncertainties:")
-    for note in proj.key_uncertainties:
+    print("\nAdjustments applied:")
+    for note in DYBANTSA_ADJUSTMENTS:
         print(f"  • {note}")
 
+    out = proj.to_dict()
+    out["model_mode"] = "scouting-informed"
+    out["adjustments"] = DYBANTSA_ADJUSTMENTS
+    out["archetype_anchors"] = list(DYBANTSA_ARCHETYPE)
+    out["profile_only"] = {
+        "p_starter_plus": base.p_starter_plus,
+        "p_star_plus": base.p_star_plus,
+        "p_bust": base.tier_probabilities["bust"],
+        "expected_career_vorp": base.expected_career_vorp,
+    }
     path = config.PROCESSED / "dybantsa_projection.json"
-    path.write_text(json.dumps(proj.to_dict(), indent=2))
+    path.write_text(json.dumps(out, indent=2))
     print(f"\nWrote {path}")
     return 0
 

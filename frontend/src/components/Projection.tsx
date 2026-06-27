@@ -11,10 +11,18 @@ export default function Projection({ p }: { p: any }) {
   const band = p.career_vorp_band;
   return (
     <section className="view">
-      <h2 className="h2">Development projection</h2>
+      <h2 className="h2">
+        Development projection{" "}
+        {p.model_mode === "scouting-informed" && (
+          <span className="pill all_star" style={{ fontSize: 12, verticalAlign: "middle" }}>
+            scouting-informed
+          </span>
+        )}
+      </h2>
       <p className="sub">
         A probability distribution over outcomes — derived from how {p.n_comparables} historical
-        comparables actually developed. No point estimates, no false precision.
+        comparables actually developed, with real pre-draft signals (draft capital, playstyle
+        archetype, competition, age) layered in. No point estimates, no false precision.
       </p>
 
       <div className="grid two">
@@ -73,6 +81,24 @@ export default function Projection({ p }: { p: any }) {
       <div className="callout" style={{ marginTop: 18 }}>
         <b>Honest read:</b> {p.key_uncertainties?.[2] ?? p.key_uncertainties?.[0]}
       </div>
+
+      {p.adjustments && (
+        <div className="card" style={{ marginTop: 18 }}>
+          <h3>How this projection is built</h3>
+          {p.profile_only && (
+            <p className="sub" style={{ marginTop: 0 }}>
+              Profile-only baseline (stats alone, no draft/scouting signal): P(starter+){" "}
+              <b>{pct(p.profile_only.p_starter_plus)}</b>, P(all-star+){" "}
+              <b>{pct(p.profile_only.p_star_plus)}</b>, P(bust){" "}
+              <b>{pct(p.profile_only.p_bust)}</b>. The signals below move it to the headline
+              numbers — adding real information, not nudging the answer.
+            </p>
+          )}
+          <ul>
+            {p.adjustments.map((a: string, i: number) => <li key={i}>{a}</li>)}
+          </ul>
+        </div>
+      )}
     </section>
   );
 }

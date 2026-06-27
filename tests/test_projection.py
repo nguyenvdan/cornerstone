@@ -9,6 +9,7 @@ import pytest
 from models.features import SIMILARITY_FEATURES
 from models.projection import (
     ProjectionModel,
+    dybantsa_context,
     vorp_feature_weights,
     weighted_percentile,
 )
@@ -105,6 +106,30 @@ def test_discriminates_star_from_bust(model, prospects):
     morrison = model.project(prospects[prospects.player_name == "Adam Morrison"].iloc[0])
     assert durant.p_star_plus > morrison.p_star_plus
     assert durant.expected_career_vorp > morrison.expected_career_vorp
+
+
+@pytestmark_data
+def test_scouting_context_raises_floor_but_keeps_risk(prospects):
+    """Scouting-informed signals (draft capital, archetype, competition, age)
+    should lower bust and raise star vs profile-only — without zeroing risk."""
+    dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
+    base = ProjectionModel(prospects).project(dyb, include_curve=False, include_swing=False)
+    prod = ProjectionModel(prospects, context=dybantsa_context()).project(
+        dyb, include_curve=False, include_swing=False)
+    assert prod.tier_probabilities["bust"] < base.tier_probabilities["bust"]
+    assert prod.p_star_plus > base.p_star_plus
+    assert prod.expected_career_vorp > base.expected_career_vorp
+    assert prod.tier_probabilities["bust"] > 0.0          # not false-precision 0%
+    assert abs(sum(prod.tier_probabilities.values()) - 1.0) < 1e-6
+
+
+@pytestmark_data
+def test_context_defaults_off_leave_model_unchanged(prospects):
+    # The Phase 4 back-test relies on this: no context => pure profile model.
+    dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
+    a = ProjectionModel(prospects).project(dyb, include_curve=False, include_swing=False)
+    b = ProjectionModel(prospects).project(dyb, include_curve=False, include_swing=False)
+    assert a.tier_probabilities == b.tier_probabilities
 
 
 @pytestmark_data

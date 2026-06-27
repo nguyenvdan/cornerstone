@@ -20,7 +20,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from models.comparables import ComparablesEngine
-from models.projection import ProjectionModel
+from models.projection import ProjectionModel, dybantsa_context
 from models.roster_fit import cornerstone_skill_supply, evaluate_fit
 from pipelines import config
 from pipelines.nba_skills import SEASON, SKILLS
@@ -34,6 +34,7 @@ class Context:
         self._dybantsa = None
         self._comp_engine = None
         self._proj_model = None
+        self._proj_model_dyb = None
         self._skills = None
 
     @property
@@ -59,6 +60,14 @@ class Context:
         if self._proj_model is None:
             self._proj_model = ProjectionModel(self.prospects)
         return self._proj_model
+
+    @property
+    def proj_model_dybantsa(self) -> ProjectionModel:
+        """Scouting-informed projection (draft capital + archetype + competition +
+        age) used for the project's subject, AJ Dybantsa."""
+        if self._proj_model_dyb is None:
+            self._proj_model_dyb = ProjectionModel(self.prospects, context=dybantsa_context())
+        return self._proj_model_dyb
 
     @property
     def skills(self) -> pd.DataFrame:
@@ -131,7 +140,10 @@ def _tool_project_development(ctx: Context, name: str) -> dict:
     row = ctx.resolve(name)
     if row is None:
         return {"error": f"no prospect named '{name}' found"}
-    p = ctx.proj_model.project(row, include_curve=True, include_swing=True)
+    # Use the scouting-informed model for the project's subject; profile-only otherwise.
+    is_dybantsa = bool(row.get("is_projection_subject")) or "dybantsa" in (name or "").lower()
+    model = ctx.proj_model_dybantsa if is_dybantsa else ctx.proj_model
+    p = model.project(row, include_curve=True, include_swing=True)
     return {
         "prospect": p.prospect_name,
         "n_comparables": p.n_comparables,
