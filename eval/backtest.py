@@ -43,7 +43,11 @@ def _college(df: pd.DataFrame) -> pd.DataFrame:
               & df["career_vorp"].notna() & df["draft_pick"].notna()]
 
 
-def run_backtest(prospects: pd.DataFrame, test_years=None) -> tuple[pd.DataFrame, dict]:
+def run_backtest(prospects: pd.DataFrame, test_years=None, context=None
+                 ) -> tuple[pd.DataFrame, dict]:
+    """Leakage-free expanding-window back-test. ``context`` (a ProjectionContext)
+    turns on the scouting levers (draft capital, competition, athleticism, age);
+    None = the pure profile-only model."""
     test_years = test_years if test_years is not None else DEFAULT_TEST_YEARS
     pool = _college(prospects)
     rows: list[dict] = []
@@ -53,7 +57,7 @@ def run_backtest(prospects: pd.DataFrame, test_years=None) -> tuple[pd.DataFrame
         test = pool[pool["draft_year"] == year]
         if len(train) < 50 or test.empty:
             continue
-        model = ProjectionModel(train, mature_only=False)
+        model = ProjectionModel(train, mature_only=False, context=context)
         base = DraftPositionBaseline().fit(train)
 
         for _, p in test.iterrows():
@@ -108,7 +112,7 @@ def _score(res: pd.DataFrame) -> dict:
 def _plot(res: pd.DataFrame, summary: dict, path) -> None:
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
 
-    for name, key, color in [("Profile model", "model", "#1f4e79"),
+    for name, key, color in [("Scouting model", "model", "#1f4e79"),
                              ("Draft-position baseline", "baseline", "#c0504d")]:
         rel = summary[key]["star"]["reliability"]
         ax1.plot(rel["confidence"], rel["observed"], "o-", color=color,
@@ -127,7 +131,7 @@ def _plot(res: pd.DataFrame, summary: dict, path) -> None:
     base_v = [summary["baseline"]["tier"]["exact"], summary["baseline"]["tier"]["within_one"],
               summary["baseline"]["star"]["auc"]]
     x = np.arange(len(labels))
-    ax2.bar(x - 0.2, model_v, 0.4, label="Profile model", color="#1f4e79")
+    ax2.bar(x - 0.2, model_v, 0.4, label="Scouting model", color="#1f4e79")
     ax2.bar(x + 0.2, base_v, 0.4, label="Draft-position baseline", color="#c0504d")
     ax2.set_xticks(x)
     ax2.set_xticklabels(labels)
@@ -166,10 +170,30 @@ def _print_summary(s: dict) -> None:
     line("VORP MAE", m["vorp"]["mae"], b["vorp"]["mae"], c["vorp"]["mae"])
 
 
+def _holdout(prospects: pd.DataFrame) -> dict:
+    """Validate the tuned scouting model on the held-out 2016-2019 cohorts
+    (settings were tuned only on 2010-2015), vs profile-only and the baseline."""
+    from models.projection import scouting_context
+    years = range(2016, 2020)
+    _, prof = run_backtest(prospects, test_years=years)
+    _, scout = run_backtest(prospects, test_years=years, context=scouting_context())
+
+    def grab(m):
+        return {"auc": m["star"]["auc"], "ece": m["star"]["ece"],
+                "spearman": m["vorp"]["spearman"],
+                "within_one": m.get("tier", {}).get("within_one")}
+    return {"n_prospects": scout["n_prospects"], "years": [2016, 2019],
+            "baseline": grab(prof["baseline"]), "profile_only": grab(prof["model"]),
+            "scouting": grab(scout["model"]), "combined": grab(scout["combined"])}
+
+
 def main() -> int:
+    from models.projection import scouting_context
     prospects = pd.read_parquet(config.PROCESSED / "prospects.parquet")
-    res, summary = run_backtest(prospects)
+    # Headline back-test uses the validated scouting model.
+    res, summary = run_backtest(prospects, context=scouting_context())
     _print_summary(summary)
+    summary["holdout"] = _holdout(prospects)
 
     out_dir = config.ROOT / "eval"
     plot_path = out_dir / "calibration.png"

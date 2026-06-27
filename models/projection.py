@@ -131,6 +131,8 @@ class ProjectionContext:
     athleticism_match: bool = False    # boost comps with similar measured combine athleticism
     athleticism_boost: float = 0.6     # max extra weight for an athleticism match
     athleticism_bandwidth: float = 22.0  # percentile-points kernel width
+    recruiting_prior: bool = False     # weight comps toward a similar HS recruiting rank
+    recruiting_bandwidth: float = 25.0   # rank-points kernel width
     candidate_pool: int = 220          # pool to reweight before trimming to k
 
 
@@ -230,6 +232,13 @@ class ProjectionModel:
                     mult[i] = 1.0 + ctx.athleticism_boost * np.exp(
                         -0.5 * ((ca - pa) / ctx.athleticism_bandwidth) ** 2)
             weights = weights * mult
+        if ctx.recruiting_prior and "rsci_rank" in self.outcomes.columns \
+                and pd.notna(prospect.get("rsci_rank")):
+            pr = float(prospect["rsci_rank"])
+            ranks = self.outcomes.loc[ids, "rsci_rank"].to_numpy(float)
+            rmult = np.where(np.isnan(ranks), 1.0,
+                             np.exp(-0.5 * ((ranks - pr) / ctx.recruiting_bandwidth) ** 2))
+            weights = weights * rmult
 
         if active and len(ids) > self.k:  # trim the reweighted pool back to k
             top = np.argsort(weights)[::-1][: self.k]
@@ -398,30 +407,62 @@ DYBANTSA_ARCHETYPE = ("Kevin Durant", "Jayson Tatum", "Jaylen Brown",
                       "Shai Gilgeous-Alexander")
 
 
-def dybantsa_context() -> ProjectionContext:
-    """Scouting-informed context for AJ Dybantsa: layers in the real pre-draft
-    signals the profile-only model ignores."""
+# Back-test-tuned generalizable hyperparameters (chosen by eval/tune_context.py,
+# validated on held-out 2016-2019 cohorts) — NOT eyeballed to flatter AJ. The
+# search found draft capital + competition carry the signal; an extra age boost
+# and the athleticism reweight did NOT help out-of-sample (and adding recruiting
+# rank / conference / combine as features hurt calibration — draft capital
+# already encodes "highly-regarded prospect"). So those levers are at neutral.
+TUNED_SCOUTING = dict(
+    draft_bandwidth=12.0,
+    competition_penalty=0.6,
+    age_weight_boost=1.0,
+    athleticism_bandwidth=22.0,
+    athleticism_boost=0.0,
+)
+
+
+def scouting_context(**overrides) -> ProjectionContext:
+    """The generalizable, back-testable scouting levers (draft capital,
+    competition, athleticism, age) — NO per-player archetype. This is what the
+    back-test validates and tunes; a lever is on only when its strength != neutral."""
+    p = {**TUNED_SCOUTING, **overrides}
     return ProjectionContext(
-        draft_prior=True, draft_bandwidth=5.0,   # tight to his elite (top-3) slot
-        archetype_anchors=DYBANTSA_ARCHETYPE, archetype_blend=0.3,
-        competition_match=True, competition_penalty=0.6,
-        age_weight_boost=2.0,
-        athleticism_match=True,
+        draft_prior=True, draft_bandwidth=p["draft_bandwidth"],
+        competition_match=p["competition_penalty"] < 1.0,
+        competition_penalty=p["competition_penalty"],
+        age_weight_boost=p["age_weight_boost"],
+        athleticism_match=p["athleticism_boost"] > 0.0,
+        athleticism_bandwidth=p["athleticism_bandwidth"],
+        athleticism_boost=p["athleticism_boost"],
     )
+
+
+def dybantsa_context() -> ProjectionContext:
+    """AJ Dybantsa's projection context: the tuned generalizable levers PLUS his
+    scout-named archetype overlay (Brown/Tatum/SGA/KD), which is a per-player
+    judgment, not a back-testable parameter."""
+    ctx = scouting_context()
+    ctx.archetype_anchors = DYBANTSA_ARCHETYPE
+    ctx.archetype_blend = 0.3
+    return ctx
 
 
 DYBANTSA_ADJUSTMENTS = [
     "Draft capital: conditioned on his #1-overall draft slot (Washington, 2026) — "
-    "top picks historically bust far less than the average drafted player.",
-    f"Scouting archetype: query nudged toward {', '.join(DYBANTSA_ARCHETYPE)} (his "
-    "scout-cited comps), using the FULL outcome distribution of similar wings — "
-    "cautionary cases (e.g. Wiggins, Barrett) included, not just the stars.",
+    "top picks historically bust far less than the average drafted player. This is "
+    "the lever the back-test found carries the most signal.",
     "Strength of competition: credited for producing in the Big 12 (a power "
     "conference), comparing him to players who faced similar competition.",
-    "Age weighting: extra emphasis on how young he is for his production.",
-    "Combine athleticism: his measured 2026 combine line (42\" max vertical — "
-    "combine-best — 7'0.5\" wingspan, 8'10\" standing reach) upweights "
-    "comparables of similar measured athleticism (where combine data exists).",
+    f"Scouting archetype (a per-player judgment, not a back-tested parameter): query "
+    f"nudged toward {', '.join(DYBANTSA_ARCHETYPE)} — his scout-cited comps — using the "
+    "FULL outcome distribution of similar wings, cautionary cases (Wiggins, Barrett) "
+    "included, not just the stars.",
+    "All generalizable settings (bandwidths, weights) were TUNED on 2010-2015 "
+    "prospects and validated on held-out 2016-2019 classes — not eyeballed to flatter "
+    "AJ. The search found that an extra age boost, combine-athleticism reweighting, and "
+    "recruiting rank did NOT improve out-of-sample prediction (draft capital already "
+    "captures them), so they are off.",
 ]
 
 

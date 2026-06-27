@@ -52,6 +52,11 @@ FEATURE_DISPLAY: dict[str, str] = {
     "coll_efg_pct": "college eFG%",
     "coll_ts_pct": "college TS%",
     "coll_usg_pct": "college usage%",
+    # candidate enriched features (Phase: missing predictors)
+    "rsci_rank": "HS recruiting rank",
+    "conference_strength": "conference strength",
+    "age_minus_class": "age vs class",
+    "athleticism_pct": "combine athleticism",
 }
 
 # Metadata columns surfaced with each comparable (not used in the distance).

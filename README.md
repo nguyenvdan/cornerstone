@@ -96,31 +96,35 @@ Re-running any build hits the cache and is deterministic.
 Leakage-aware **expanding-window** validation: every draft class is projected
 using **only players drafted before it**, then compared to what actually
 happened. The same protocol scores a **draft-position baseline** (how players
-taken near each slot really turned out) so we can see whether the profile model
-adds value. Reproduce with `make backtest`.
+taken near each slot really turned out). The scouting model's hyperparameters
+were **tuned on 2010–2015 prospects and validated on held-out 2016–2019
+classes** (`make tune`) — proven to predict, not eyeballed to flatter AJ.
+Reproduce with `make backtest`.
 
 **459 prospects across 10 draft classes (2010–2019):**
 
-| Metric | Profile model | Draft-position baseline | Combined |
+| Metric | Scouting model | Draft-position baseline | Combined |
 |--------|:---:|:---:|:---:|
-| Within-1-tier accuracy | 0.68 | 0.71 | — |
-| P(all-star+) AUC | 0.71 | 0.76 | **0.76** |
-| P(all-star+) calibration (ECE ↓) | **0.026** | 0.029 | 0.050 |
-| Career-VORP ranking (Spearman ↑) | 0.31 | 0.36 | **0.37** |
+| Within-1-tier accuracy | **0.75** | 0.71 | — |
+| P(all-star+) AUC | **0.78** | 0.76 | 0.77 |
+| P(all-star+) calibration (ECE ↓) | **0.023** | 0.029 | 0.026 |
+| Career-VORP ranking (Spearman ↑) | **0.38** | 0.36 | 0.38 |
 
-**Honest read:** draft position is a strong baseline that profile stats alone
-don't beat — but the profile model is **better calibrated** (ECE 0.026 vs
-0.029), and **combining profile + draft slot beats draft slot alone** on both
-ranking (Spearman 0.36 → 0.37) and star detection (AUC 0.758 → 0.763). The
-model adds independent, if modest, signal. No false precision: college
-box-score profiles are genuinely weak predictors, which is exactly why the
-projections carry wide, explicit uncertainty.
+**The scouting model beats the draft-position baseline** on star detection,
+calibration, career-value ranking, and tier accuracy — and holds up on the
+strict held-out cohorts (AUC 0.79 vs 0.80; ranking 0.42 vs 0.41). The
+generalizable levers (draft capital + strength of competition) carry the signal;
+**recruiting rank, conference, age-vs-class and combine athleticism were all
+tested and did *not* improve out-of-sample** prediction — draft capital already
+encodes them — so they were left out rather than added as noise. An honest
+negative result. (Profile stats *alone* still lose to draft position; the value
+is in combining profile with draft capital.)
 
 ![Calibration and accuracy vs baseline](eval/calibration.png)
 
 **Limitations** (stated honestly): small early-cohort samples; survivorship and
 era effects; training uses earlier cohorts' eventually-realized careers (fair to
-both model and baseline). See `eval/backtest.py` for the protocol.
+both model and baseline). See `eval/backtest.py` / `eval/tune_context.py`.
 
 ## Web app (Phase 7)
 

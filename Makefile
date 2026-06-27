@@ -39,6 +39,16 @@ roster-fit:
 combine:
 	uv run python -m pipelines.combine
 
+# Enriched predictors: recruiting rank (RSCI), combine, conference SOS, age-vs-class.
+recruiting:
+	uv run python -m pipelines.recruiting
+enrich:
+	uv run python -m pipelines.enrich
+
+# Tune the scouting model's hyperparameters on the back-test (not on AJ).
+tune:
+	uv run python -m eval.tune_context
+
 # Phase 6: run the agent. Scripted (no key) by default; autonomous LLM mode if
 # ANTHROPIC_API_KEY is set and `uv sync --extra agent` has been run.
 agent:
