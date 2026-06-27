@@ -15,6 +15,10 @@ data-sample:
 dybantsa:
 	uv run python -m pipelines.dybantsa
 
+# Phase 2: fit the comparables engine and print Dybantsa's historical analogs.
+comparables:
+	uv run python -m models.comparables
+
 test:
 	uv run pytest -q
 
