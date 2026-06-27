@@ -27,7 +27,7 @@
       "args": {
         "name": "AJ Dybantsa"
       },
-      "result_summary": "p_starter_plus=0.701, expected_career_vorp=13.9, n_comparables=75"
+      "result_summary": "p_starter_plus=0.704, expected_career_vorp=15.7, n_comparables=75"
     },
     {
       "n": 4,
@@ -49,7 +49,7 @@
       "result_summary": "fit_score=67.0"
     }
   ],
-  "report_markdown": "# Scouting & strategy report: AJ Dybantsa\n_Question: Analyze the Wizards' path with AJ Dybantsa as their cornerstone._\n\n## Profile  _(from lookup_prospect)_\nBYU, age 19.56, 6'9\", 25.5 pts / 6.8 reb / 3.7 ast.\n\n## Historical comparables  _(from find_comparables)_\n- **James Harden** (2009) \u2014 similarity 72.8, became a superstar (career VORP 87.9); alike on college blocks/game, college eFG%.\n- **James Anderson** (2010) \u2014 similarity 71.2, became a bust (career VORP -0.8); alike on college 3P%, college TS%.\n- **Alec Burks** (2011) \u2014 similarity 70.7, became a starter (career VORP 6.6); alike on college steals/game, college blocks/game.\n- **RJ Barrett** (2019) \u2014 similarity 70.0, became a rotation (career VORP 1.8); alike on college minutes/game, college blocks/game.\n- **T.J. Warren** (2014) \u2014 similarity 68.4, became a starter (career VORP 4.1); alike on college eFG%, college minutes/game.\n\nAcross the analog set the outcomes range widely (all_star, bust, rotation, starter, superstar), which is the basis for the uncertainty below.\n\n## Development projection  _(from project_development)_\n- **P(starter or better): 70%**, P(all-star or better): 45%, P(bust): 15%.\n- Expected career VORP **13.9**, with an honest 80% range of -1.6 to 32.3 (median 7.9).\n- Biggest swing factors: college steals/game (\u2191), age at draft (\u2193), college rebounds/game (\u2191).\n\n> 80% career-VORP interval spans -1.6 to 32.3 (median 7.9) \u2014 a wide range driven by how differently the comparables developed.\n\n## Roster fit & build path  _(from evaluate_roster_fit)_\n- WAS fit around AJ Dybantsa: **67.0/100**.\n- Biggest unmet needs: **perimeter defense, spacing, rim protection**.\n- Recommended complementary archetypes: 3&D Wing (fills perimeter defense, spacing); Defensive Anchor Big (fills rim protection, perimeter defense); Two-Way Wing (fills perimeter defense, spacing).\n\n## Bottom line\nAJ Dybantsa profiles as a 70%-likely starter-or-better with real star upside (P(all-star+) 45%) but genuine bust risk (15%) \u2014 a wide distribution, not a sure thing. To maximize his value, WAS should prioritize perimeter defense, spacing \u2014 a 3&D Wing is the highest-leverage add.",
+  "report_markdown": "# Scouting & strategy report: AJ Dybantsa\n_Question: Analyze the Wizards' path with AJ Dybantsa as their cornerstone._\n\n## Profile  _(from lookup_prospect)_\nBYU, age 19.56, 6'9\", 25.5 pts / 6.8 reb / 3.7 ast.\n\n## Historical comparables  _(from find_comparables)_\n- **James Harden** (2009) \u2014 similarity 72.8, became a superstar (career VORP 87.9); alike on college blocks/game, college eFG%.\n- **James Anderson** (2010) \u2014 similarity 71.2, became a bust (career VORP -0.8); alike on college 3P%, college TS%.\n- **Alec Burks** (2011) \u2014 similarity 70.7, became a starter (career VORP 6.6); alike on college steals/game, college blocks/game.\n- **RJ Barrett** (2019) \u2014 similarity 70.0, became a rotation (career VORP 1.8); alike on college minutes/game, college blocks/game.\n- **T.J. Warren** (2014) \u2014 similarity 68.4, became a starter (career VORP 4.1); alike on college eFG%, college minutes/game.\n\nAcross the analog set the outcomes range widely (all_star, bust, rotation, starter, superstar), which is the basis for the uncertainty below.\n\n## Development projection  _(from project_development)_\n- **P(starter or better): 70%**, P(all-star or better): 50%, P(bust): 11%.\n- Expected career VORP **15.7**, with an honest 80% range of -0.4 to 36.7 (median 9.2).\n- Biggest swing factors: college steals/game (\u2191), age at draft (\u2193), college assists/game (\u2191).\n\n> 80% career-VORP interval spans -0.4 to 36.7 (median 9.2) \u2014 a wide range driven by how differently the comparables developed.\n\n## Roster fit & build path  _(from evaluate_roster_fit)_\n- WAS fit around AJ Dybantsa: **67.0/100**.\n- Biggest unmet needs: **perimeter defense, spacing, rim protection**.\n- Recommended complementary archetypes: 3&D Wing (fills perimeter defense, spacing); Defensive Anchor Big (fills rim protection, perimeter defense); Two-Way Wing (fills perimeter defense, spacing).\n\n## Bottom line\nAJ Dybantsa profiles as a 70%-likely starter-or-better with real star upside (P(all-star+) 50%) but genuine bust risk (11%) \u2014 a wide distribution, not a sure thing. To maximize his value, WAS should prioritize perimeter defense, spacing \u2014 a 3&D Wing is the highest-leverage add.",
   "tool_results": {
     "lookup_prospect": {
       "player_name": "AJ Dybantsa",
@@ -174,104 +174,104 @@
       "prospect": "AJ Dybantsa",
       "n_comparables": 75,
       "tier_probabilities": {
-        "bust": 0.146,
-        "rotation": 0.153,
-        "starter": 0.25,
-        "all_star": 0.299,
-        "superstar": 0.152
+        "bust": 0.114,
+        "rotation": 0.182,
+        "starter": 0.209,
+        "all_star": 0.328,
+        "superstar": 0.167
       },
-      "p_starter_plus": 0.701,
-      "p_star_plus": 0.451,
-      "expected_career_vorp": 13.9,
+      "p_starter_plus": 0.704,
+      "p_star_plus": 0.495,
+      "expected_career_vorp": 15.7,
       "career_vorp_band": {
-        "p10": -1.6,
+        "p10": -0.4,
         "p25": 1.8,
-        "p50": 7.9,
-        "p75": 18.2,
-        "p90": 32.3
+        "p50": 9.2,
+        "p75": 21.6,
+        "p90": 36.7
       },
       "season_curve": [
         {
           "season": 1,
           "n_comps": 75,
           "p10": -1.1,
-          "p25": -0.5,
-          "p50": -0.07,
-          "p75": 0.8,
-          "p90": 1.39
+          "p25": -0.4,
+          "p50": 0.0,
+          "p75": 0.95,
+          "p90": 1.4
         },
         {
           "season": 2,
           "n_comps": 75,
-          "p10": -0.5,
-          "p25": -0.1,
-          "p50": 0.51,
-          "p75": 1.37,
-          "p90": 2.26
+          "p10": -0.4,
+          "p25": 0.0,
+          "p50": 0.6,
+          "p75": 1.46,
+          "p90": 2.3
         },
         {
           "season": 3,
           "n_comps": 75,
-          "p10": -0.3,
-          "p25": 0.1,
-          "p50": 0.87,
-          "p75": 2.08,
-          "p90": 3.46
+          "p10": -0.02,
+          "p25": 0.19,
+          "p50": 1.0,
+          "p75": 2.46,
+          "p90": 3.54
         },
         {
           "season": 4,
           "n_comps": 75,
           "p10": -0.2,
-          "p25": 0.0,
-          "p50": 1.1,
-          "p75": 2.5,
-          "p90": 3.52
+          "p25": 0.01,
+          "p50": 1.29,
+          "p75": 2.92,
+          "p90": 3.8
         },
         {
           "season": 5,
           "n_comps": 75,
-          "p10": -0.29,
+          "p10": -0.3,
           "p25": 0.2,
-          "p50": 1.0,
-          "p75": 2.98,
-          "p90": 5.35
+          "p50": 1.09,
+          "p75": 3.42,
+          "p90": 5.22
         }
       ],
       "swing_factors": [
         {
           "factor": "college steals/game",
           "direction": "raises",
-          "effect_vorp": 1.75
+          "effect_vorp": 1.55
         },
         {
           "factor": "age at draft",
           "direction": "lowers",
-          "effect_vorp": -1.19
+          "effect_vorp": -1.16
         },
         {
-          "factor": "college rebounds/game",
+          "factor": "college assists/game",
           "direction": "raises",
-          "effect_vorp": 0.55
-        },
-        {
-          "factor": "college TS%",
-          "direction": "raises",
-          "effect_vorp": 0.45
+          "effect_vorp": 0.42
         },
         {
           "factor": "height",
-          "direction": "raises",
-          "effect_vorp": 0.27
+          "direction": "lowers",
+          "effect_vorp": -0.27
         },
         {
-          "factor": "college turnovers/game",
+          "factor": "college eFG%",
+          "direction": "lowers",
+          "effect_vorp": -0.18
+        },
+        {
+          "factor": "college minutes/game",
           "direction": "raises",
-          "effect_vorp": 0.21
+          "effect_vorp": 0.17
         }
       ],
       "key_uncertainties": [
-        "80% career-VORP interval spans -1.6 to 32.3 (median 7.9) \u2014 a wide range driven by how differently the comparables developed.",
-        "P(starter or better) = 70%; P(all-star or better) = 45%; P(bust) = 15%. The projection is a distribution, not a single outcome.",
+        "80% career-VORP interval spans -0.4 to 36.7 (median 9.2) \u2014 a wide range driven by how differently the comparables developed.",
+        "P(starter or better) = 70%; P(all-star or better) = 50%; P(bust) = 11%. The projection is a distribution, not a single outcome.",
         "College box-score profiles are weak predictors of NBA stardom, so the uncertainty here is real, not hidden \u2014 comparables also don't capture team fit, health, or development environment."
       ]
     },

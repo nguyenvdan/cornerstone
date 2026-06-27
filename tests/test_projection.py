@@ -123,6 +123,28 @@ def test_scouting_context_raises_floor_but_keeps_risk(prospects):
     assert abs(sum(prod.tier_probabilities.values()) - 1.0) < 1e-6
 
 
+def test_combine_normalize_name():
+    from pipelines.combine import normalize_name
+    assert normalize_name("Michael Kidd-Gilchrist") == "michael kidd gilchrist"
+    assert normalize_name("Otto Porter Jr.") == "otto porter"
+    assert normalize_name("Luka Dončić") == "luka doncic"
+
+
+@pytestmark_data
+@pytest.mark.skipif(not (config.PROCESSED / "combine_athleticism.parquet").exists(),
+                    reason="combine data not built")
+def test_athleticism_match_helps_elite_athlete(prospects):
+    from models.projection import ProjectionContext
+    dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
+    off = ProjectionContext(**{**dybantsa_context().__dict__, "athleticism_match": False})
+    a = ProjectionModel(prospects, context=off).project(
+        dyb, include_curve=False, include_swing=False)
+    b = ProjectionModel(prospects, context=dybantsa_context()).project(
+        dyb, include_curve=False, include_swing=False)
+    # AJ is an above-average measured athlete -> athleticism match shouldn't lower star.
+    assert b.p_star_plus >= a.p_star_plus - 1e-9
+
+
 @pytestmark_data
 def test_context_defaults_off_leave_model_unchanged(prospects):
     # The Phase 4 back-test relies on this: no context => pure profile model.

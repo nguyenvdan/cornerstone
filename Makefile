@@ -35,6 +35,10 @@ skills:
 roster-fit:
 	uv run python -m models.roster_fit
 
+# Combine athleticism: join public NBA combine data (wingspan/vertical) + AJ's line.
+combine:
+	uv run python -m pipelines.combine
+
 # Phase 6: run the agent. Scripted (no key) by default; autonomous LLM mode if
 # ANTHROPIC_API_KEY is set and `uv sync --extra agent` has been run.
 agent:

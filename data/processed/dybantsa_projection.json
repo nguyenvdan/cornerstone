@@ -2,153 +2,146 @@
   "prospect_name": "AJ Dybantsa",
   "n_comparables": 75,
   "tier_probabilities": {
-    "bust": 0.146,
-    "rotation": 0.153,
-    "starter": 0.25,
-    "all_star": 0.299,
-    "superstar": 0.152
+    "bust": 0.114,
+    "rotation": 0.182,
+    "starter": 0.209,
+    "all_star": 0.328,
+    "superstar": 0.167
   },
-  "p_starter_plus": 0.701,
-  "p_star_plus": 0.451,
+  "p_starter_plus": 0.704,
+  "p_star_plus": 0.495,
   "modal_tier": "all_star",
-  "expected_career_vorp": 13.9,
+  "expected_career_vorp": 15.7,
   "career_vorp_band": {
-    "p10": -1.6,
+    "p10": -0.4,
     "p25": 1.8,
-    "p50": 7.9,
-    "p75": 18.2,
-    "p90": 32.3
+    "p50": 9.2,
+    "p75": 21.6,
+    "p90": 36.7
   },
   "peak_bpm_band": {
-    "p10": -0.5,
+    "p10": 0.0,
     "p50": 2.6,
-    "p90": 6.3
+    "p90": 8.0
   },
   "season_curve": [
     {
       "season": 1,
       "n_comps": 75,
       "p10": -1.1,
-      "p25": -0.5,
-      "p50": -0.07,
-      "p75": 0.8,
-      "p90": 1.39
+      "p25": -0.4,
+      "p50": 0.0,
+      "p75": 0.95,
+      "p90": 1.4
     },
     {
       "season": 2,
       "n_comps": 75,
-      "p10": -0.5,
-      "p25": -0.1,
-      "p50": 0.51,
-      "p75": 1.37,
-      "p90": 2.26
+      "p10": -0.4,
+      "p25": 0.0,
+      "p50": 0.6,
+      "p75": 1.46,
+      "p90": 2.3
     },
     {
       "season": 3,
       "n_comps": 75,
-      "p10": -0.3,
-      "p25": 0.1,
-      "p50": 0.87,
-      "p75": 2.08,
-      "p90": 3.46
+      "p10": -0.02,
+      "p25": 0.19,
+      "p50": 1.0,
+      "p75": 2.46,
+      "p90": 3.54
     },
     {
       "season": 4,
       "n_comps": 75,
       "p10": -0.2,
-      "p25": 0.0,
-      "p50": 1.1,
-      "p75": 2.5,
-      "p90": 3.52
+      "p25": 0.01,
+      "p50": 1.29,
+      "p75": 2.92,
+      "p90": 3.8
     },
     {
       "season": 5,
       "n_comps": 75,
-      "p10": -0.29,
+      "p10": -0.3,
       "p25": 0.2,
-      "p50": 1.0,
-      "p75": 2.98,
-      "p90": 5.35
+      "p50": 1.09,
+      "p75": 3.42,
+      "p90": 5.22
     }
   ],
   "swing_factors": [
     {
       "feature": "coll_stl_per_g",
       "display": "college steals/game",
-      "effect_vorp": 1.75,
+      "effect_vorp": 1.55,
       "direction": "raises"
     },
     {
       "feature": "age_at_draft",
       "display": "age at draft",
-      "effect_vorp": -1.19,
+      "effect_vorp": -1.16,
       "direction": "lowers"
     },
     {
-      "feature": "coll_trb_per_g",
-      "display": "college rebounds/game",
-      "effect_vorp": 0.55,
-      "direction": "raises"
-    },
-    {
-      "feature": "coll_ts_pct",
-      "display": "college TS%",
-      "effect_vorp": 0.45,
+      "feature": "coll_ast_per_g",
+      "display": "college assists/game",
+      "effect_vorp": 0.42,
       "direction": "raises"
     },
     {
       "feature": "height_in",
       "display": "height",
-      "effect_vorp": 0.27,
-      "direction": "raises"
+      "effect_vorp": -0.27,
+      "direction": "lowers"
     },
     {
-      "feature": "coll_tov_per_g",
-      "display": "college turnovers/game",
-      "effect_vorp": 0.21,
+      "feature": "coll_efg_pct",
+      "display": "college eFG%",
+      "effect_vorp": -0.18,
+      "direction": "lowers"
+    },
+    {
+      "feature": "coll_mp_per_g",
+      "display": "college minutes/game",
+      "effect_vorp": 0.17,
       "direction": "raises"
     }
   ],
   "key_uncertainties": [
-    "80% career-VORP interval spans -1.6 to 32.3 (median 7.9) \u2014 a wide range driven by how differently the comparables developed.",
-    "P(starter or better) = 70%; P(all-star or better) = 45%; P(bust) = 15%. The projection is a distribution, not a single outcome.",
+    "80% career-VORP interval spans -0.4 to 36.7 (median 9.2) \u2014 a wide range driven by how differently the comparables developed.",
+    "P(starter or better) = 70%; P(all-star or better) = 50%; P(bust) = 11%. The projection is a distribution, not a single outcome.",
     "College box-score profiles are weak predictors of NBA stardom, so the uncertainty here is real, not hidden \u2014 comparables also don't capture team fit, health, or development environment."
   ],
   "top_comparables": [
     {
-      "player_name": "Jayson Tatum",
-      "draft_year": 2017,
-      "similarity": 78.5,
-      "outcome_tier": "superstar",
-      "career_vorp": 30.3
-    },
-    {
       "player_name": "James Harden",
       "draft_year": 2009,
-      "similarity": 76.1,
+      "similarity": 76.0,
       "outcome_tier": "superstar",
       "career_vorp": 87.9
     },
     {
-      "player_name": "Andrew Wiggins",
-      "draft_year": 2014,
-      "similarity": 75.0,
-      "outcome_tier": "starter",
-      "career_vorp": 5.8
+      "player_name": "Jayson Tatum",
+      "draft_year": 2017,
+      "similarity": 79.2,
+      "outcome_tier": "superstar",
+      "career_vorp": 30.3
     },
     {
-      "player_name": "D'Angelo Russell",
-      "draft_year": 2015,
-      "similarity": 73.7,
+      "player_name": "Otto Porter Jr.",
+      "draft_year": 2013,
+      "similarity": 68.3,
       "outcome_tier": "all_star",
-      "career_vorp": 12.4
+      "career_vorp": 12.5
     },
     {
-      "player_name": "RJ Barrett",
-      "draft_year": 2019,
-      "similarity": 73.4,
+      "player_name": "Michael Kidd-Gilchrist",
+      "draft_year": 2012,
+      "similarity": 68.3,
       "outcome_tier": "rotation",
-      "career_vorp": 1.8
+      "career_vorp": 0.6
     },
     {
       "player_name": "Bradley Beal",
@@ -158,30 +151,39 @@
       "career_vorp": 23.7
     },
     {
-      "player_name": "O.J. Mayo",
-      "draft_year": 2008,
-      "similarity": 71.3,
+      "player_name": "Andrew Wiggins",
+      "draft_year": 2014,
+      "similarity": 74.3,
       "outcome_tier": "starter",
-      "career_vorp": 4.7
+      "career_vorp": 5.8
     },
     {
-      "player_name": "Jamal Murray",
-      "draft_year": 2016,
-      "similarity": 77.0,
+      "player_name": "D'Angelo Russell",
+      "draft_year": 2015,
+      "similarity": 72.7,
       "outcome_tier": "all_star",
-      "career_vorp": 16.5
+      "career_vorp": 12.4
+    },
+    {
+      "player_name": "RJ Barrett",
+      "draft_year": 2019,
+      "similarity": 72.9,
+      "outcome_tier": "rotation",
+      "career_vorp": 1.8
     }
   ],
   "model_mode": "scouting-informed",
   "adjustments": [
-    "Draft capital: conditioned on his projected #1 / elite draft slot \u2014 top picks historically bust far less than the average drafted player.",
-    "Scouting archetype: query nudged toward Jaylen Brown, Jayson Tatum, Shai Gilgeous-Alexander (his scout-cited comps), using the FULL outcome distribution of similar wings \u2014 cautionary cases (e.g. Wiggins, Barrett) included, not just the stars.",
+    "Draft capital: conditioned on his #1-overall draft slot (Washington, 2026) \u2014 top picks historically bust far less than the average drafted player.",
+    "Scouting archetype: query nudged toward Kevin Durant, Jayson Tatum, Jaylen Brown, Shai Gilgeous-Alexander (his scout-cited comps), using the FULL outcome distribution of similar wings \u2014 cautionary cases (e.g. Wiggins, Barrett) included, not just the stars.",
     "Strength of competition: credited for producing in the Big 12 (a power conference), comparing him to players who faced similar competition.",
-    "Age weighting: extra emphasis on how young he is for his production."
+    "Age weighting: extra emphasis on how young he is for his production.",
+    "Combine athleticism: his measured 2026 combine line (42\" max vertical \u2014 combine-best \u2014 7'0.5\" wingspan, 8'10\" standing reach) upweights comparables of similar measured athleticism (where combine data exists)."
   ],
   "archetype_anchors": [
-    "Jaylen Brown",
+    "Kevin Durant",
     "Jayson Tatum",
+    "Jaylen Brown",
     "Shai Gilgeous-Alexander"
   ],
   "profile_only": {

@@ -127,6 +127,9 @@ class ProjectionContext:
     competition_match: bool = False    # compare to players who faced similar competition
     competition_penalty: float = 0.6   # weight multiplier for a competition-tier mismatch
     age_weight_boost: float = 1.0      # extra emphasis on (young) age at draft
+    athleticism_match: bool = False    # boost comps with similar measured combine athleticism
+    athleticism_boost: float = 0.6     # max extra weight for an athleticism match
+    athleticism_bandwidth: float = 22.0  # percentile-points kernel width
     candidate_pool: int = 220          # pool to reweight before trimming to k
 
 
@@ -162,6 +165,14 @@ class ProjectionModel:
         self.engine = engine
         self.k = k
         self.bandwidth_rank = bandwidth_rank
+
+        # Measured combine athleticism (partial coverage), used as a reweight.
+        self._ath = {}
+        if self.context.athleticism_match:
+            ath_path = config.PROCESSED / "combine_athleticism.parquet"
+            if ath_path.exists():
+                adf = pd.read_parquet(ath_path)
+                self._ath = dict(zip(adf["player_id"], adf["athleticism_pct"], strict=False))
 
         # Archetype centroid (raw feature space), averaged over the scout-named
         # anchors that exist in the matured universe.
@@ -209,6 +220,15 @@ class ProjectionModel:
             same = np.array([_is_power(c) == _is_power(prospect["coll_conf"])
                              for c in self.outcomes.loc[ids, "coll_conf"]])
             weights = weights * np.where(same, 1.0, ctx.competition_penalty)
+        if ctx.athleticism_match and self._ath.get(pid) is not None:
+            pa = self._ath[pid]
+            mult = np.ones(len(ids))
+            for i, cid in enumerate(ids):
+                ca = self._ath.get(cid)
+                if ca is not None:  # boost athletically-similar comps; neutral if unmeasured
+                    mult[i] = 1.0 + ctx.athleticism_boost * np.exp(
+                        -0.5 * ((ca - pa) / ctx.athleticism_bandwidth) ** 2)
+            weights = weights * mult
 
         if active and len(ids) > self.k:  # trim the reweighted pool back to k
             top = np.argsort(weights)[::-1][: self.k]
@@ -361,30 +381,36 @@ def _bar(p: float, width: int = 24) -> str:
 
 
 # Scout-named playstyle comps that exist within the 2003-2022 data window
-# (Tracy McGrady is outside it — drafted 1997 from high school).
-DYBANTSA_ARCHETYPE = ("Jaylen Brown", "Jayson Tatum", "Shai Gilgeous-Alexander")
+# (Tracy McGrady is outside it — drafted 1997 from high school). Kevin Durant
+# anchors the "KD ceiling" the front office sees in him.
+DYBANTSA_ARCHETYPE = ("Kevin Durant", "Jayson Tatum", "Jaylen Brown",
+                      "Shai Gilgeous-Alexander")
 
 
 def dybantsa_context() -> ProjectionContext:
     """Scouting-informed context for AJ Dybantsa: layers in the real pre-draft
     signals the profile-only model ignores."""
     return ProjectionContext(
-        draft_prior=True, draft_bandwidth=8.0,
+        draft_prior=True, draft_bandwidth=5.0,   # tight to his elite (top-3) slot
         archetype_anchors=DYBANTSA_ARCHETYPE, archetype_blend=0.3,
         competition_match=True, competition_penalty=0.6,
         age_weight_boost=2.0,
+        athleticism_match=True,
     )
 
 
 DYBANTSA_ADJUSTMENTS = [
-    "Draft capital: conditioned on his projected #1 / elite draft slot — top picks "
-    "historically bust far less than the average drafted player.",
+    "Draft capital: conditioned on his #1-overall draft slot (Washington, 2026) — "
+    "top picks historically bust far less than the average drafted player.",
     f"Scouting archetype: query nudged toward {', '.join(DYBANTSA_ARCHETYPE)} (his "
     "scout-cited comps), using the FULL outcome distribution of similar wings — "
     "cautionary cases (e.g. Wiggins, Barrett) included, not just the stars.",
     "Strength of competition: credited for producing in the Big 12 (a power "
     "conference), comparing him to players who faced similar competition.",
     "Age weighting: extra emphasis on how young he is for his production.",
+    "Combine athleticism: his measured 2026 combine line (42\" max vertical — "
+    "combine-best — 7'0.5\" wingspan, 8'10\" standing reach) upweights "
+    "comparables of similar measured athleticism (where combine data exists).",
 ]
 
 
