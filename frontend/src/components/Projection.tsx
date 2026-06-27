@@ -1,9 +1,10 @@
 import { inchesToFeet, pct, TIER_LABELS, TIER_ORDER, vorpLabel } from "../data";
 import { Bar, SeasonCurve } from "./Bits";
 
+// Color only carries meaning: green = star upside, red = bust, gray = the middle.
 const TIER_COLOR: Record<string, string> = {
-  superstar: "#7a2bb8", all_star: "#e8743b", starter: "#2e8b57",
-  rotation: "#1f4e79", bust: "#9c3a3a",
+  superstar: "var(--pos)", all_star: "var(--pos-soft)", starter: "var(--ink-2)",
+  rotation: "var(--faint)", bust: "var(--neg)",
 };
 
 export default function Projection({ p }: { p: any }) {
@@ -154,7 +155,8 @@ function Measurable({ label, value, sub, highlight }:
   return (
     <div style={{ padding: "6px 0" }}>
       <div style={{ fontSize: 12, color: "var(--muted-solid)", fontWeight: 600 }}>{label}</div>
-      <div style={{ fontSize: 22, fontWeight: 800, color: highlight ? "var(--accent)" : "var(--navy)" }}>
+      <div style={{ fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 700,
+        color: highlight ? "var(--pos)" : "var(--ink)" }}>
         {value}
       </div>
       {sub && <div style={{ fontSize: 12, color: "var(--muted-solid)" }}>{sub}</div>}

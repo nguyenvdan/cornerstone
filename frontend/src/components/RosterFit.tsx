@@ -23,8 +23,8 @@ export default function RosterFit({ fit }: { fit: any }) {
                 {titleCase(s.skill)}
                 {s.gap >= 20 && <span className="pill bust" style={{ marginLeft: 8 }}>gap {s.gap}</span>}
               </div>
-              <Bar label="need" value={s.need} color="var(--accent)" />
-              <Bar label="roster" value={s.roster_supply} color="var(--navy-2)" />
+              <Bar label="need" value={s.need} color="var(--faint)" />
+              <Bar label="roster" value={s.roster_supply} color="var(--ink)" />
             </div>
           ))}
         </div>
