@@ -155,8 +155,8 @@ function Measurable({ label, value, sub, highlight }:
   return (
     <div style={{ padding: "6px 0" }}>
       <div style={{ fontSize: 12, color: "var(--muted-solid)", fontWeight: 600 }}>{label}</div>
-      <div style={{ fontFamily: "var(--font-display)", fontSize: 26, fontWeight: 700,
-        color: highlight ? "var(--pos)" : "var(--ink)" }}>
+      <div style={{ fontFamily: "var(--font-display)", fontSize: 24, fontWeight: 500,
+        letterSpacing: "-0.02em", color: highlight ? "var(--pos)" : "var(--ink)" }}>
         {value}
       </div>
       {sub && <div style={{ fontSize: 12, color: "var(--muted-solid)" }}>{sub}</div>}
