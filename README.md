@@ -50,7 +50,7 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for module responsibilities and data fl
 | 3 | Probabilistic outcome model | ✅ done |
 | 4 | Back-testing / calibration | ✅ done |
 | 5 | Roster-fit engine | ✅ done |
-| 6 | Agentic orchestration | ⏳ planned |
+| 6 | Agentic orchestration | ✅ done |
 | 7 | React frontend + API | ⏳ planned |
 | 8 | Polish & writeup | ⏳ planned |
 
@@ -70,6 +70,7 @@ make project               # Dybantsa's probabilistic projection (Phase 3)
 make backtest              # leakage-free back-test + calibration plot (Phase 4)
 make skills                # scrape current-season NBA skill profiles (Phase 5)
 make roster-fit            # Wizards roster fit around Dybantsa (Phase 5)
+make agent                 # run the agent on the default Wizards question (Phase 6)
 make test                  # unit tests
 ```
 
@@ -120,6 +121,25 @@ projections carry wide, explicit uncertainty.
 **Limitations** (stated honestly): small early-cohort samples; survivorship and
 era effects; training uses earlier cohorts' eventually-realized careers (fair to
 both model and baseline). See `eval/backtest.py` for the protocol.
+
+## The agent (Phase 6)
+
+The whole system is exposed as a toolbelt (`lookup_prospect`, `find_comparables`,
+`project_development`, `evaluate_roster_fit`, `team_skill_summary`) wrapped in an
+agent that answers a natural-language question with a multi-step, **cited**
+scouting & strategy report. Run with `make agent` (or pass your own question:
+`uv run python -m agent.runner "How will AJ Dybantsa develop?"`).
+
+Two modes over the same tools:
+- **Autonomous** — with `ANTHROPIC_API_KEY` set (and `uv sync --extra agent`), an
+  LLM plans and chooses tool calls itself, then synthesizes the report.
+- **Scripted** — with no key, a deterministic orchestrator routes the request to
+  the relevant tools and synthesizes the report from their outputs, so the agent
+  is fully demonstrable offline.
+
+Both emit an inspectable reasoning trace, and every number in the report is read
+from a tool output — the agent never fabricates stats and always states
+uncertainty as a distribution.
 
 ## Data sources
 

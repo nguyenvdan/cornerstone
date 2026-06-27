@@ -1,0 +1,505 @@
+{
+  "query": "Analyze the Wizards' path with AJ Dybantsa as their cornerstone.",
+  "mode": "scripted",
+  "steps": [
+    {
+      "n": 1,
+      "thought": "Establish the player's pre-draft profile.",
+      "tool": "lookup_prospect",
+      "args": {
+        "name": "AJ Dybantsa"
+      },
+      "result_summary": "ok"
+    },
+    {
+      "n": 2,
+      "thought": "Ground the projection in real historical analogs.",
+      "tool": "find_comparables",
+      "args": {
+        "name": "AJ Dybantsa"
+      },
+      "result_summary": "8 comparables (top: James Harden)"
+    },
+    {
+      "n": 3,
+      "thought": "Quantify the development outlook as a distribution.",
+      "tool": "project_development",
+      "args": {
+        "name": "AJ Dybantsa"
+      },
+      "result_summary": "p_starter_plus=0.475, expected_career_vorp=7.3, n_comparables=75"
+    },
+    {
+      "n": 4,
+      "thought": "Inventory the current roster's skills.",
+      "tool": "team_skill_summary",
+      "args": {
+        "team": "WAS"
+      },
+      "result_summary": "n_rotation=19"
+    },
+    {
+      "n": 5,
+      "thought": "Assess fit and the highest-leverage needs.",
+      "tool": "evaluate_roster_fit",
+      "args": {
+        "team": "WAS",
+        "cornerstone": "AJ Dybantsa"
+      },
+      "result_summary": "fit_score=67.0"
+    }
+  ],
+  "report_markdown": "# Scouting & strategy report: AJ Dybantsa\n_Question: Analyze the Wizards' path with AJ Dybantsa as their cornerstone._\n\n## Profile  _(from lookup_prospect)_\nBYU, age 19.56, 6'9\", 25.5 pts / 6.8 reb / 3.7 ast.\n\n## Historical comparables  _(from find_comparables)_\n- **James Harden** (2009) \u2014 similarity 72.8, became a superstar (career VORP 87.9); alike on college blocks/game, college eFG%.\n- **James Anderson** (2010) \u2014 similarity 71.2, became a bust (career VORP -0.8); alike on college 3P%, college TS%.\n- **Alec Burks** (2011) \u2014 similarity 70.7, became a starter (career VORP 6.6); alike on college steals/game, college blocks/game.\n- **RJ Barrett** (2019) \u2014 similarity 70.0, became a rotation (career VORP 1.8); alike on college minutes/game, college blocks/game.\n- **T.J. Warren** (2014) \u2014 similarity 68.4, became a starter (career VORP 4.1); alike on college eFG%, college minutes/game.\n\nAcross the analog set the outcomes range widely (all_star, bust, rotation, starter, superstar), which is the basis for the uncertainty below.\n\n## Development projection  _(from project_development)_\n- **P(starter or better): 48%**, P(all-star or better): 22%, P(bust): 30%.\n- Expected career VORP **7.3**, with an honest 80% range of -1.2 to 22.3 (median 2.6).\n- Biggest swing factors: age at draft (\u2193), college steals/game (\u2191), college rebounds/game (\u2191).\n\n> 80% career-VORP interval spans -1.2 to 22.3 (median 2.6) \u2014 a wide range driven by how differently the comparables developed.\n\n## Roster fit & build path  _(from evaluate_roster_fit)_\n- WAS fit around AJ Dybantsa: **67.0/100**.\n- Biggest unmet needs: **perimeter defense, spacing, rim protection**.\n- Recommended complementary archetypes: 3&D Wing (fills perimeter defense, spacing); Defensive Anchor Big (fills rim protection, perimeter defense); Two-Way Wing (fills perimeter defense, spacing).\n\n## Bottom line\nAJ Dybantsa profiles as a 48%-likely starter-or-better with real star upside (P(all-star+) 22%) but genuine bust risk (30%) \u2014 a wide distribution, not a sure thing. To maximize his value, WAS should prioritize perimeter defense, spacing \u2014 a 3&D Wing is the highest-leverage add.",
+  "tool_results": {
+    "lookup_prospect": {
+      "player_name": "AJ Dybantsa",
+      "draft_year": "2026",
+      "draft_pick": "1",
+      "college_name": "BYU",
+      "age_at_draft": 19.56,
+      "height_in": "81",
+      "weight_lb": "210",
+      "position": "F",
+      "coll_pts_per_g": 25.5,
+      "coll_trb_per_g": 6.8,
+      "coll_ast_per_g": 3.7,
+      "coll_stl_per_g": 1.1,
+      "coll_blk_per_g": 0.3,
+      "coll_ts_pct": 0.6,
+      "coll_usg_pct": 33.9,
+      "coll_fg3_pct": 0.331
+    },
+    "find_comparables": {
+      "prospect": "AJ Dybantsa",
+      "comparables": [
+        {
+          "player_name": "James Harden",
+          "draft_year": 2009,
+          "similarity": 72.8,
+          "outcome_tier": "superstar",
+          "career_vorp": 87.9,
+          "why_alike": [
+            "college blocks/game",
+            "college eFG%",
+            "college TS%"
+          ]
+        },
+        {
+          "player_name": "James Anderson",
+          "draft_year": 2010,
+          "similarity": 71.2,
+          "outcome_tier": "bust",
+          "career_vorp": -0.8,
+          "why_alike": [
+            "college 3P%",
+            "college TS%",
+            "weight"
+          ]
+        },
+        {
+          "player_name": "Alec Burks",
+          "draft_year": 2011,
+          "similarity": 70.7,
+          "outcome_tier": "starter",
+          "career_vorp": 6.6,
+          "why_alike": [
+            "college steals/game",
+            "college blocks/game",
+            "college rebounds/game"
+          ]
+        },
+        {
+          "player_name": "RJ Barrett",
+          "draft_year": 2019,
+          "similarity": 70.0,
+          "outcome_tier": "rotation",
+          "career_vorp": 1.8,
+          "why_alike": [
+            "college minutes/game",
+            "college blocks/game",
+            "college turnovers/game"
+          ]
+        },
+        {
+          "player_name": "T.J. Warren",
+          "draft_year": 2014,
+          "similarity": 68.4,
+          "outcome_tier": "starter",
+          "career_vorp": 4.1,
+          "why_alike": [
+            "college eFG%",
+            "college minutes/game",
+            "college rebounds/game"
+          ]
+        },
+        {
+          "player_name": "O.J. Mayo",
+          "draft_year": 2008,
+          "similarity": 67.9,
+          "outcome_tier": "starter",
+          "career_vorp": 4.7,
+          "why_alike": [
+            "weight",
+            "college blocks/game",
+            "college assists/game"
+          ]
+        },
+        {
+          "player_name": "Chandler Hutchison",
+          "draft_year": 2018,
+          "similarity": 67.1,
+          "outcome_tier": "bust",
+          "career_vorp": -0.9,
+          "why_alike": [
+            "weight",
+            "college blocks/game",
+            "college assists/game"
+          ]
+        },
+        {
+          "player_name": "Klay Thompson",
+          "draft_year": 2011,
+          "similarity": 67.0,
+          "outcome_tier": "all_star",
+          "career_vorp": 17.6,
+          "why_alike": [
+            "college assists/game",
+            "college minutes/game",
+            "college usage%"
+          ]
+        }
+      ]
+    },
+    "project_development": {
+      "prospect": "AJ Dybantsa",
+      "n_comparables": 75,
+      "tier_probabilities": {
+        "bust": 0.301,
+        "rotation": 0.224,
+        "starter": 0.252,
+        "all_star": 0.163,
+        "superstar": 0.06
+      },
+      "p_starter_plus": 0.475,
+      "p_star_plus": 0.223,
+      "expected_career_vorp": 7.3,
+      "career_vorp_band": {
+        "p10": -1.2,
+        "p25": 0.0,
+        "p50": 2.6,
+        "p75": 8.8,
+        "p90": 22.3
+      },
+      "season_curve": [
+        {
+          "season": 1,
+          "n_comps": 75,
+          "p10": -0.91,
+          "p25": -0.3,
+          "p50": -0.1,
+          "p75": 0.25,
+          "p90": 1.11
+        },
+        {
+          "season": 2,
+          "n_comps": 75,
+          "p10": -0.49,
+          "p25": -0.2,
+          "p50": 0.1,
+          "p75": 0.8,
+          "p90": 1.8
+        },
+        {
+          "season": 3,
+          "n_comps": 75,
+          "p10": -0.3,
+          "p25": 0.0,
+          "p50": 0.52,
+          "p75": 1.2,
+          "p90": 2.78
+        },
+        {
+          "season": 4,
+          "n_comps": 75,
+          "p10": -0.2,
+          "p25": -0.1,
+          "p50": 0.2,
+          "p75": 1.42,
+          "p90": 2.81
+        },
+        {
+          "season": 5,
+          "n_comps": 75,
+          "p10": -0.1,
+          "p25": 0.0,
+          "p50": 0.3,
+          "p75": 1.74,
+          "p90": 5.14
+        }
+      ],
+      "swing_factors": [
+        {
+          "factor": "age at draft",
+          "direction": "lowers",
+          "effect_vorp": -2.88
+        },
+        {
+          "factor": "college steals/game",
+          "direction": "raises",
+          "effect_vorp": 2.86
+        },
+        {
+          "factor": "college rebounds/game",
+          "direction": "raises",
+          "effect_vorp": 1.38
+        },
+        {
+          "factor": "college assists/game",
+          "direction": "raises",
+          "effect_vorp": 0.68
+        },
+        {
+          "factor": "college turnovers/game",
+          "direction": "raises",
+          "effect_vorp": 0.45
+        },
+        {
+          "factor": "college FT%",
+          "direction": "raises",
+          "effect_vorp": 0.35
+        }
+      ],
+      "key_uncertainties": [
+        "80% career-VORP interval spans -1.2 to 22.3 (median 2.6) \u2014 a wide range driven by how differently the comparables developed.",
+        "P(starter or better) = 48%; P(all-star or better) = 22%; P(bust) = 30%. The projection is a distribution, not a single outcome.",
+        "College box-score profiles are weak predictors of NBA stardom, so the uncertainty here is real, not hidden \u2014 comparables also don't capture team fit, health, or development environment."
+      ]
+    },
+    "team_skill_summary": {
+      "team": "WAS",
+      "n_rotation": 19,
+      "players": [
+        {
+          "player_name": "CJ McCollum",
+          "mp_per_g": 29.8,
+          "primary_skill": "spacing",
+          "skills": {
+            "spacing": 89.0,
+            "playmaking": 72.0,
+            "rim_protection": 53.0,
+            "rebounding": 16.0,
+            "shot_creation": 86.0,
+            "perimeter_defense": 12.0
+          }
+        },
+        {
+          "player_name": "Kyshawn George",
+          "mp_per_g": 29.0,
+          "primary_skill": "spacing",
+          "skills": {
+            "spacing": 83.0,
+            "playmaking": 81.0,
+            "rim_protection": 80.0,
+            "rebounding": 57.0,
+            "shot_creation": 75.0,
+            "perimeter_defense": 39.0
+          }
+        },
+        {
+          "player_name": "Leaky Black",
+          "mp_per_g": 28.9,
+          "primary_skill": "rim_protection",
+          "skills": {
+            "spacing": 53.0,
+            "playmaking": 7.0,
+            "rim_protection": 60.0,
+            "rebounding": 56.0,
+            "shot_creation": 6.0,
+            "perimeter_defense": 34.0
+          }
+        },
+        {
+          "player_name": "Bub Carrington",
+          "mp_per_g": 27.7,
+          "primary_skill": "spacing",
+          "skills": {
+            "spacing": 82.0,
+            "playmaking": 82.0,
+            "rim_protection": 22.0,
+            "rebounding": 23.0,
+            "shot_creation": 44.0,
+            "perimeter_defense": 3.0
+          }
+        },
+        {
+          "player_name": "Alex Sarr",
+          "mp_per_g": 27.2,
+          "primary_skill": "rim_protection",
+          "skills": {
+            "spacing": 41.0,
+            "playmaking": 59.0,
+            "rim_protection": 98.0,
+            "rebounding": 85.0,
+            "shot_creation": 86.0,
+            "perimeter_defense": 44.0
+          }
+        },
+        {
+          "player_name": "Bilal Coulibaly",
+          "mp_per_g": 26.2,
+          "primary_skill": "rim_protection",
+          "skills": {
+            "spacing": 47.0,
+            "playmaking": 52.0,
+            "rim_protection": 86.0,
+            "rebounding": 52.0,
+            "shot_creation": 60.0,
+            "perimeter_defense": 62.0
+          }
+        },
+        {
+          "player_name": "Trae Young",
+          "mp_per_g": 25.6,
+          "primary_skill": "playmaking",
+          "skills": {
+            "spacing": 73.0,
+            "playmaking": 100.0,
+            "rim_protection": 12.0,
+            "rebounding": 2.0,
+            "shot_creation": 93.0,
+            "perimeter_defense": 21.0
+          }
+        },
+        {
+          "player_name": "Tre Johnson",
+          "mp_per_g": 24.1,
+          "primary_skill": "spacing",
+          "skills": {
+            "spacing": 78.0,
+            "playmaking": 47.0,
+            "rim_protection": 41.0,
+            "rebounding": 20.0,
+            "shot_creation": 73.0,
+            "perimeter_defense": 2.0
+          }
+        },
+        {
+          "player_name": "Khris Middleton",
+          "mp_per_g": 22.8,
+          "primary_skill": "shot_creation",
+          "skills": {
+            "spacing": 44.0,
+            "playmaking": 64.0,
+            "rim_protection": 12.0,
+            "rebounding": 49.0,
+            "shot_creation": 65.0,
+            "perimeter_defense": 15.0
+          }
+        },
+        {
+          "player_name": "Will Riley",
+          "mp_per_g": 22.1,
+          "primary_skill": "shot_creation",
+          "skills": {
+            "spacing": 42.0,
+            "playmaking": 49.0,
+            "rim_protection": 12.0,
+            "rebounding": 30.0,
+            "shot_creation": 62.0,
+            "perimeter_defense": 4.0
+          }
+        }
+      ]
+    },
+    "evaluate_roster_fit": {
+      "team": "WAS",
+      "cornerstone": "AJ Dybantsa",
+      "fit_score": 67.0,
+      "cornerstone_supply": {
+        "shot_creation": 97.9,
+        "playmaking": 77.1,
+        "spacing": 31.2,
+        "rim_protection": 20.0,
+        "rebounding": 61.0,
+        "perimeter_defense": 46.8
+      },
+      "skills": [
+        {
+          "skill": "perimeter_defense",
+          "need": 59.1,
+          "roster_supply": 42.9,
+          "gap": 33.7
+        },
+        {
+          "skill": "spacing",
+          "need": 95.6,
+          "roster_supply": 71.1,
+          "gap": 27.6
+        },
+        {
+          "skill": "rim_protection",
+          "need": 100.0,
+          "roster_supply": 75.3,
+          "gap": 24.7
+        },
+        {
+          "skill": "rebounding",
+          "need": 32.5,
+          "roster_supply": 67.4,
+          "gap": 10.6
+        },
+        {
+          "skill": "playmaking",
+          "need": 22.3,
+          "roster_supply": 75.6,
+          "gap": 5.4
+        },
+        {
+          "skill": "shot_creation",
+          "need": 0.9,
+          "roster_supply": 76.1,
+          "gap": 0.2
+        }
+      ],
+      "biggest_gaps": [
+        "perimeter_defense",
+        "spacing",
+        "rim_protection"
+      ],
+      "recommended_archetypes": [
+        {
+          "archetype": "3&D Wing",
+          "score": 52.1,
+          "fills": [
+            "perimeter_defense",
+            "spacing"
+          ]
+        },
+        {
+          "archetype": "Defensive Anchor Big",
+          "score": 50.3,
+          "fills": [
+            "rim_protection",
+            "perimeter_defense"
+          ]
+        },
+        {
+          "archetype": "Two-Way Wing",
+          "score": 47.1,
+          "fills": [
+            "perimeter_defense",
+            "spacing"
+          ]
+        },
+        {
+          "archetype": "Stretch Big",
+          "score": 46.2,
+          "fills": [
+            "spacing",
+            "rim_protection"
+          ]
+        }
+      ]
+    }
+  }
+}

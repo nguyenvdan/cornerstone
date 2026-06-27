@@ -26,6 +26,12 @@ dev = [
     "pytest>=8.0",
     "ruff>=0.4",
 ]
+# Live LLM-driven agent mode (set ANTHROPIC_API_KEY). The agent runs in a
+# deterministic scripted mode without this; the SDK is only needed to let an
+# LLM choose the tool calls itself.
+agent = [
+    "anthropic>=0.40",
+]
 
 [build-system]
 requires = ["hatchling"]

@@ -35,6 +35,11 @@ skills:
 roster-fit:
 	uv run python -m models.roster_fit
 
+# Phase 6: run the agent. Scripted (no key) by default; autonomous LLM mode if
+# ANTHROPIC_API_KEY is set and `uv sync --extra agent` has been run.
+agent:
+	uv run python -m agent.runner
+
 test:
 	uv run pytest -q
 
