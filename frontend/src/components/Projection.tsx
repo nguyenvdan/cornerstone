@@ -74,28 +74,42 @@ export default function Projection({ p }: { p: any }) {
         </p>
       )}
 
-      {p.projected_peak_per36?.pts && (
+      {p.peak_per36_by_tier && Object.keys(p.peak_per36_by_tier).length > 0 && (
         <div className="card" style={{ marginBottom: 16 }}>
-          <h3>Projected peak production <span style={{ color: "var(--muted)", fontWeight: 400,
-            textTransform: "none", letterSpacing: 0 }}>— per 36 minutes, at his peak</span></h3>
-          <div style={{ display: "flex", gap: 0, flexWrap: "wrap", borderTop: "1px solid var(--line)" }}>
-            {[["PTS", p.projected_peak_per36.pts], ["REB", p.projected_peak_per36.reb],
-              ["AST", p.projected_peak_per36.ast], ["STL", p.projected_peak_per36.stl],
-              ["BLK", p.projected_peak_per36.blk]].map(([lbl, v]) => (
-              <div key={lbl as string} style={{ flex: 1, minWidth: 90, padding: "14px 18px 14px 0" }}>
-                <div style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 30,
-                  letterSpacing: "-0.02em" }}>{(v as number).toFixed(1)}</div>
-                <div style={{ fontFamily: "var(--font-display)", fontSize: 11, color: "var(--muted)",
-                  textTransform: "uppercase", letterSpacing: "0.1em" }}>{lbl}</div>
-              </div>
-            ))}
-          </div>
+          <h3>Projected peak per-36 <span style={{ color: "var(--muted)", fontWeight: 400,
+            textTransform: "none", letterSpacing: 0 }}>— if he reaches each level</span></h3>
+          <table className="tbl">
+            <thead>
+              <tr>
+                <th>Outcome</th><th className="num">PTS</th><th className="num">REB</th>
+                <th className="num">AST</th><th className="num">STL</th><th className="num">BLK</th>
+                <th className="num">3P%</th><th className="num">TS%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[["superstar", "Superstar"], ["all_star", "All-Star"],
+                ["starter", "Starter"], ["rotation", "Role player"]].map(([key, label]) => {
+                const x = p.peak_per36_by_tier[key as string];
+                if (!x) return null;
+                return (
+                  <tr key={key as string}>
+                    <td><span className={`pill ${key}`}>{label}</span></td>
+                    <td className="num">{x.pts.toFixed(1)}</td>
+                    <td className="num">{x.reb.toFixed(1)}</td>
+                    <td className="num">{x.ast.toFixed(1)}</td>
+                    <td className="num">{x.stl.toFixed(1)}</td>
+                    <td className="num">{x.blk.toFixed(1)}</td>
+                    <td className="num">{(x.fg3_pct * 100).toFixed(0)}</td>
+                    <td className="num">{(x.ts_pct * 100).toFixed(0)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
           <div className="note">
-            Shooting {(p.projected_peak_per36.fg_pct * 100).toFixed(0)}% FG /{" "}
-            {(p.projected_peak_per36.fg3_pct * 100).toFixed(0)}% 3P /{" "}
-            {(p.projected_peak_per36.ts_pct * 100).toFixed(0)}% TS. Similarity-weighted from the
-            peak seasons of his {p.projected_peak_per36.n} comparables — a fringe-All-Star scoring
-            wing line.
+            Each line is the similarity-weighted peak season of his comparables who actually
+            reached that level. His likeliest outcomes are starter / All-Star; superstar
+            (a Durant-tier 28-6-6 on 60% TS) is the upside.
           </div>
         </div>
       )}

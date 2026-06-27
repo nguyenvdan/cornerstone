@@ -159,11 +159,16 @@ def test_context_defaults_off_leave_model_unchanged(prospects):
                     reason="peak per-36 not built")
 def test_projected_peak_per36_is_sensible(prospects):
     dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
-    pk = ProjectionModel(prospects, context=dybantsa_context()).project(
-        dyb, include_curve=False, include_swing=False).projected_peak_per36
+    proj = ProjectionModel(prospects, context=dybantsa_context()).project(
+        dyb, include_curve=False, include_swing=False)
+    pk = proj.projected_peak_per36
     assert pk and pk["n"] >= 8
     assert 10 < pk["pts"] < 35          # a plausible peak scoring rate per 36
     assert 0.3 < pk["ts_pct"] < 0.75    # plausible shooting efficiency
+    # conditional-by-tier lines: a superstar peak out-scores a role-player peak
+    bt = proj.peak_per36_by_tier
+    assert "superstar" in bt and "starter" in bt
+    assert bt["superstar"]["pts"] > bt["starter"]["pts"]
 
 
 @pytestmark_data

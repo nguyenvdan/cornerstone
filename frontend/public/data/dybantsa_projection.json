@@ -191,6 +191,56 @@
     "fg3_pct": 0.35,
     "ts_pct": 0.56
   },
+  "peak_per36_by_tier": {
+    "superstar": {
+      "n": 10,
+      "pts": 28.37,
+      "reb": 7.49,
+      "ast": 5.7,
+      "stl": 1.34,
+      "blk": 0.63,
+      "fg3m": 2.35,
+      "fg_pct": 0.47,
+      "fg3_pct": 0.36,
+      "ts_pct": 0.6
+    },
+    "all_star": {
+      "n": 21,
+      "pts": 22.37,
+      "reb": 6.02,
+      "ast": 5.17,
+      "stl": 1.28,
+      "blk": 0.57,
+      "fg3m": 1.8,
+      "fg_pct": 0.48,
+      "fg3_pct": 0.33,
+      "ts_pct": 0.57
+    },
+    "starter": {
+      "n": 20,
+      "pts": 18.41,
+      "reb": 5.82,
+      "ast": 3.19,
+      "stl": 1.13,
+      "blk": 0.76,
+      "fg3m": 1.99,
+      "fg_pct": 0.46,
+      "fg3_pct": 0.36,
+      "ts_pct": 0.57
+    },
+    "rotation": {
+      "n": 11,
+      "pts": 18.06,
+      "reb": 6.16,
+      "ast": 4.14,
+      "stl": 1.13,
+      "blk": 0.54,
+      "fg3m": 1.33,
+      "fg_pct": 0.47,
+      "fg3_pct": 0.35,
+      "ts_pct": 0.55
+    }
+  },
   "model_mode": "scouting-informed",
   "adjustments": [
     "Draft capital: conditioned on his #1-overall draft slot (Washington, 2026) \u2014 top picks historically bust far less than the average drafted player. This is the lever the back-test found carries the most signal.",

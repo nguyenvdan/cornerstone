@@ -102,6 +102,7 @@ class Projection:
     top_comparables: list[dict] = field(default_factory=list)
     ceiling_comparable: dict = field(default_factory=dict)
     projected_peak_per36: dict = field(default_factory=dict)
+    peak_per36_by_tier: dict = field(default_factory=dict)
 
     def to_dict(self) -> dict:
         d = self.__dict__.copy()
@@ -318,6 +319,20 @@ class ProjectionModel:
             )
         return curve
 
+    _PER36_COLS = [("pts36", "pts"), ("trb36", "reb"), ("ast36", "ast"),
+                   ("stl36", "stl"), ("blk36", "blk"), ("fg3_36", "fg3m"),
+                   ("fg_pct", "fg_pct"), ("fg3_pct", "fg3_pct"), ("peak_ts_pct", "ts_pct")]
+
+    def _per36_line(self, sub_ids: list[str], sub_w: np.ndarray) -> dict:
+        rows = self._peak36.loc[sub_ids]
+        out = {"n": len(sub_ids)}
+        for col, label in self._PER36_COLS:
+            v = rows[col].to_numpy(float)
+            m = ~np.isnan(v)
+            if m.any():
+                out[label] = round(float(np.average(v[m], weights=sub_w[m])), 2)
+        return out
+
     def _peak_per36(self, ids: list[str], weights: np.ndarray) -> dict:
         """Similarity-weighted projected peak per-36 line from the comparables."""
         if self._peak36 is None:
@@ -326,17 +341,23 @@ class ProjectionModel:
         if len(have) < 8:
             return {}
         sub_ids, sub_w = zip(*have, strict=False)
-        rows = self._peak36.loc[list(sub_ids)]
-        w = np.array(sub_w)
-        out = {"n": len(have)}
-        for col, label in [("pts36", "pts"), ("trb36", "reb"), ("ast36", "ast"),
-                           ("stl36", "stl"), ("blk36", "blk"), ("fg3_36", "fg3m"),
-                           ("fg_pct", "fg_pct"), ("fg3_pct", "fg3_pct"),
-                           ("peak_ts_pct", "ts_pct")]:
-            v = rows[col].to_numpy(float)
-            m = ~np.isnan(v)
-            if m.any():
-                out[label] = round(float(np.average(v[m], weights=w[m])), 2)
+        return self._per36_line(list(sub_ids), np.array(sub_w))
+
+    def _peak_per36_by_tier(self, ids: list[str], weights: np.ndarray) -> dict:
+        """Peak per-36 line conditioned on outcome tier — 'what his peak looks
+        like *if* he becomes a superstar / all-star / starter / role player',
+        from the comparables who actually reached each level."""
+        if self._peak36 is None:
+            return {}
+        tiers = self.outcomes.loc[ids, "outcome_tier"].tolist()
+        out = {}
+        for tier in ("superstar", "all_star", "starter", "rotation"):
+            have = [(i, w) for i, w, t in zip(ids, weights, tiers, strict=False)
+                    if t == tier and i in self._peak36.index]
+            if len(have) < 5:        # need a stable sample
+                continue
+            sub_ids, sub_w = zip(*have, strict=False)
+            out[tier] = self._per36_line(list(sub_ids), np.array(sub_w))
         return out
 
     # -- public API --------------------------------------------------------
@@ -421,6 +442,7 @@ class ProjectionModel:
             top_comparables=top,
             ceiling_comparable=ceiling_comparable,
             projected_peak_per36=self._peak_per36(ids, weights),
+            peak_per36_by_tier=self._peak_per36_by_tier(ids, weights),
         )
 
 
