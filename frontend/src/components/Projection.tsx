@@ -1,4 +1,4 @@
-import { pct, TIER_LABELS, TIER_ORDER } from "../data";
+import { inchesToFeet, pct, TIER_LABELS, TIER_ORDER, vorpLabel } from "../data";
 import { Bar, SeasonCurve } from "./Bits";
 
 const TIER_COLOR: Record<string, string> = {
@@ -24,6 +24,13 @@ export default function Projection({ p }: { p: any }) {
         comparables actually developed, with real pre-draft signals (draft capital, playstyle
         archetype, competition, age) layered in. No point estimates, no false precision.
       </p>
+
+      {/* Best / expected / worst career outcomes, mapped to the VORP scale */}
+      <div className="grid three" style={{ marginBottom: 18 }}>
+        <Scenario label="Worst case (10th pct)" vorp={band.p10} accent="var(--accent-2)" />
+        <Scenario label="Expected" vorp={p.expected_career_vorp} accent="var(--navy-2)" />
+        <Scenario label="Best case (90th pct)" vorp={band.p90} accent="var(--ok)" />
+      </div>
 
       <div className="grid two">
         <div className="card">
@@ -78,6 +85,25 @@ export default function Projection({ p }: { p: any }) {
         </div>
       </div>
 
+      {p.combine && (
+        <div className="card" style={{ marginTop: 18 }}>
+          <h3>Combine athletic profile <span className="pill superstar" style={{ fontSize: 12 }}>
+            {Math.round(p.combine.athleticism_pct)}th pct athlete</span></h3>
+          <div className="grid three" style={{ gap: 12 }}>
+            <Measurable label="Height (no shoes)" value={inchesToFeet(p.combine.height_no_shoes_in)} />
+            <Measurable label="Wingspan" value={inchesToFeet(p.combine.wingspan_in)}
+              sub={`+${p.combine.length_in}" length`} />
+            <Measurable label="Standing reach" value={inchesToFeet(p.combine.standing_reach_in)} />
+            <Measurable label="Max vertical" value={`${p.combine.max_vertical_in}"`}
+              sub="combine-best (2026)" highlight />
+          </div>
+          <div className="note">
+            Measured 2026 NBA Combine data — the elite explosiveness + length that box scores
+            miss. Used to weight him toward comparably athletic historical wings.
+          </div>
+        </div>
+      )}
+
       <div className="callout" style={{ marginTop: 18 }}>
         <b>Honest read:</b> {p.key_uncertainties?.[2] ?? p.key_uncertainties?.[0]}
       </div>
@@ -100,6 +126,30 @@ export default function Projection({ p }: { p: any }) {
         </div>
       )}
     </section>
+  );
+}
+
+function Scenario({ label, vorp, accent }: { label: string; vorp: number; accent: string }) {
+  return (
+    <div className="card" style={{ borderTop: `3px solid ${accent}`, padding: "16px 18px" }}>
+      <div style={{ fontSize: 12, textTransform: "uppercase", letterSpacing: "0.06em",
+        color: "var(--muted-solid)", fontWeight: 700 }}>{label}</div>
+      <div className="kpi" style={{ margin: "6px 0 2px" }}>{vorp}<small> career VORP</small></div>
+      <div style={{ fontSize: 14, fontWeight: 600, color: accent }}>{vorpLabel(vorp)}</div>
+    </div>
+  );
+}
+
+function Measurable({ label, value, sub, highlight }:
+  { label: string; value: string; sub?: string; highlight?: boolean }) {
+  return (
+    <div style={{ padding: "6px 0" }}>
+      <div style={{ fontSize: 12, color: "var(--muted-solid)", fontWeight: 600 }}>{label}</div>
+      <div style={{ fontSize: 22, fontWeight: 800, color: highlight ? "var(--accent)" : "var(--navy)" }}>
+        {value}
+      </div>
+      {sub && <div style={{ fontSize: 12, color: "var(--muted-solid)" }}>{sub}</div>}
+    </div>
   );
 }
 

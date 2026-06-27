@@ -456,6 +456,20 @@ def main() -> int:
     out["model_mode"] = "scouting-informed"
     out["adjustments"] = DYBANTSA_ADJUSTMENTS
     out["archetype_anchors"] = list(DYBANTSA_ARCHETYPE)
+
+    # Surface AJ's measured 2026 combine line for the frontend.
+    ath_path = config.PROCESSED / "combine_athleticism.parquet"
+    if ath_path.exists():
+        from pipelines.combine import DYBANTSA_COMBINE
+        arow = pd.read_parquet(ath_path).query("player_id == 'dybanaj01'")
+        out["combine"] = {
+            "height_no_shoes_in": DYBANTSA_COMBINE["height_no_shoes"],
+            "wingspan_in": DYBANTSA_COMBINE["wingspan"],
+            "standing_reach_in": DYBANTSA_COMBINE["standing_reach"],
+            "max_vertical_in": DYBANTSA_COMBINE["vertical_max"],
+            "length_in": float(arow["length"].iloc[0]) if not arow.empty else None,
+            "athleticism_pct": float(arow["athleticism_pct"].iloc[0]) if not arow.empty else None,
+        }
     out["profile_only"] = {
         "p_starter_plus": base.p_starter_plus,
         "p_star_plus": base.p_star_plus,
