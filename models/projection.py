@@ -468,19 +468,28 @@ def main() -> int:
     out["adjustments"] = DYBANTSA_ADJUSTMENTS
     out["archetype_anchors"] = list(DYBANTSA_ARCHETYPE)
 
-    # Surface AJ's measured 2026 combine line for the frontend.
+    # Surface AJ's measured 2026 combine line for the frontend (percentiles are
+    # height-adjusted: vs same-height peers, except height itself vs position).
     ath_path = config.PROCESSED / "combine_athleticism.parquet"
     if ath_path.exists():
         from pipelines.combine import DYBANTSA_COMBINE
         arow = pd.read_parquet(ath_path).query("player_id == 'dybanaj01'")
+        a = arow.iloc[0] if not arow.empty else {}
         out["combine"] = {
             "height_no_shoes_in": DYBANTSA_COMBINE["height_no_shoes"],
             "wingspan_in": DYBANTSA_COMBINE["wingspan"],
             "standing_reach_in": DYBANTSA_COMBINE["standing_reach"],
             "max_vertical_in": DYBANTSA_COMBINE["vertical_max"],
-            "length_in": float(arow["length"].iloc[0]) if not arow.empty else None,
-            "athleticism_pct": float(arow["athleticism_pct"].iloc[0]) if not arow.empty else None,
+            "length_in": float(a["length"]) if len(arow) else None,
+            "athleticism_pct": float(a["athleticism_pct"]) if len(arow) else None,
+            "vertical_pct": float(a["vertical_pct"]) if len(arow) else None,
+            "wingspan_pct": float(a["wingspan_pct"]) if len(arow) else None,
+            "height_pct": float(a["height_pct"]) if len(arow) else None,
         }
+
+    # Skill profile (percentiles) for the radar chart.
+    from models.roster_fit import cornerstone_skill_supply
+    out["skill_profile"] = cornerstone_skill_supply(dyb, prospects)
     out["profile_only"] = {
         "p_starter_plus": base.p_starter_plus,
         "p_star_plus": base.p_star_plus,

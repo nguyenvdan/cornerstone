@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import unicodedata
 
+import numpy as np
 import pandas as pd
 
 from . import config
@@ -48,6 +49,54 @@ def _percentile(series: pd.Series) -> pd.Series:
     return series.rank(pct=True) * 100.0
 
 
+def _pos_group(pos: object) -> str | None:
+    """Coarse position group for stable height baselines."""
+    if not isinstance(pos, str):
+        return None
+    p = pos.upper()
+    if p in ("PG", "SG", "G"):
+        return "G"
+    if p in ("SF", "F", "GF"):
+        return "W"
+    if p in ("PF", "C", "FC"):
+        return "B"
+    return None
+
+
+def _banded_pct(heights: np.ndarray, values: np.ndarray, targets: np.ndarray,
+                band: float = 2.0, min_n: int = 25) -> np.ndarray:
+    """For each player, percentile of their metric among athletes within `band`
+    inches of their height (widening the band until min_n peers are found)."""
+    out = np.full(len(targets), np.nan)
+    for i, (th, tv) in enumerate(zip(targets, values, strict=False)):
+        if np.isnan(tv):
+            continue
+        b = band
+        while True:
+            mask = (np.abs(heights - th) <= b) & ~np.isnan(values)
+            peers = values[mask]
+            if len(peers) >= min_n or b > 8:
+                break
+            b += 1
+        out[i] = 100.0 * np.mean(peers < tv) if len(peers) else np.nan
+    return out
+
+
+def _position_pct(groups: np.ndarray, heights: np.ndarray, min_n: int = 15) -> np.ndarray:
+    """Percentile of each player's height within their position group."""
+    out = np.full(len(heights), np.nan)
+    valid = ~np.isnan(heights)
+    for i, g in enumerate(groups):
+        if np.isnan(heights[i]):
+            continue
+        mask = np.array([gg == g for gg in groups]) & valid if g else valid
+        peers = heights[mask]
+        if len(peers) < min_n:
+            peers = heights[valid]
+        out[i] = 100.0 * np.mean(peers < heights[i])
+    return out
+
+
 def build_combine(prospects: pd.DataFrame) -> pd.DataFrame:
     raw = pd.read_csv(_local_csv())
     measured = raw.rename(columns={
@@ -61,29 +110,43 @@ def build_combine(prospects: pd.DataFrame) -> pd.DataFrame:
     aj = pd.DataFrame([{k: DYBANTSA_COMBINE[k] for k in
                         ("player_name", "wingspan", "standing_reach", "vertical_max",
                          "height_no_shoes")}])
-    pool = pd.concat([measured, aj], ignore_index=True)
+    pool = pd.concat([measured, aj], ignore_index=True).reset_index(drop=True)
     pool["length"] = pool["wingspan"] - pool["height_no_shoes"]
 
-    # Athleticism = mean percentile of explosiveness (max vertical) + length
-    # (wingspan, standing reach). Captures the "elite athlete" wing signal.
-    ath = (_percentile(pool["vertical_max"]) + _percentile(pool["wingspan"])
-           + _percentile(pool["standing_reach"])) / 3.0
-    pool = pool.assign(athleticism_pct=ath.round(1))
-
-    # Join historical rows to player_id by normalized name.
+    # Position (for the height comparison) joined from the prospect universe.
     tmp = (prospects.drop_duplicates("player_id")
            .assign(_n=lambda d: d["player_name"].map(normalize_name))
            .drop_duplicates("_n"))
     pmap = dict(zip(tmp["_n"], tmp["player_id"], strict=False))
+    posmap = dict(zip(tmp["_n"], tmp["position"], strict=False))
+    pool["position"] = pool["player_name"].map(
+        lambda n: "F" if n == "AJ Dybantsa" else posmap.get(normalize_name(n)))
+    pool["pos_group"] = pool["position"].map(_pos_group)
+
+    # Athleticism is size-adjusted: explosiveness/length are scored vs athletes of
+    # the SAME height (a 42" vertical on a 6'8" frame isn't diluted by small
+    # guards), while height itself is scored vs the player's position.
+    # Explosiveness (vertical) + length (wingspan) vs same-height peers; height
+    # vs position. Standing reach is dropped (redundant with wingspan + height).
+    h = pool["height_no_shoes"].to_numpy()
+    vp = _banded_pct(h, pool["vertical_max"].to_numpy(), h)
+    wp = _banded_pct(h, pool["wingspan"].to_numpy(), h)
+    hp = _position_pct(pool["pos_group"].to_numpy(), h)
+    pool["vertical_pct"] = vp.round(1)
+    pool["wingspan_pct"] = wp.round(1)
+    pool["height_pct"] = hp.round(1)
+    pool["athleticism_pct"] = np.nanmean(np.vstack([vp, wp, hp]), axis=0).round(1)
+
     out_rows = []
     for _, r in pool.iterrows():
-        if r["player_name"] == "AJ Dybantsa":
-            pid = "dybanaj01"
-        else:
-            pid = pmap.get(normalize_name(r["player_name"]))
-            if pid is None:
-                continue
+        pid = "dybanaj01" if r["player_name"] == "AJ Dybantsa" \
+            else pmap.get(normalize_name(r["player_name"]))
+        if pid is None:
+            continue
         out_rows.append({"player_id": pid, "athleticism_pct": float(r["athleticism_pct"]),
+                         "vertical_pct": float(r["vertical_pct"]),
+                         "wingspan_pct": float(r["wingspan_pct"]),
+                         "height_pct": float(r["height_pct"]),
                          "wingspan": float(r["wingspan"]), "vertical_max": float(r["vertical_max"]),
                          "length": round(float(r["length"]), 1)})
     return pd.DataFrame(out_rows).drop_duplicates("player_id")

@@ -1,5 +1,15 @@
 import { inchesToFeet, pct, TIER_LABELS, TIER_ORDER, vorpLabel } from "../data";
-import { Bar, SeasonCurve } from "./Bits";
+import { Bar, Radar, SeasonCurve } from "./Bits";
+
+// Map the 6 internal skills to scout-friendly radar categories (clockwise).
+const RADAR: { key: string; label: string }[] = [
+  { key: "shot_creation", label: "Scoring" },
+  { key: "playmaking", label: "Playmaking" },
+  { key: "spacing", label: "Shooting" },
+  { key: "perimeter_defense", label: "Perimeter D" },
+  { key: "rim_protection", label: "Interior D" },
+  { key: "rebounding", label: "Rebounding" },
+];
 
 // Color only carries meaning: green = star upside, red = bust, gray = the middle.
 const TIER_COLOR: Record<string, string> = {
@@ -95,24 +105,43 @@ export default function Projection({ p }: { p: any }) {
         </div>
       </div>
 
-      {p.combine && (
-        <div className="card" style={{ marginTop: 18 }}>
-          <h3>Combine athletic profile <span className="pill superstar" style={{ fontSize: 12 }}>
-            {Math.round(p.combine.athleticism_pct)}th pct athlete</span></h3>
-          <div className="grid three" style={{ gap: 12 }}>
-            <Measurable label="Height (no shoes)" value={inchesToFeet(p.combine.height_no_shoes_in)} />
-            <Measurable label="Wingspan" value={inchesToFeet(p.combine.wingspan_in)}
-              sub={`+${p.combine.length_in}" length`} />
-            <Measurable label="Standing reach" value={inchesToFeet(p.combine.standing_reach_in)} />
-            <Measurable label="Max vertical" value={`${p.combine.max_vertical_in}"`}
-              sub="combine-best (2026)" highlight />
+      <div className="grid two" style={{ marginTop: 18 }}>
+        {p.skill_profile && (
+          <div className="card">
+            <h3>Skill profile <span style={{ color: "var(--muted)", fontWeight: 400,
+              textTransform: "none", letterSpacing: 0 }}>— percentile vs prospects</span></h3>
+            <Radar data={RADAR.map((r) => ({ label: r.label, value: p.skill_profile[r.key] }))} />
+            <div className="note">
+              Elite shot creation & playmaking; average shooting; low rim protection — the
+              profile of a primary scoring wing who needs spacing & rim help around him.
+            </div>
           </div>
-          <div className="note">
-            Measured 2026 NBA Combine data — the elite explosiveness + length that box scores
-            miss. Used to weight him toward comparably athletic historical wings.
+        )}
+
+        {p.combine && (
+          <div className="card">
+            <h3>Combine athletic profile <span className="pill superstar" style={{ fontSize: 11 }}>
+              {Math.round(p.combine.athleticism_pct)}th pct athlete</span></h3>
+            <div className="grid three" style={{ gap: 10, marginBottom: 6 }}>
+              <Measurable label="Height (no shoes)" value={inchesToFeet(p.combine.height_no_shoes_in)} />
+              <Measurable label="Wingspan" value={inchesToFeet(p.combine.wingspan_in)} />
+              <Measurable label="Max vertical" value={`${p.combine.max_vertical_in}"`}
+                sub="combine-best" highlight />
+            </div>
+            <Bar label="Vertical" value={Math.round(p.combine.vertical_pct)} suffix="th"
+              color="var(--pos)" />
+            <Bar label="Length" value={Math.round(p.combine.wingspan_pct)} suffix="th"
+              color="var(--ink-2)" />
+            <Bar label="Pos. size" value={Math.round(p.combine.height_pct)} suffix="th"
+              color="var(--pos)" />
+            <div className="note">
+              Height-adjusted: explosiveness & length scored vs same-height players, size vs
+              position. A 42" vertical on a 6'8" frame is 99th-pct explosive — his length is
+              only average for his height.
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="callout" style={{ marginTop: 18 }}>
         <b>Honest read:</b> {p.key_uncertainties?.[2] ?? p.key_uncertainties?.[0]}

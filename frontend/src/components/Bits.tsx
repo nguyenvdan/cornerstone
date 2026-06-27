@@ -13,6 +13,52 @@ export function Bar({
   );
 }
 
+/** Spider/radar chart of skill percentiles (0-100). */
+export function Radar({ data }: { data: { label: string; value: number }[] }) {
+  const W = 360, H = 300, cx = 180, cy = 150, R = 100;
+  const n = data.length;
+  const ang = (i: number) => (Math.PI * 2 * i) / n - Math.PI / 2;
+  const pt = (i: number, r: number): [number, number] => [
+    cx + Math.cos(ang(i)) * r, cy + Math.sin(ang(i)) * r,
+  ];
+  const clamp = (v: number) => Math.max(0, Math.min(100, v));
+  const ring = (rv: number) =>
+    data.map((_, i) => pt(i, (rv / 100) * R).join(",")).join(" ");
+  const shape = data.map((d, i) => pt(i, (clamp(d.value) / 100) * R).join(",")).join(" ");
+
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label="Skill profile radar">
+      {[25, 50, 75, 100].map((rv) => (
+        <polygon key={rv} points={ring(rv)} fill="none" stroke="var(--line)" strokeWidth={1} />
+      ))}
+      {data.map((_, i) => {
+        const [x, y] = pt(i, R);
+        return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="var(--line)" strokeWidth={1} />;
+      })}
+      <polygon points={shape} fill="var(--ink)" fillOpacity={0.08}
+        stroke="var(--ink)" strokeWidth={2} />
+      {data.map((d, i) => {
+        const [x, y] = pt(i, (clamp(d.value) / 100) * R);
+        return <circle key={i} cx={x} cy={y} r={3} fill="var(--ink)" />;
+      })}
+      {data.map((d, i) => {
+        const [lx, ly] = pt(i, R + 20);
+        const anchor = Math.abs(lx - cx) < 6 ? "middle" : lx > cx ? "start" : "end";
+        return (
+          <g key={`l${i}`}>
+            <text x={lx} y={ly - 6} textAnchor={anchor} fontSize={10.5}
+              fontFamily="var(--font-display)" fill="var(--muted)"
+              style={{ textTransform: "uppercase", letterSpacing: "0.04em" }}>{d.label}</text>
+            <text x={lx} y={ly + 8} textAnchor={anchor} fontSize={12}
+              fontFamily="var(--font-mono)" fontWeight={700} fill="var(--ink)">
+              {Math.round(d.value)}</text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
+
 /** Season development curve: p25–p75 band with a median line. */
 export function SeasonCurve({ curve }: { curve: any[] }) {
   if (!curve || curve.length === 0) return <p className="sub">No curve data.</p>;
