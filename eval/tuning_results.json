@@ -1,0 +1,444 @@
+{
+  "tune_years": [
+    2010,
+    2015
+  ],
+  "holdout_years": [
+    2016,
+    2019
+  ],
+  "best_params": {
+    "draft_bandwidth": 12.0,
+    "age_weight_boost": 1.0,
+    "competition_penalty": 0.6,
+    "athleticism_boost": 0.0
+  },
+  "tune_table": [
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.6545,
+      "auc": 0.76,
+      "ece": 0.0241,
+      "spearman": 0.348,
+      "within1": 0.74
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.6393,
+      "auc": 0.751,
+      "ece": 0.0254,
+      "spearman": 0.338,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.6342,
+      "auc": 0.76,
+      "ece": 0.0275,
+      "spearman": 0.34,
+      "within1": 0.74
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.6324,
+      "auc": 0.747,
+      "ece": 0.0263,
+      "spearman": 0.337,
+      "within1": 0.732
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.6294,
+      "auc": 0.751,
+      "ece": 0.0263,
+      "spearman": 0.325,
+      "within1": 0.717
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.6217,
+      "auc": 0.753,
+      "ece": 0.0293,
+      "spearman": 0.34,
+      "within1": 0.747
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.6131,
+      "auc": 0.735,
+      "ece": 0.0263,
+      "spearman": 0.305,
+      "within1": 0.736
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.6103,
+      "auc": 0.761,
+      "ece": 0.0323,
+      "spearman": 0.339,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.5997,
+      "auc": 0.76,
+      "ece": 0.0344,
+      "spearman": 0.34,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.5993,
+      "auc": 0.759,
+      "ece": 0.0338,
+      "spearman": 0.333,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.5983,
+      "auc": 0.752,
+      "ece": 0.0332,
+      "spearman": 0.332,
+      "within1": 0.725
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.598,
+      "auc": 0.748,
+      "ece": 0.0327,
+      "spearman": 0.33,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.5954,
+      "auc": 0.757,
+      "ece": 0.0342,
+      "spearman": 0.331,
+      "within1": 0.725
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.5932,
+      "auc": 0.742,
+      "ece": 0.0328,
+      "spearman": 0.327,
+      "within1": 0.732
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.5821,
+      "auc": 0.75,
+      "ece": 0.0365,
+      "spearman": 0.335,
+      "within1": 0.736
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.5799,
+      "auc": 0.749,
+      "ece": 0.036,
+      "spearman": 0.325,
+      "within1": 0.725
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5775,
+      "auc": 0.752,
+      "ece": 0.0377,
+      "spearman": 0.336,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5774,
+      "auc": 0.752,
+      "ece": 0.0378,
+      "spearman": 0.337,
+      "within1": 0.717
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.5717,
+      "auc": 0.736,
+      "ece": 0.0351,
+      "spearman": 0.31,
+      "within1": 0.74
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.5676,
+      "auc": 0.762,
+      "ece": 0.0411,
+      "spearman": 0.341,
+      "within1": 0.732
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.5666,
+      "auc": 0.743,
+      "ece": 0.0374,
+      "spearman": 0.317,
+      "within1": 0.725
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5642,
+      "auc": 0.753,
+      "ece": 0.0408,
+      "spearman": 0.34,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.5598,
+      "auc": 0.735,
+      "ece": 0.0377,
+      "spearman": 0.314,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.5522,
+      "auc": 0.76,
+      "ece": 0.0434,
+      "spearman": 0.334,
+      "within1": 0.721
+    },
+    {
+      "draft_bandwidth": 12.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.0,
+      "score": 0.5508,
+      "auc": 0.76,
+      "ece": 0.0446,
+      "spearman": 0.345,
+      "within1": 0.743
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.5457,
+      "auc": 0.747,
+      "ece": 0.0429,
+      "spearman": 0.328,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.5449,
+      "auc": 0.754,
+      "ece": 0.044,
+      "spearman": 0.331,
+      "within1": 0.721
+    },
+    {
+      "draft_bandwidth": 8.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5416,
+      "auc": 0.755,
+      "ece": 0.0451,
+      "spearman": 0.335,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5405,
+      "auc": 0.732,
+      "ece": 0.0406,
+      "spearman": 0.306,
+      "within1": 0.736
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5322,
+      "auc": 0.73,
+      "ece": 0.0419,
+      "spearman": 0.304,
+      "within1": 0.736
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.5222,
+      "auc": 0.742,
+      "ece": 0.0456,
+      "spearman": 0.31,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 0.6,
+      "athleticism_boost": 0.6,
+      "score": 0.5212,
+      "auc": 0.735,
+      "ece": 0.0451,
+      "spearman": 0.31,
+      "within1": 0.725
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 1.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.4856,
+      "auc": 0.729,
+      "ece": 0.0507,
+      "spearman": 0.299,
+      "within1": 0.74
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.0,
+      "score": 0.4798,
+      "auc": 0.736,
+      "ece": 0.0534,
+      "spearman": 0.309,
+      "within1": 0.728
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 2.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.4568,
+      "auc": 0.731,
+      "ece": 0.0569,
+      "spearman": 0.302,
+      "within1": 0.736
+    },
+    {
+      "draft_bandwidth": 4.0,
+      "age_weight_boost": 3.0,
+      "competition_penalty": 1.0,
+      "athleticism_boost": 0.6,
+      "score": 0.4517,
+      "auc": 0.738,
+      "ece": 0.0587,
+      "spearman": 0.303,
+      "within1": 0.74
+    }
+  ],
+  "holdout": {
+    "baseline": {
+      "score": 0.6397,
+      "auc": 0.795,
+      "ece": 0.0354,
+      "spearman": 0.406,
+      "within1": 0.742
+    },
+    "profile_only": {
+      "score": 0.5363,
+      "auc": 0.691,
+      "ece": 0.04,
+      "spearman": 0.338,
+      "within1": 0.691
+    },
+    "scouting_tuned": {
+      "score": 0.6594,
+      "auc": 0.789,
+      "ece": 0.0321,
+      "spearman": 0.421,
+      "within1": 0.758
+    },
+    "combined": {
+      "score": 0.5747,
+      "auc": 0.798,
+      "ece": 0.0496,
+      "spearman": 0.417,
+      "within1": null
+    }
+  }
+}
