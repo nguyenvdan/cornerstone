@@ -23,6 +23,10 @@ comparables:
 project:
 	uv run python -m models.projection
 
+# Phase 4: leakage-aware temporal back-test + calibration plot vs baseline.
+backtest:
+	uv run python -m eval.backtest
+
 test:
 	uv run pytest -q
 

@@ -202,7 +202,12 @@ class ProjectionModel:
         return curve
 
     # -- public API --------------------------------------------------------
-    def project(self, prospect: pd.Series) -> Projection:
+    def project(
+        self,
+        prospect: pd.Series,
+        include_curve: bool = True,
+        include_swing: bool = True,
+    ) -> Projection:
         comps, ids, weights = self._neighbors(prospect)
         meta = self.outcomes.loc[ids]
 
@@ -228,9 +233,9 @@ class ProjectionModel:
         peak_band = {f"p{q}": round(weighted_percentile(pb[pmask], weights[pmask], q), 1)
                      for q in (10, 50, 90)}
 
-        # 3) development curve, 4) swing factors
-        curve = self._season_curve(ids, weights)
-        swings = self._swing_factors(prospect)
+        # 3) development curve, 4) swing factors (skippable for fast back-testing)
+        curve = self._season_curve(ids, weights) if include_curve else []
+        swings = self._swing_factors(prospect) if include_swing else []
 
         # 5) honest uncertainty notes
         bust_p = tier_prob["bust"]

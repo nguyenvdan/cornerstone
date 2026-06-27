@@ -48,7 +48,7 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for module responsibilities and data fl
 | 1 | Data pipeline (fetch → clean → join → version) | ✅ done |
 | 2 | Comparables engine (embedding similarity) | ✅ done |
 | 3 | Probabilistic outcome model | ✅ done |
-| 4 | Back-testing / calibration | ⏳ planned |
+| 4 | Back-testing / calibration | ✅ done |
 | 5 | Roster-fit engine | ⏳ planned |
 | 6 | Agentic orchestration | ⏳ planned |
 | 7 | React frontend + API | ⏳ planned |
@@ -67,6 +67,7 @@ make data                  # full 2003-2022 universe (first run ~1.5-2 hr; cache
 make dybantsa              # build AJ Dybantsa's pre-draft profile row
 make comparables           # Dybantsa's top historical analogs (Phase 2)
 make project               # Dybantsa's probabilistic projection (Phase 3)
+make backtest              # leakage-free back-test + calibration plot (Phase 4)
 make test                  # unit tests
 ```
 
@@ -86,6 +87,37 @@ Full column reference: [`pipelines/data_dictionary.md`](pipelines/data_dictionar
 `data/raw/` (cached HTML) is git-ignored and regenerable; the cleaned
 `data/processed/` dataset is committed, so the project is reproducible offline.
 Re-running any build hits the cache and is deterministic.
+
+## Back-test results (Phase 4)
+
+Leakage-aware **expanding-window** validation: every draft class is projected
+using **only players drafted before it**, then compared to what actually
+happened. The same protocol scores a **draft-position baseline** (how players
+taken near each slot really turned out) so we can see whether the profile model
+adds value. Reproduce with `make backtest`.
+
+**459 prospects across 10 draft classes (2010–2019):**
+
+| Metric | Profile model | Draft-position baseline | Combined |
+|--------|:---:|:---:|:---:|
+| Within-1-tier accuracy | 0.68 | 0.71 | — |
+| P(all-star+) AUC | 0.71 | 0.76 | **0.76** |
+| P(all-star+) calibration (ECE ↓) | **0.026** | 0.029 | 0.050 |
+| Career-VORP ranking (Spearman ↑) | 0.31 | 0.36 | **0.37** |
+
+**Honest read:** draft position is a strong baseline that profile stats alone
+don't beat — but the profile model is **better calibrated** (ECE 0.026 vs
+0.029), and **combining profile + draft slot beats draft slot alone** on both
+ranking (Spearman 0.36 → 0.37) and star detection (AUC 0.758 → 0.763). The
+model adds independent, if modest, signal. No false precision: college
+box-score profiles are genuinely weak predictors, which is exactly why the
+projections carry wide, explicit uncertainty.
+
+![Calibration and accuracy vs baseline](eval/calibration.png)
+
+**Limitations** (stated honestly): small early-cohort samples; survivorship and
+era effects; training uses earlier cohorts' eventually-realized careers (fair to
+both model and baseline). See `eval/backtest.py` for the protocol.
 
 ## Data sources
 
