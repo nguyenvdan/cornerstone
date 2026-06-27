@@ -16,7 +16,15 @@ export default function RosterFit({ fit }: { fit: any }) {
         <div className="card">
           <h3>Roster fit around {fit.cornerstone}</h3>
           <div className="kpi">{r.fit_score}<small>/100</small></div>
-          <p className="sub" style={{ marginTop: 10 }}>Need vs. roster supply, by skill:</p>
+          {fit.calibration && (
+            <p className="sub" style={{ marginTop: 8, marginBottom: 0 }}>
+              Ranks <b>{fit.calibration.rank} of {fit.calibration.n_teams}</b> teams league-wide
+              {" "}({fit.calibration.percentile}th pctile · median {fit.calibration.league_median}
+              {" "}· best {fit.calibration.league_best.team} {fit.calibration.league_best.fit_score}).
+              Trajectory-adjusted for the roster's youth.
+            </p>
+          )}
+          <p className="sub" style={{ marginTop: 12 }}>Need vs. roster supply, by skill:</p>
           {r.skills.map((s: any) => (
             <div key={s.skill} style={{ marginBottom: 6 }}>
               <div style={{ fontSize: 13, fontWeight: 600, marginBottom: 2 }}>

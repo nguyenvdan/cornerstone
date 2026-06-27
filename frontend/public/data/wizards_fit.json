@@ -1,66 +1,54 @@
 {
   "cornerstone": "AJ Dybantsa",
   "report": {
-    "fit_score": 67.0,
+    "fit_score": 73.1,
     "skills": [
       {
         "skill": "perimeter_defense",
         "need": 59.1,
-        "roster_supply": 42.9,
-        "gap": 33.7
-      },
-      {
-        "skill": "spacing",
-        "need": 95.6,
-        "roster_supply": 71.1,
-        "gap": 27.6
+        "roster_supply": 50.1,
+        "gap": 29.5
       },
       {
         "skill": "rim_protection",
         "need": 100.0,
-        "roster_supply": 75.3,
-        "gap": 24.7
+        "roster_supply": 78.7,
+        "gap": 21.3
+      },
+      {
+        "skill": "spacing",
+        "need": 95.6,
+        "roster_supply": 79.6,
+        "gap": 19.5
       },
       {
         "skill": "rebounding",
         "need": 32.5,
-        "roster_supply": 67.4,
-        "gap": 10.6
+        "roster_supply": 74.8,
+        "gap": 8.2
       },
       {
         "skill": "playmaking",
         "need": 22.3,
-        "roster_supply": 75.6,
-        "gap": 5.4
+        "roster_supply": 78.7,
+        "gap": 4.7
       },
       {
         "skill": "shot_creation",
         "need": 0.9,
-        "roster_supply": 76.1,
+        "roster_supply": 83.1,
         "gap": 0.2
       }
     ],
     "biggest_gaps": [
       "perimeter_defense",
-      "spacing",
-      "rim_protection"
+      "rim_protection",
+      "spacing"
     ],
     "recommended_archetypes": [
       {
-        "archetype": "3&D Wing",
-        "score": 52.1,
-        "fills": [
-          "perimeter_defense",
-          "spacing"
-        ],
-        "provides": {
-          "spacing": 85,
-          "perimeter_defense": 85
-        }
-      },
-      {
         "archetype": "Defensive Anchor Big",
-        "score": 50.3,
+        "score": 42.8,
         "fills": [
           "rim_protection",
           "perimeter_defense"
@@ -72,8 +60,20 @@
         }
       },
       {
+        "archetype": "3&D Wing",
+        "score": 41.6,
+        "fills": [
+          "perimeter_defense",
+          "spacing"
+        ],
+        "provides": {
+          "spacing": 85,
+          "perimeter_defense": 85
+        }
+      },
+      {
         "archetype": "Two-Way Wing",
-        "score": 47.1,
+        "score": 38.0,
         "fills": [
           "perimeter_defense",
           "spacing"
@@ -86,7 +86,7 @@
       },
       {
         "archetype": "Stretch Big",
-        "score": 46.2,
+        "score": 35.5,
         "fills": [
           "spacing",
           "rim_protection"
@@ -99,7 +99,7 @@
       },
       {
         "archetype": "Floor General PG",
-        "score": 41.3,
+        "score": 33.1,
         "fills": [
           "perimeter_defense",
           "spacing"
@@ -112,7 +112,7 @@
       },
       {
         "archetype": "Movement Shooter",
-        "score": 40.6,
+        "score": 31.2,
         "fills": [
           "spacing",
           "perimeter_defense"
@@ -124,7 +124,7 @@
       },
       {
         "archetype": "Lob-Threat Center",
-        "score": 31.1,
+        "score": 26.0,
         "fills": [
           "rim_protection",
           "rebounding"
@@ -144,15 +144,178 @@
       "perimeter_defense": 46.8
     },
     "notes": [
-      "Overall fit 67/100: how well the roster covers the skills this cornerstone most needs around him.",
-      "Biggest unmet needs: perimeter defense, spacing, rim protection.",
-      "Top complementary archetype: 3&D Wing (fills perimeter defense, spacing).",
-      "Heuristic fit grounded in real current-season NBA skill percentiles; it captures skills, not contracts, chemistry, or scheme."
+      "Overall fit 73/100: how well the roster covers the skills this cornerstone most needs around him.",
+      "Biggest unmet needs: perimeter defense, rim protection, spacing.",
+      "Top complementary archetype: Defensive Anchor Big (fills rim protection, perimeter defense).",
+      "Trajectory-adjusted: young, ascending players are credited for upside, since a cornerstone's window is years out. Calibrated against all 30 teams so the score has an anchor. Captures skills, not contracts or scheme."
     ]
   },
+  "calibration": {
+    "n_teams": 30,
+    "rank": 26,
+    "percentile": 17.0,
+    "league_median": 76.3,
+    "league_best": {
+      "team": "HOU",
+      "fit_score": 82.0
+    }
+  },
+  "league_table": [
+    {
+      "team": "HOU",
+      "cornerstone": "Kevin Durant",
+      "fit_score": 82.0
+    },
+    {
+      "team": "PHI",
+      "cornerstone": "Joel Embiid",
+      "fit_score": 80.3
+    },
+    {
+      "team": "TOR",
+      "cornerstone": "Brandon Ingram",
+      "fit_score": 80.2
+    },
+    {
+      "team": "PHO",
+      "cornerstone": "Devin Booker",
+      "fit_score": 79.5
+    },
+    {
+      "team": "BOS",
+      "cornerstone": "Jaylen Brown",
+      "fit_score": 78.9
+    },
+    {
+      "team": "SAS",
+      "cornerstone": "Victor Wembanyama",
+      "fit_score": 78.9
+    },
+    {
+      "team": "ORL",
+      "cornerstone": "Paolo Banchero",
+      "fit_score": 78.5
+    },
+    {
+      "team": "DET",
+      "cornerstone": "Cade Cunningham",
+      "fit_score": 78.4
+    },
+    {
+      "team": "MIL",
+      "cornerstone": "Giannis Antetokounmpo",
+      "fit_score": 78.4
+    },
+    {
+      "team": "ATL",
+      "cornerstone": "Trae Young",
+      "fit_score": 78.0
+    },
+    {
+      "team": "POR",
+      "cornerstone": "Shaedon Sharpe",
+      "fit_score": 77.5
+    },
+    {
+      "team": "GSW",
+      "cornerstone": "Stephen Curry",
+      "fit_score": 76.9
+    },
+    {
+      "team": "OKC",
+      "cornerstone": "Shai Gilgeous-Alexander",
+      "fit_score": 76.7
+    },
+    {
+      "team": "CHO",
+      "cornerstone": "LaMelo Ball",
+      "fit_score": 76.6
+    },
+    {
+      "team": "MIA",
+      "cornerstone": "Norman Powell",
+      "fit_score": 76.5
+    },
+    {
+      "team": "NYK",
+      "cornerstone": "Jalen Brunson",
+      "fit_score": 76.2
+    },
+    {
+      "team": "UTA",
+      "cornerstone": "Lauri Markkanen",
+      "fit_score": 76.2
+    },
+    {
+      "team": "CLE",
+      "cornerstone": "Donovan Mitchell",
+      "fit_score": 76.0
+    },
+    {
+      "team": "MEM",
+      "cornerstone": "Ja Morant",
+      "fit_score": 75.5
+    },
+    {
+      "team": "MIN",
+      "cornerstone": "Anthony Edwards",
+      "fit_score": 74.7
+    },
+    {
+      "team": "NOP",
+      "cornerstone": "Zion Williamson",
+      "fit_score": 74.6
+    },
+    {
+      "team": "BRK",
+      "cornerstone": "Michael Porter Jr.",
+      "fit_score": 74.1
+    },
+    {
+      "team": "LAC",
+      "cornerstone": "Kawhi Leonard",
+      "fit_score": 74.0
+    },
+    {
+      "team": "DEN",
+      "cornerstone": "Nikola Joki\u0107",
+      "fit_score": 74.0
+    },
+    {
+      "team": "LAL",
+      "cornerstone": "Luka Don\u010di\u0107",
+      "fit_score": 73.9
+    },
+    {
+      "team": "DAL",
+      "cornerstone": "Anthony Davis",
+      "fit_score": 71.8
+    },
+    {
+      "team": "CHI",
+      "cornerstone": "Coby White",
+      "fit_score": 71.0
+    },
+    {
+      "team": "WAS",
+      "cornerstone": "Trae Young",
+      "fit_score": 70.9
+    },
+    {
+      "team": "SAC",
+      "cornerstone": "Russell Westbrook",
+      "fit_score": 70.6
+    },
+    {
+      "team": "IND",
+      "cornerstone": "Pascal Siakam",
+      "fit_score": 67.9
+    }
+  ],
   "roster": [
     {
       "player_name": "Leaky Black",
+      "age": 26,
       "mp_per_g": 28.9,
       "spacing": 53.1,
       "playmaking": 7.3,
@@ -164,6 +327,7 @@
     },
     {
       "player_name": "Trae Young",
+      "age": 27,
       "mp_per_g": 25.6,
       "spacing": 73.3,
       "playmaking": 99.5,
@@ -175,6 +339,7 @@
     },
     {
       "player_name": "Cam Whitmore",
+      "age": 21,
       "mp_per_g": 16.9,
       "spacing": 27.7,
       "playmaking": 6.8,
@@ -186,6 +351,7 @@
     },
     {
       "player_name": "Sharife Cooper",
+      "age": 24,
       "mp_per_g": 17.1,
       "spacing": 26.2,
       "playmaking": 86.1,
@@ -197,6 +363,7 @@
     },
     {
       "player_name": "Alex Sarr",
+      "age": 20,
       "mp_per_g": 27.2,
       "spacing": 40.6,
       "playmaking": 58.7,
@@ -208,6 +375,7 @@
     },
     {
       "player_name": "Kyshawn George",
+      "age": 22,
       "mp_per_g": 29.0,
       "spacing": 83.1,
       "playmaking": 80.6,
@@ -219,6 +387,7 @@
     },
     {
       "player_name": "Tristan Vukcevic",
+      "age": 22,
       "mp_per_g": 13.7,
       "spacing": 38.5,
       "playmaking": 49.4,
@@ -230,6 +399,7 @@
     },
     {
       "player_name": "Jamir Watkins",
+      "age": 24,
       "mp_per_g": 20.6,
       "spacing": 35.0,
       "playmaking": 22.2,
@@ -241,6 +411,7 @@
     },
     {
       "player_name": "Anthony Gill",
+      "age": 33,
       "mp_per_g": 17.3,
       "spacing": 12.1,
       "playmaking": 31.0,
@@ -252,6 +423,7 @@
     },
     {
       "player_name": "Bilal Coulibaly",
+      "age": 21,
       "mp_per_g": 26.2,
       "spacing": 46.9,
       "playmaking": 52.4,
@@ -263,6 +435,7 @@
     },
     {
       "player_name": "Jaden Hardy",
+      "age": 23,
       "mp_per_g": 15.8,
       "spacing": 74.1,
       "playmaking": 30.2,
@@ -274,6 +447,7 @@
     },
     {
       "player_name": "Corey Kispert",
+      "age": 26,
       "mp_per_g": 18.6,
       "spacing": 63.7,
       "playmaking": 43.6,
@@ -285,6 +459,7 @@
     },
     {
       "player_name": "Tre Johnson",
+      "age": 19,
       "mp_per_g": 24.1,
       "spacing": 78.1,
       "playmaking": 46.9,
@@ -296,6 +471,7 @@
     },
     {
       "player_name": "Marvin Bagley III",
+      "age": 26,
       "mp_per_g": 20.0,
       "spacing": 13.6,
       "playmaking": 37.0,
@@ -307,6 +483,7 @@
     },
     {
       "player_name": "Khris Middleton",
+      "age": 34,
       "mp_per_g": 22.8,
       "spacing": 43.6,
       "playmaking": 64.5,
@@ -318,6 +495,7 @@
     },
     {
       "player_name": "Justin Champagnie",
+      "age": 24,
       "mp_per_g": 20.0,
       "spacing": 27.5,
       "playmaking": 21.4,
@@ -329,6 +507,7 @@
     },
     {
       "player_name": "Will Riley",
+      "age": 19,
       "mp_per_g": 22.1,
       "spacing": 41.6,
       "playmaking": 48.6,
@@ -340,6 +519,7 @@
     },
     {
       "player_name": "CJ McCollum",
+      "age": 34,
       "mp_per_g": 29.8,
       "spacing": 89.2,
       "playmaking": 72.3,
@@ -351,6 +531,7 @@
     },
     {
       "player_name": "Bub Carrington",
+      "age": 20,
       "mp_per_g": 27.7,
       "spacing": 82.4,
       "playmaking": 81.9,

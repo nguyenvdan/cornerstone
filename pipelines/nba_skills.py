@@ -109,9 +109,10 @@ def build_skills(min_mpg: float = 12.0, min_games: int = 15) -> pd.DataFrame:
     for skill in SKILLS:
         df[skill] = _percentile(cur[skill], ref[skill]).round(1)
 
+    df["age"] = df["age"].map(to_int)
     df["primary_skill"] = df[SKILLS].idxmax(axis=1)
     df["is_qualified"] = (df["mp_per_g"] >= min_mpg) & (df["games_i"] >= min_games)
-    keep = (["player_id", "player_name", "team", "teams", "mp_per_g", "games_i",
+    keep = (["player_id", "player_name", "team", "teams", "age", "mp_per_g", "games_i",
              "pts_per_g", "usg_pct"] + SKILLS + ["primary_skill", "is_qualified"])
     return df[keep].reset_index(drop=True)
 

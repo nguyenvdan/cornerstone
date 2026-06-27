@@ -109,12 +109,32 @@ def _need_profile(supply: dict[str, float]) -> dict[str, float]:
     return {s: round(100.0 * raw[s] / hi, 1) for s in SKILLS}
 
 
-def _roster_supply(roster: pd.DataFrame) -> dict[str, float]:
-    """Per skill: blend the roster's best provider with minutes-weighted depth."""
+# Trajectory: a cornerstone's competitive window is years out, so a young,
+# ascending roster's *future* skill matters. Credit youth up to +25% (a 19-yo),
+# fading to 0 by peak age — capped so nobody exceeds the 100 percentile ceiling.
+PEAK_AGE = 27.0
+YOUNG_AGE = 19.0
+UPSIDE_MAX = 0.25
+
+
+def _upside(age: float) -> float:
+    if age is None or (isinstance(age, float) and np.isnan(age)):
+        return 1.0
+    frac = float(np.clip((PEAK_AGE - age) / (PEAK_AGE - YOUNG_AGE), 0.0, 1.0))
+    return 1.0 + UPSIDE_MAX * frac
+
+
+def _roster_supply(roster: pd.DataFrame, trajectory: bool = True) -> dict[str, float]:
+    """Per skill: blend the roster's best provider with minutes-weighted depth,
+    optionally crediting young/ascending players' upside."""
     w = roster["mp_per_g"].clip(lower=1).to_numpy()
+    if trajectory and "age" in roster.columns:
+        up = roster["age"].map(_upside).to_numpy(float)
+    else:
+        up = np.ones(len(roster))
     out: dict[str, float] = {}
     for skill in SKILLS:
-        vals = roster[skill].to_numpy(float)
+        vals = np.minimum(roster[skill].to_numpy(float) * up, 100.0)
         best = float(np.nanmax(vals)) if len(vals) else 0.0
         depth = float(np.average(vals, weights=w)) if len(vals) else 0.0
         out[skill] = round(0.5 * best + 0.5 * depth, 1)
@@ -145,6 +165,46 @@ def _rank_archetypes(rows: list[SkillRow]) -> list[dict]:
     return ranked
 
 
+def _team_cornerstone(team_players: pd.DataFrame) -> pd.Series:
+    """The team's focal point: highest-usage real-minutes player."""
+    pool = team_players[team_players["mp_per_g"] >= 25]
+    if pool.empty:
+        pool = team_players
+    return pool.loc[pool["usg_pct"].idxmax()]
+
+
+def compute_league_fit(skills: pd.DataFrame) -> pd.DataFrame:
+    """Fit score for every team around its own cornerstone — the reference
+    distribution that gives an absolute fit number context."""
+    q = skills[skills["is_qualified"]]
+    teams = sorted({t for ts in q["teams"] for t in ts})
+    rows = []
+    for team in teams:
+        tp = q[q["teams"].apply(lambda ts, t=team: t in ts)]
+        if len(tp) < 5:
+            continue
+        corner = _team_cornerstone(tp)
+        supply = {s: float(corner[s]) for s in SKILLS}
+        roster = tp[tp["player_id"] != corner["player_id"]]
+        fit, _ = _fit_from(_need_profile(supply), _roster_supply(roster))
+        rows.append({"team": team, "cornerstone": corner["player_name"], "fit_score": fit})
+    return pd.DataFrame(rows).sort_values("fit_score", ascending=False).reset_index(drop=True)
+
+
+def calibrate(fit_score: float, league: pd.DataFrame) -> dict:
+    """Place a fit score in the league distribution (rank + percentile)."""
+    scores = league["fit_score"].to_numpy()
+    better = int((scores > fit_score).sum())
+    return {
+        "n_teams": int(len(league)),
+        "rank": better + 1,
+        "percentile": round(100.0 * (scores < fit_score).mean(), 0),
+        "league_median": round(float(np.median(scores)), 1),
+        "league_best": {"team": league.iloc[0]["team"],
+                        "fit_score": float(league.iloc[0]["fit_score"])},
+    }
+
+
 def evaluate_fit(roster: pd.DataFrame, cornerstone_supply: dict[str, float]) -> RosterFitReport:
     need = _need_profile(cornerstone_supply)
     supply = _roster_supply(roster)
@@ -157,8 +217,9 @@ def evaluate_fit(roster: pd.DataFrame, cornerstone_supply: dict[str, float]) -> 
         f"Biggest unmet needs: {', '.join(g.replace('_', ' ') for g in gaps)}.",
         f"Top complementary archetype: {archetypes[0]['archetype']} "
         f"(fills {', '.join(f.replace('_', ' ') for f in archetypes[0]['fills'])}).",
-        "Heuristic fit grounded in real current-season NBA skill percentiles; it "
-        "captures skills, not contracts, chemistry, or scheme.",
+        "Trajectory-adjusted: young, ascending players are credited for upside, "
+        "since a cornerstone's window is years out. Calibrated against all 30 "
+        "teams so the score has an anchor. Captures skills, not contracts or scheme.",
     ]
     return RosterFitReport(fit, rows, gaps, archetypes, cornerstone_supply, notes)
 
@@ -188,12 +249,17 @@ def _load_wizards() -> pd.DataFrame:
 def main() -> int:
     prospects = pd.read_parquet(config.PROCESSED / "prospects.parquet")
     dyb = pd.read_parquet(config.PROCESSED / "dybantsa.parquet").iloc[0]
+    skills = pd.read_parquet(config.PROCESSED / f"nba_skills_{SEASON}.parquet")
     roster = _load_wizards()
 
     supply = cornerstone_skill_supply(dyb, prospects)
     report = evaluate_fit(roster, supply)
+    league = compute_league_fit(skills)
+    cal = calibrate(report.fit_score, league)
 
-    print(f"Wizards roster fit for AJ Dybantsa — {len(roster)} rotation players\n")
+    print(f"Wizards roster fit for AJ Dybantsa — {len(roster)} rotation players")
+    print(f"  {report.fit_score}/100 — ranks {cal['rank']} of {cal['n_teams']} teams "
+          f"({cal['percentile']:.0f}th pctile; league median {cal['league_median']}).\n")
     print("AJ Dybantsa projected skill supply (role tendency, percentile):")
     print("  " + "  ".join(f"{s.replace('_',' ')} {int(v)}" for s, v in supply.items()))
     print(f"\nOverall roster fit: {report.fit_score}/100\n")
@@ -213,12 +279,17 @@ def main() -> int:
         print(f"  add {arch:22s} fit {w['fit_before']} -> {w['fit_after']}  "
               f"(Δ {w['fit_delta']:+.1f})")
 
-    roster_cols = ["player_name", "mp_per_g", *SKILLS, "primary_skill"]
+    print(f"\nLeague calibration ({cal['n_teams']} teams): WAS ranks {cal['rank']} "
+          f"(best: {cal['league_best']['team']} {cal['league_best']['fit_score']}).")
+
+    roster_cols = ["player_name", "age", "mp_per_g", *SKILLS, "primary_skill"]
     out = {"cornerstone": "AJ Dybantsa", "report": report.to_dict(),
+           "calibration": cal,
+           "league_table": league.to_dict("records"),
            "roster": roster[roster_cols].to_dict("records")}
     path = config.PROCESSED / "wizards_fit.json"
     path.write_text(json.dumps(out, indent=2, default=float))
-    print(f"\nWrote {path}")
+    print(f"Wrote {path}")
     return 0
 
 

@@ -8,6 +8,9 @@ import pytest
 
 from models.roster_fit import (
     ARCHETYPES,
+    _upside,
+    calibrate,
+    compute_league_fit,
     cornerstone_skill_supply,
     evaluate_fit,
     what_if,
@@ -79,6 +82,43 @@ def test_what_if_relevant_addition_helps_most():
 def test_what_if_unknown_archetype_raises():
     with pytest.raises(ValueError):
         what_if(_roster(), {s: 50.0 for s in SKILLS}, "Point Forward Unicorn")
+
+
+def test_upside_curve():
+    assert _upside(19) > _upside(23) > _upside(27)
+    assert _upside(27) == pytest.approx(1.0)
+    assert _upside(33) == pytest.approx(1.0)   # clamped, no penalty for age
+    assert _upside(float("nan")) == 1.0
+
+
+def test_trajectory_credits_youth():
+    young = _roster()
+    young["age"] = 20
+    old = _roster()
+    old["age"] = 31
+    ry = evaluate_fit(young, {s: 50.0 for s in SKILLS})
+    ro = evaluate_fit(old, {s: 50.0 for s in SKILLS})
+    assert ry.fit_score > ro.fit_score      # a young roster projects to fit better
+
+
+def test_calibrate_places_score():
+    import pandas as pd
+    league = pd.DataFrame({"team": list("ABCDE"), "fit_score": [80, 76, 72, 70, 68],
+                           "cornerstone": ["x"] * 5}).sort_values(
+        "fit_score", ascending=False).reset_index(drop=True)
+    cal = calibrate(74.0, league)
+    assert cal["rank"] == 3 and cal["n_teams"] == 5
+    assert cal["league_median"] == 72.0
+    assert cal["league_best"]["team"] == "A"
+
+
+@pytest.mark.skipif(not SKILLS_PARQUET.exists(), reason="nba skills not built")
+def test_compute_league_fit_real():
+    skills = pd.read_parquet(SKILLS_PARQUET)
+    league = compute_league_fit(skills)
+    assert 25 <= len(league) <= 30
+    assert league["fit_score"].between(0, 100).all()
+    assert league["fit_score"].is_monotonic_decreasing
 
 
 # --------------------------------------------------------------------------
