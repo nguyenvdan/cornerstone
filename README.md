@@ -49,7 +49,7 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for module responsibilities and data fl
 | 2 | Comparables engine (embedding similarity) | ✅ done |
 | 3 | Probabilistic outcome model | ✅ done |
 | 4 | Back-testing / calibration | ✅ done |
-| 5 | Roster-fit engine | ⏳ planned |
+| 5 | Roster-fit engine | ✅ done |
 | 6 | Agentic orchestration | ⏳ planned |
 | 7 | React frontend + API | ⏳ planned |
 | 8 | Polish & writeup | ⏳ planned |
@@ -68,6 +68,8 @@ make dybantsa              # build AJ Dybantsa's pre-draft profile row
 make comparables           # Dybantsa's top historical analogs (Phase 2)
 make project               # Dybantsa's probabilistic projection (Phase 3)
 make backtest              # leakage-free back-test + calibration plot (Phase 4)
+make skills                # scrape current-season NBA skill profiles (Phase 5)
+make roster-fit            # Wizards roster fit around Dybantsa (Phase 5)
 make test                  # unit tests
 ```
 

@@ -1,0 +1,364 @@
+{
+  "cornerstone": "AJ Dybantsa",
+  "report": {
+    "fit_score": 67.0,
+    "skills": [
+      {
+        "skill": "perimeter_defense",
+        "need": 59.1,
+        "roster_supply": 42.9,
+        "gap": 33.7
+      },
+      {
+        "skill": "spacing",
+        "need": 95.6,
+        "roster_supply": 71.1,
+        "gap": 27.6
+      },
+      {
+        "skill": "rim_protection",
+        "need": 100.0,
+        "roster_supply": 75.3,
+        "gap": 24.7
+      },
+      {
+        "skill": "rebounding",
+        "need": 32.5,
+        "roster_supply": 67.4,
+        "gap": 10.6
+      },
+      {
+        "skill": "playmaking",
+        "need": 22.3,
+        "roster_supply": 75.6,
+        "gap": 5.4
+      },
+      {
+        "skill": "shot_creation",
+        "need": 0.9,
+        "roster_supply": 76.1,
+        "gap": 0.2
+      }
+    ],
+    "biggest_gaps": [
+      "perimeter_defense",
+      "spacing",
+      "rim_protection"
+    ],
+    "recommended_archetypes": [
+      {
+        "archetype": "3&D Wing",
+        "score": 52.1,
+        "fills": [
+          "perimeter_defense",
+          "spacing"
+        ],
+        "provides": {
+          "spacing": 85,
+          "perimeter_defense": 85
+        }
+      },
+      {
+        "archetype": "Defensive Anchor Big",
+        "score": 50.3,
+        "fills": [
+          "rim_protection",
+          "perimeter_defense"
+        ],
+        "provides": {
+          "rim_protection": 92,
+          "rebounding": 85,
+          "perimeter_defense": 55
+        }
+      },
+      {
+        "archetype": "Two-Way Wing",
+        "score": 47.1,
+        "fills": [
+          "perimeter_defense",
+          "spacing"
+        ],
+        "provides": {
+          "perimeter_defense": 82,
+          "spacing": 70,
+          "shot_creation": 55
+        }
+      },
+      {
+        "archetype": "Stretch Big",
+        "score": 46.2,
+        "fills": [
+          "spacing",
+          "rim_protection"
+        ],
+        "provides": {
+          "spacing": 85,
+          "rebounding": 75,
+          "rim_protection": 60
+        }
+      },
+      {
+        "archetype": "Floor General PG",
+        "score": 41.3,
+        "fills": [
+          "perimeter_defense",
+          "spacing"
+        ],
+        "provides": {
+          "playmaking": 90,
+          "spacing": 65,
+          "perimeter_defense": 55
+        }
+      },
+      {
+        "archetype": "Movement Shooter",
+        "score": 40.6,
+        "fills": [
+          "spacing",
+          "perimeter_defense"
+        ],
+        "provides": {
+          "spacing": 92,
+          "perimeter_defense": 45
+        }
+      },
+      {
+        "archetype": "Lob-Threat Center",
+        "score": 31.1,
+        "fills": [
+          "rim_protection",
+          "rebounding"
+        ],
+        "provides": {
+          "rim_protection": 88,
+          "rebounding": 88
+        }
+      }
+    ],
+    "cornerstone_supply": {
+      "shot_creation": 97.9,
+      "playmaking": 77.1,
+      "spacing": 31.2,
+      "rim_protection": 20.0,
+      "rebounding": 61.0,
+      "perimeter_defense": 46.8
+    },
+    "notes": [
+      "Overall fit 67/100: how well the roster covers the skills this cornerstone most needs around him.",
+      "Biggest unmet needs: perimeter defense, spacing, rim protection.",
+      "Top complementary archetype: 3&D Wing (fills perimeter defense, spacing).",
+      "Heuristic fit grounded in real current-season NBA skill percentiles; it captures skills, not contracts, chemistry, or scheme."
+    ]
+  },
+  "roster": [
+    {
+      "player_name": "Leaky Black",
+      "mp_per_g": 28.9,
+      "spacing": 53.1,
+      "playmaking": 7.3,
+      "rim_protection": 59.7,
+      "rebounding": 55.7,
+      "shot_creation": 6.0,
+      "perimeter_defense": 34.3,
+      "primary_skill": "rim_protection"
+    },
+    {
+      "player_name": "Trae Young",
+      "mp_per_g": 25.6,
+      "spacing": 73.3,
+      "playmaking": 99.5,
+      "rim_protection": 11.6,
+      "rebounding": 1.5,
+      "shot_creation": 92.9,
+      "perimeter_defense": 21.2,
+      "primary_skill": "playmaking"
+    },
+    {
+      "player_name": "Cam Whitmore",
+      "mp_per_g": 16.9,
+      "spacing": 27.7,
+      "playmaking": 6.8,
+      "rim_protection": 69.3,
+      "rebounding": 50.9,
+      "shot_creation": 79.8,
+      "perimeter_defense": 15.6,
+      "primary_skill": "shot_creation"
+    },
+    {
+      "player_name": "Sharife Cooper",
+      "mp_per_g": 17.1,
+      "spacing": 26.2,
+      "playmaking": 86.1,
+      "rim_protection": 17.1,
+      "rebounding": 24.7,
+      "shot_creation": 60.5,
+      "perimeter_defense": 1.8,
+      "primary_skill": "playmaking"
+    },
+    {
+      "player_name": "Alex Sarr",
+      "mp_per_g": 27.2,
+      "spacing": 40.6,
+      "playmaking": 58.7,
+      "rim_protection": 98.0,
+      "rebounding": 85.1,
+      "shot_creation": 85.6,
+      "perimeter_defense": 43.6,
+      "primary_skill": "rim_protection"
+    },
+    {
+      "player_name": "Kyshawn George",
+      "mp_per_g": 29.0,
+      "spacing": 83.1,
+      "playmaking": 80.6,
+      "rim_protection": 79.8,
+      "rebounding": 56.9,
+      "shot_creation": 74.6,
+      "perimeter_defense": 38.8,
+      "primary_skill": "spacing"
+    },
+    {
+      "player_name": "Tristan Vukcevic",
+      "mp_per_g": 13.7,
+      "spacing": 38.5,
+      "playmaking": 49.4,
+      "rim_protection": 92.2,
+      "rebounding": 72.3,
+      "shot_creation": 88.7,
+      "perimeter_defense": 33.2,
+      "primary_skill": "rim_protection"
+    },
+    {
+      "player_name": "Jamir Watkins",
+      "mp_per_g": 20.6,
+      "spacing": 35.0,
+      "playmaking": 22.2,
+      "rim_protection": 71.0,
+      "rebounding": 60.7,
+      "shot_creation": 24.2,
+      "perimeter_defense": 62.2,
+      "primary_skill": "rim_protection"
+    },
+    {
+      "player_name": "Anthony Gill",
+      "mp_per_g": 17.3,
+      "spacing": 12.1,
+      "playmaking": 31.0,
+      "rim_protection": 66.8,
+      "rebounding": 52.4,
+      "shot_creation": 7.1,
+      "perimeter_defense": 19.9,
+      "primary_skill": "rim_protection"
+    },
+    {
+      "player_name": "Bilal Coulibaly",
+      "mp_per_g": 26.2,
+      "spacing": 46.9,
+      "playmaking": 52.4,
+      "rim_protection": 85.6,
+      "rebounding": 52.4,
+      "shot_creation": 59.7,
+      "perimeter_defense": 62.2,
+      "primary_skill": "rim_protection"
+    },
+    {
+      "player_name": "Jaden Hardy",
+      "mp_per_g": 15.8,
+      "spacing": 74.1,
+      "playmaking": 30.2,
+      "rim_protection": 17.1,
+      "rebounding": 6.3,
+      "shot_creation": 81.9,
+      "perimeter_defense": 0.5,
+      "primary_skill": "shot_creation"
+    },
+    {
+      "player_name": "Corey Kispert",
+      "mp_per_g": 18.6,
+      "spacing": 63.7,
+      "playmaking": 43.6,
+      "rim_protection": 22.4,
+      "rebounding": 24.7,
+      "shot_creation": 49.6,
+      "perimeter_defense": 3.0,
+      "primary_skill": "spacing"
+    },
+    {
+      "player_name": "Tre Johnson",
+      "mp_per_g": 24.1,
+      "spacing": 78.1,
+      "playmaking": 46.9,
+      "rim_protection": 40.8,
+      "rebounding": 19.6,
+      "shot_creation": 72.8,
+      "perimeter_defense": 1.8,
+      "primary_skill": "spacing"
+    },
+    {
+      "player_name": "Marvin Bagley III",
+      "mp_per_g": 20.0,
+      "spacing": 13.6,
+      "playmaking": 37.0,
+      "rim_protection": 84.6,
+      "rebounding": 90.2,
+      "shot_creation": 49.6,
+      "perimeter_defense": 18.9,
+      "primary_skill": "rebounding"
+    },
+    {
+      "player_name": "Khris Middleton",
+      "mp_per_g": 22.8,
+      "spacing": 43.6,
+      "playmaking": 64.5,
+      "rim_protection": 11.6,
+      "rebounding": 48.6,
+      "shot_creation": 64.7,
+      "perimeter_defense": 15.4,
+      "primary_skill": "shot_creation"
+    },
+    {
+      "player_name": "Justin Champagnie",
+      "mp_per_g": 20.0,
+      "spacing": 27.5,
+      "playmaking": 21.4,
+      "rim_protection": 79.8,
+      "rebounding": 85.9,
+      "shot_creation": 35.8,
+      "perimeter_defense": 38.8,
+      "primary_skill": "rebounding"
+    },
+    {
+      "player_name": "Will Riley",
+      "mp_per_g": 22.1,
+      "spacing": 41.6,
+      "playmaking": 48.6,
+      "rim_protection": 11.6,
+      "rebounding": 30.2,
+      "shot_creation": 62.0,
+      "perimeter_defense": 4.5,
+      "primary_skill": "shot_creation"
+    },
+    {
+      "player_name": "CJ McCollum",
+      "mp_per_g": 29.8,
+      "spacing": 89.2,
+      "playmaking": 72.3,
+      "rim_protection": 52.6,
+      "rebounding": 15.9,
+      "shot_creation": 85.6,
+      "perimeter_defense": 11.6,
+      "primary_skill": "spacing"
+    },
+    {
+      "player_name": "Bub Carrington",
+      "mp_per_g": 27.7,
+      "spacing": 82.4,
+      "playmaking": 81.9,
+      "rim_protection": 22.4,
+      "rebounding": 23.4,
+      "shot_creation": 43.8,
+      "perimeter_defense": 2.8,
+      "primary_skill": "spacing"
+    }
+  ]
+}

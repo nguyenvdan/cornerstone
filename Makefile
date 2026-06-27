@@ -27,6 +27,14 @@ project:
 backtest:
 	uv run python -m eval.backtest
 
+# Phase 5: scrape current-season NBA skill profiles (league-wide).
+skills:
+	uv run python -m pipelines.nba_skills
+
+# Phase 5: roster-fit readout for the Wizards around Dybantsa.
+roster-fit:
+	uv run python -m models.roster_fit
+
 test:
 	uv run pytest -q
 
