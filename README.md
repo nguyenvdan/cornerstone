@@ -51,7 +51,7 @@ See [`ARCHITECTURE.md`](ARCHITECTURE.md) for module responsibilities and data fl
 | 4 | Back-testing / calibration | ✅ done |
 | 5 | Roster-fit engine | ✅ done |
 | 6 | Agentic orchestration | ✅ done |
-| 7 | React frontend + API | ⏳ planned |
+| 7 | React frontend + API | ✅ done |
 | 8 | Polish & writeup | ⏳ planned |
 
 ---
@@ -121,6 +121,22 @@ projections carry wide, explicit uncertainty.
 **Limitations** (stated honestly): small early-cohort samples; survivorship and
 era effects; training uses earlier cohorts' eventually-realized careers (fair to
 both model and baseline). See `eval/backtest.py` for the protocol.
+
+## Web app (Phase 7)
+
+A clean, mobile-friendly React (Vite + TypeScript) dashboard with five views —
+**Projection**, **Comparables**, **Wizards build**, **Ask the agent**, and
+**Methodology**. It's fully static: it reads the precomputed JSON artifacts, so
+it deploys as a static site (Vercel-ready) with no backend.
+
+```bash
+make frontend-dev     # http://localhost:5173
+make frontend-build   # production build -> frontend/dist/
+```
+
+Deploy: import the repo in Vercel, set **Root Directory** to `frontend` (Vite
+auto-detected). See [`frontend/README.md`](frontend/README.md). _Live URL: add
+after first deploy._
 
 ## The agent (Phase 6)
 

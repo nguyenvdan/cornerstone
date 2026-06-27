@@ -40,6 +40,23 @@ roster-fit:
 agent:
 	uv run python -m agent.runner
 
+# Phase 7: sync the precomputed JSON/plot artifacts into the frontend, so the
+# deployed app is self-contained and static.
+frontend-data:
+	mkdir -p frontend/public/data
+	cp data/processed/dybantsa_projection.json data/processed/dybantsa_comparables.json \
+	   data/processed/wizards_fit.json data/processed/agent_report.json \
+	   eval/backtest_results.json frontend/public/data/
+	cp eval/calibration.png frontend/public/
+
+# Phase 7: build the React app (run frontend-data first if models changed).
+frontend-build: frontend-data
+	cd frontend && npm install && npm run build
+
+# Phase 7: run the frontend locally at http://localhost:5173
+frontend-dev:
+	cd frontend && npm install && npm run dev
+
 test:
 	uv run pytest -q
 
