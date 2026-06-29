@@ -1,0 +1,99 @@
+{
+  "n_prospects": 459,
+  "scores": {
+    "star": {
+      "auc": 0.743,
+      "brier": 0.1156,
+      "ece": 0.0576,
+      "reliability": {
+        "confidence": [
+          0.0795,
+          0.1412,
+          0.2446,
+          0.3538,
+          0.4455,
+          0.5499,
+          0.6298
+        ],
+        "observed": [
+          0.0631,
+          0.1047,
+          0.1515,
+          0.2727,
+          0.3077,
+          0.75,
+          0.4
+        ],
+        "count": [
+          111,
+          191,
+          66,
+          44,
+          26,
+          16,
+          5
+        ],
+        "ece": 0.0576
+      }
+    },
+    "vorp": {
+      "spearman": 0.262,
+      "mae": 6.11
+    },
+    "tier": {
+      "exact": 0.222,
+      "within_one": 0.638
+    }
+  },
+  "significance": {
+    "vs_baseline": {
+      "delta": -0.0149,
+      "ci_low": -0.0518,
+      "ci_high": 0.0247,
+      "significant": false
+    },
+    "vs_knn": {
+      "delta": -0.0328,
+      "ci_low": -0.0641,
+      "ci_high": -0.0008,
+      "significant": true
+    }
+  },
+  "compression": [
+    {
+      "tier": "bust",
+      "n": 221,
+      "mean_actual_vorp": -0.6,
+      "mean_pred_vorp": 4.0,
+      "resid": -4.5
+    },
+    {
+      "tier": "rotation",
+      "n": 92,
+      "mean_actual_vorp": 1.0,
+      "mean_pred_vorp": 5.8,
+      "resid": -4.8
+    },
+    {
+      "tier": "starter",
+      "n": 75,
+      "mean_actual_vorp": 5.8,
+      "mean_pred_vorp": 7.1,
+      "resid": -1.3
+    },
+    {
+      "tier": "all_star",
+      "n": 56,
+      "mean_actual_vorp": 15.2,
+      "mean_pred_vorp": 10.0,
+      "resid": 5.2
+    },
+    {
+      "tier": "superstar",
+      "n": 15,
+      "mean_actual_vorp": 39.6,
+      "mean_pred_vorp": 12.2,
+      "resid": 27.4
+    }
+  ]
+}

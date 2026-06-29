@@ -27,6 +27,17 @@ from pipelines import config
 from . import report
 from .tools import Context, Tool, build_tools
 
+# Load a local, git-ignored .env (ANTHROPIC_API_KEY, CORNERSTONE_AGENT_MODEL)
+# so autonomous mode "just works" without exporting vars each shell. Optional:
+# if python-dotenv isn't installed (scripted-only setup), we silently skip it
+# and still read from the real environment.
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ModuleNotFoundError:
+    pass
+
 DEFAULT_QUERY = "Analyze the Wizards' path with AJ Dybantsa as their cornerstone."
 AGENT_MODEL = os.environ.get("CORNERSTONE_AGENT_MODEL", "claude-sonnet-4-6")
 MAX_TURNS = 8

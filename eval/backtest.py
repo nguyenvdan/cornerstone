@@ -29,7 +29,7 @@ import pandas as pd
 from models.projection import ProjectionModel
 from pipelines import config
 
-from . import metrics
+from . import metrics, stacker
 from .baseline import DraftPositionBaseline
 
 matplotlib.use("Agg")
@@ -80,8 +80,9 @@ def run_backtest(prospects: pd.DataFrame, test_years=None, context=None
             })
 
     res = pd.DataFrame(rows)
-    res["comb_p_star"] = 0.5 * (res["model_p_star"] + res["base_p_star"])
-    res["comb_exp_vorp"] = 0.5 * (res["model_exp_vorp"] + res["base_exp_vorp"])
+    # Combined = leakage-free walk-forward stack (logistic for P(star+), linear
+    # for VORP, isotonic-calibrated), NOT a fixed 50/50 average. See eval/stacker.py.
+    res["comb_p_star"], res["comb_exp_vorp"] = stacker.walk_forward_combine(res)
     return res, _score(res)
 
 
@@ -99,6 +100,24 @@ def _score(res: pd.DataFrame) -> dict:
             out["tier"] = metrics.tier_accuracy(res[tier_col].tolist(), actual_tier)
         return out
 
+    picks = res["draft_pick"].to_numpy(float)
+    model_p = res["model_p_star"].to_numpy()
+    base_p = res["base_p_star"].to_numpy()
+    comb_p = res["comb_p_star"].to_numpy()
+
+    # Is the edge over the free baseline real, or inside the noise? Paired
+    # bootstrap CIs on the metric *differences* (a CI crossing 0 = not significant).
+    significance = {
+        "auc_model_minus_base": metrics.bootstrap_delta(model_p, base_p, actual_star, "auc"),
+        "auc_combined_minus_base": metrics.bootstrap_delta(comb_p, base_p, actual_star, "auc"),
+        "spearman_model_minus_base": metrics.bootstrap_delta(
+            res["model_exp_vorp"].to_numpy(), res["base_exp_vorp"].to_numpy(),
+            actual_vorp, "spearman"),
+    }
+    # Where the profile actually adds value: discrimination *within* pick bands,
+    # where the draft-position baseline is nearly flat by construction.
+    within_bucket = metrics.auc_within_buckets(model_p, base_p, actual_star, picks)
+
     return {
         "n_prospects": int(len(res)),
         "n_years": int(res["draft_year"].nunique()),
@@ -106,6 +125,8 @@ def _score(res: pd.DataFrame) -> dict:
         "model": block("model", "model_tier"),
         "baseline": block("base", "base_tier"),
         "combined": block("comb", None),
+        "significance": significance,
+        "within_bucket": within_bucket,
     }
 
 
@@ -168,6 +189,31 @@ def _print_summary(s: dict) -> None:
     line("P(star+) ECE", m["star"]["ece"], b["star"]["ece"], c["star"]["ece"])
     line("VORP Spearman", m["vorp"]["spearman"], b["vorp"]["spearman"], c["vorp"]["spearman"])
     line("VORP MAE", m["vorp"]["mae"], b["vorp"]["mae"], c["vorp"]["mae"])
+
+    sig = s.get("significance")
+    if sig:
+        print("\nSignificance — Δ vs draft-position baseline (95% paired bootstrap CI):")
+        labels = {"auc_model_minus_base": "AUC  model − base",
+                  "auc_combined_minus_base": "AUC  combined − base",
+                  "spearman_model_minus_base": "Spearman  model − base"}
+        for key, lbl in labels.items():
+            d = sig[key]
+            if d["delta"] is None:
+                continue
+            star = "  *significant*" if d["significant"] else "  (n.s. — CI crosses 0)"
+            print(f"  {lbl:24s} Δ {d['delta']:+.4f}  "
+                  f"[{d['ci_low']:+.4f}, {d['ci_high']:+.4f}]{star}")
+
+    wb = s.get("within_bucket")
+    if wb:
+        print("\nStar-detection AUC within draft-pick bands (where the baseline is flat):")
+        print(f"  {'picks':8s} {'n':>4s} {'stars':>6s} {'model':>7s} {'base':>7s} {'Δ':>7s}")
+        for r in wb:
+            if r["model_auc"] is None:
+                print(f"  {r['bucket']:8s} {r['n']:>4d} {r['stars']:>6d}   (too few stars)")
+            else:
+                print(f"  {r['bucket']:8s} {r['n']:>4d} {r['stars']:>6d} "
+                      f"{r['model_auc']:>7.3f} {r['base_auc']:>7.3f} {r['delta']:>+7.3f}")
 
 
 def _holdout(prospects: pd.DataFrame) -> dict:

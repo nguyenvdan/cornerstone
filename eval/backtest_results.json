@@ -89,42 +89,108 @@
     },
     "combined": {
       "star": {
-        "auc": 0.772,
-        "brier": 0.113,
-        "ece": 0.0264,
+        "auc": 0.751,
+        "brier": 0.1172,
+        "ece": 0.0255,
         "reliability": {
           "confidence": [
-            0.0718,
-            0.1406,
-            0.2424,
-            0.3498,
-            0.4461,
-            0.5146
+            0.0577,
+            0.1463,
+            0.2522,
+            0.3515,
+            0.4239,
+            0.5333,
+            0.6458,
+            0.75,
+            0.8,
+            1.0
           ],
           "observed": [
-            0.0421,
-            0.1261,
-            0.209,
-            0.3208,
-            0.4412,
-            0.75
+            0.0535,
+            0.1087,
+            0.2778,
+            0.3556,
+            0.4167,
+            0.3333,
+            1.0,
+            1.0,
+            0.0,
+            0.0
           ],
           "count": [
-            190,
-            111,
-            67,
-            53,
-            34,
-            4
+            187,
+            138,
+            54,
+            45,
+            24,
+            6,
+            2,
+            1,
+            1,
+            1
           ],
-          "ece": 0.0264
+          "ece": 0.0255
         }
       },
       "vorp": {
-        "spearman": 0.377,
-        "mae": 5.33
+        "spearman": 0.368,
+        "mae": 5.18
       }
     },
+    "significance": {
+      "auc_model_minus_base": {
+        "delta": 0.0179,
+        "ci_low": -0.0086,
+        "ci_high": 0.0451,
+        "significant": false
+      },
+      "auc_combined_minus_base": {
+        "delta": -0.0066,
+        "ci_low": -0.0359,
+        "ci_high": 0.0257,
+        "significant": false
+      },
+      "spearman_model_minus_base": {
+        "delta": 0.02,
+        "ci_low": -0.0148,
+        "ci_high": 0.0568,
+        "significant": false
+      }
+    },
+    "within_bucket": [
+      {
+        "bucket": "1-5",
+        "n": 43,
+        "stars": 20,
+        "model_auc": 0.661,
+        "base_auc": 0.55,
+        "delta": 0.111
+      },
+      {
+        "bucket": "6-14",
+        "n": 83,
+        "stars": 24,
+        "model_auc": 0.536,
+        "base_auc": 0.54,
+        "delta": -0.004
+      },
+      {
+        "bucket": "15-30",
+        "n": 131,
+        "stars": 18,
+        "model_auc": 0.588,
+        "base_auc": 0.443,
+        "delta": 0.145
+      },
+      {
+        "bucket": "31-60",
+        "n": 202,
+        "stars": 9,
+        "model_auc": 0.58,
+        "base_auc": 0.518,
+        "delta": 0.062
+      }
+    ],
     "holdout": {
       "n_prospects": 194,
       "years": [
@@ -150,9 +216,9 @@
         "within_one": 0.758
       },
       "combined": {
-        "auc": 0.798,
-        "ece": 0.0496,
-        "spearman": 0.417,
+        "auc": 0.77,
+        "ece": 0.0622,
+        "spearman": 0.401,
         "within_one": null
       }
     }
@@ -1643,8 +1709,8 @@
       "base_p_star": 0.516,
       "base_exp_vorp": 19.662,
       "base_tier": "superstar",
-      "comb_p_star": 0.463,
-      "comb_exp_vorp": 17.131
+      "comb_p_star": 0.305,
+      "comb_exp_vorp": 12.751
     },
     {
       "player_name": "Michael Kidd-Gilchrist",
@@ -1659,8 +1725,8 @@
       "base_p_star": 0.5,
       "base_exp_vorp": 18.973,
       "base_tier": "superstar",
-      "comb_p_star": 0.489,
-      "comb_exp_vorp": 17.686
+      "comb_p_star": 0.324,
+      "comb_exp_vorp": 17.325
     },
     {
       "player_name": "Bradley Beal",
@@ -1675,8 +1741,8 @@
       "base_p_star": 0.482,
       "base_exp_vorp": 18.185,
       "base_tier": "superstar",
-      "comb_p_star": 0.502,
-      "comb_exp_vorp": 18.592
+      "comb_p_star": 0.335,
+      "comb_exp_vorp": 23.732
     },
     {
       "player_name": "Dion Waiters",
@@ -1691,8 +1757,8 @@
       "base_p_star": 0.462,
       "base_exp_vorp": 17.3,
       "base_tier": "superstar",
-      "comb_p_star": 0.449,
-      "comb_exp_vorp": 15.85
+      "comb_p_star": 0.303,
+      "comb_exp_vorp": 14.616
     },
     {
       "player_name": "Thomas Robinson",
@@ -1707,8 +1773,8 @@
       "base_p_star": 0.44,
       "base_exp_vorp": 16.326,
       "base_tier": "superstar",
-      "comb_p_star": 0.366,
-      "comb_exp_vorp": 13.413
+      "comb_p_star": 0.254,
+      "comb_exp_vorp": 7.105
     },
     {
       "player_name": "Damian Lillard",
@@ -1723,8 +1789,8 @@
       "base_p_star": 0.416,
       "base_exp_vorp": 15.279,
       "base_tier": "superstar",
-      "comb_p_star": 0.371,
-      "comb_exp_vorp": 12.64
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 7.04
     },
     {
       "player_name": "Harrison Barnes",
@@ -1739,8 +1805,8 @@
       "base_p_star": 0.391,
       "base_exp_vorp": 14.181,
       "base_tier": "bust",
-      "comb_p_star": 0.367,
-      "comb_exp_vorp": 12.49
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 9.844
     },
     {
       "player_name": "Terrence Ross",
@@ -1755,8 +1821,8 @@
       "base_p_star": 0.366,
       "base_exp_vorp": 13.059,
       "base_tier": "bust",
-      "comb_p_star": 0.28,
-      "comb_exp_vorp": 9.68
+      "comb_p_star": 0.214,
+      "comb_exp_vorp": 1.176
     },
     {
       "player_name": "Andre Drummond",
@@ -1771,8 +1837,8 @@
       "base_p_star": 0.34,
       "base_exp_vorp": 11.948,
       "base_tier": "bust",
-      "comb_p_star": 0.333,
-      "comb_exp_vorp": 11.724
+      "comb_p_star": 0.245,
+      "comb_exp_vorp": 13.537
     },
     {
       "player_name": "Austin Rivers",
@@ -1787,8 +1853,8 @@
       "base_p_star": 0.316,
       "base_exp_vorp": 10.881,
       "base_tier": "bust",
-      "comb_p_star": 0.326,
-      "comb_exp_vorp": 10.89
+      "comb_p_star": 0.244,
+      "comb_exp_vorp": 13.274
     },
     {
       "player_name": "Meyers Leonard",
@@ -1803,8 +1869,8 @@
       "base_p_star": 0.294,
       "base_exp_vorp": 9.891,
       "base_tier": "bust",
-      "comb_p_star": 0.278,
-      "comb_exp_vorp": 9.245
+      "comb_p_star": 0.219,
+      "comb_exp_vorp": 9.249
     },
     {
       "player_name": "Jeremy Lamb",
@@ -1819,8 +1885,8 @@
       "base_p_star": 0.274,
       "base_exp_vorp": 9.004,
       "base_tier": "bust",
-      "comb_p_star": 0.289,
-      "comb_exp_vorp": 9.452
+      "comb_p_star": 0.227,
+      "comb_exp_vorp": 12.932
     },
     {
       "player_name": "Kendall Marshall",
@@ -1835,8 +1901,8 @@
       "base_p_star": 0.258,
       "base_exp_vorp": 8.237,
       "base_tier": "bust",
-      "comb_p_star": 0.311,
-      "comb_exp_vorp": 10.068
+      "comb_p_star": 0.241,
+      "comb_exp_vorp": 18.017
     },
     {
       "player_name": "John Henson",
@@ -1851,8 +1917,8 @@
       "base_p_star": 0.245,
       "base_exp_vorp": 7.595,
       "base_tier": "bust",
-      "comb_p_star": 0.197,
-      "comb_exp_vorp": 6.747
+      "comb_p_star": 0.184,
+      "comb_exp_vorp": 5.628
     },
     {
       "player_name": "Maurice Harkless",
@@ -1867,8 +1933,8 @@
       "base_p_star": 0.236,
       "base_exp_vorp": 7.073,
       "base_tier": "bust",
-      "comb_p_star": 0.317,
-      "comb_exp_vorp": 10.437
+      "comb_p_star": 0.247,
+      "comb_exp_vorp": 23.27
     },
     {
       "player_name": "Royce White",
@@ -1883,8 +1949,8 @@
       "base_p_star": 0.229,
       "base_exp_vorp": 6.658,
       "base_tier": "bust",
-      "comb_p_star": 0.239,
-      "comb_exp_vorp": 6.829
+      "comb_p_star": 0.205,
+      "comb_exp_vorp": 8.926
     },
     {
       "player_name": "Tyler Zeller",
@@ -1899,8 +1965,8 @@
       "base_p_star": 0.224,
       "base_exp_vorp": 6.328,
       "base_tier": "bust",
-      "comb_p_star": 0.162,
-      "comb_exp_vorp": 5.164
+      "comb_p_star": 0.17,
+      "comb_exp_vorp": 2.741
     },
     {
       "player_name": "Terrence Jones",
@@ -1915,8 +1981,8 @@
       "base_p_star": 0.22,
       "base_exp_vorp": 6.059,
       "base_tier": "bust",
-      "comb_p_star": 0.217,
-      "comb_exp_vorp": 6.629
+      "comb_p_star": 0.195,
+      "comb_exp_vorp": 9.943
     },
     {
       "player_name": "Andrew Nicholson",
@@ -1931,8 +1997,8 @@
       "base_p_star": 0.215,
       "base_exp_vorp": 5.828,
       "base_tier": "bust",
-      "comb_p_star": 0.156,
-      "comb_exp_vorp": 4.314
+      "comb_p_star": 0.168,
+      "comb_exp_vorp": 0.624
     },
     {
       "player_name": "Jared Sullinger",
@@ -1947,8 +2013,8 @@
       "base_p_star": 0.204,
       "base_exp_vorp": 5.405,
       "base_tier": "bust",
-      "comb_p_star": 0.207,
-      "comb_exp_vorp": 6.152
+      "comb_p_star": 0.192,
+      "comb_exp_vorp": 9.929
     },
     {
       "player_name": "Fab Melo",
@@ -1963,8 +2029,8 @@
       "base_p_star": 0.196,
       "base_exp_vorp": 5.185,
       "base_tier": "bust",
-      "comb_p_star": 0.135,
-      "comb_exp_vorp": 4.142
+      "comb_p_star": 0.16,
+      "comb_exp_vorp": 1.902
     },
     {
       "player_name": "John Jenkins",
@@ -1979,8 +2045,8 @@
       "base_p_star": 0.186,
       "base_exp_vorp": 4.951,
       "base_tier": "bust",
-      "comb_p_star": 0.142,
-      "comb_exp_vorp": 4.026
+      "comb_p_star": 0.164,
+      "comb_exp_vorp": 2.129
     },
     {
       "player_name": "Jared Cunningham",
@@ -1995,8 +2061,8 @@
       "base_p_star": 0.176,
       "base_exp_vorp": 4.703,
       "base_tier": "bust",
-      "comb_p_star": 0.245,
-      "comb_exp_vorp": 6.102
+      "comb_p_star": 0.214,
+      "comb_exp_vorp": 11.914
     },
     {
       "player_name": "Tony Wroten",
@@ -2011,8 +2077,8 @@
       "base_p_star": 0.164,
       "base_exp_vorp": 4.443,
       "base_tier": "bust",
-      "comb_p_star": 0.204,
-      "comb_exp_vorp": 5.721
+      "comb_p_star": 0.194,
+      "comb_exp_vorp": 11.082
     },
     {
       "player_name": "Miles Plumlee",
@@ -2027,8 +2093,8 @@
       "base_p_star": 0.152,
       "base_exp_vorp": 4.175,
       "base_tier": "bust",
-      "comb_p_star": 0.111,
-      "comb_exp_vorp": 3.288
+      "comb_p_star": 0.154,
+      "comb_exp_vorp": 1.366
     },
     {
       "player_name": "Arnett Moultrie",
@@ -2043,8 +2109,8 @@
       "base_p_star": 0.141,
       "base_exp_vorp": 3.906,
       "base_tier": "bust",
-      "comb_p_star": 0.124,
-      "comb_exp_vorp": 3.553
+      "comb_p_star": 0.16,
+      "comb_exp_vorp": 3.364
     },
     {
       "player_name": "Perry Jones",
@@ -2059,8 +2125,8 @@
       "base_p_star": 0.13,
       "base_exp_vorp": 3.639,
       "base_tier": "bust",
-      "comb_p_star": 0.123,
-      "comb_exp_vorp": 3.67
+      "comb_p_star": 0.16,
+      "comb_exp_vorp": 4.707
     },
     {
       "player_name": "Marquis Teague",
@@ -2075,8 +2141,8 @@
       "base_p_star": 0.12,
       "base_exp_vorp": 3.38,
       "base_tier": "bust",
-      "comb_p_star": 0.141,
-      "comb_exp_vorp": 4.09
+      "comb_p_star": 0.169,
+      "comb_exp_vorp": 7.345
     },
     {
       "player_name": "Festus Ezeli",
@@ -2091,8 +2157,8 @@
       "base_p_star": 0.111,
       "base_exp_vorp": 3.133,
       "base_tier": "bust",
-      "comb_p_star": 0.096,
-      "comb_exp_vorp": 2.667
+      "comb_p_star": 0.151,
+      "comb_exp_vorp": 1.947
     },
     {
       "player_name": "Jeff Taylor",
@@ -2107,8 +2173,8 @@
       "base_p_star": 0.102,
       "base_exp_vorp": 2.9,
       "base_tier": "bust",
-      "comb_p_star": 0.101,
-      "comb_exp_vorp": 2.8
+      "comb_p_star": 0.153,
+      "comb_exp_vorp": 3.258
     },
     {
       "player_name": "Bernard James",
@@ -2123,8 +2189,8 @@
       "base_p_star": 0.088,
       "base_exp_vorp": 2.492,
       "base_tier": "bust",
-      "comb_p_star": 0.084,
-      "comb_exp_vorp": 2.246
+      "comb_p_star": 0.148,
+      "comb_exp_vorp": 2.137
     },
     {
       "player_name": "Jae Crowder",
@@ -2139,8 +2205,8 @@
       "base_p_star": 0.083,
       "base_exp_vorp": 2.323,
       "base_tier": "bust",
-      "comb_p_star": 0.122,
-      "comb_exp_vorp": 3.311
+      "comb_p_star": 0.163,
+      "comb_exp_vorp": 7.291
     },
     {
       "player_name": "Draymond Green",
@@ -2155,8 +2221,8 @@
       "base_p_star": 0.08,
       "base_exp_vorp": 2.181,
       "base_tier": "bust",
-      "comb_p_star": 0.087,
-      "comb_exp_vorp": 2.24
+      "comb_p_star": 0.15,
+      "comb_exp_vorp": 3.091
     },
     {
       "player_name": "Orlando Johnson",
@@ -2171,8 +2237,8 @@
       "base_p_star": 0.078,
       "base_exp_vorp": 2.07,
       "base_tier": "bust",
-      "comb_p_star": 0.07,
-      "comb_exp_vorp": 1.885
+      "comb_p_star": 0.143,
+      "comb_exp_vorp": 1.898
     },
     {
       "player_name": "Quincy Acy",
@@ -2187,8 +2253,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 1.992,
       "base_tier": "bust",
-      "comb_p_star": 0.079,
-      "comb_exp_vorp": 2.146
+      "comb_p_star": 0.146,
+      "comb_exp_vorp": 3.275
     },
     {
       "player_name": "Quincy Miller",
@@ -2203,8 +2269,8 @@
       "base_p_star": 0.078,
       "base_exp_vorp": 1.949,
       "base_tier": "bust",
-      "comb_p_star": 0.09,
-      "comb_exp_vorp": 2.324
+      "comb_p_star": 0.151,
+      "comb_exp_vorp": 4.185
     },
     {
       "player_name": "Khris Middleton",
@@ -2219,8 +2285,8 @@
       "base_p_star": 0.081,
       "base_exp_vorp": 1.939,
       "base_tier": "bust",
-      "comb_p_star": 0.083,
-      "comb_exp_vorp": 2.019
+      "comb_p_star": 0.148,
+      "comb_exp_vorp": 2.893
     },
     {
       "player_name": "Will Barton",
@@ -2235,8 +2301,8 @@
       "base_p_star": 0.085,
       "base_exp_vorp": 1.959,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 2.529
+      "comb_p_star": 0.154,
+      "comb_exp_vorp": 5.042
     },
     {
       "player_name": "Tyshawn Taylor",
@@ -2251,8 +2317,8 @@
       "base_p_star": 0.09,
       "base_exp_vorp": 2.002,
       "base_tier": "bust",
-      "comb_p_star": 0.08,
-      "comb_exp_vorp": 1.701
+      "comb_p_star": 0.146,
+      "comb_exp_vorp": 1.313
     },
     {
       "player_name": "Doron Lamb",
@@ -2267,8 +2333,8 @@
       "base_p_star": 0.095,
       "base_exp_vorp": 2.06,
       "base_tier": "bust",
-      "comb_p_star": 0.093,
-      "comb_exp_vorp": 2.13
+      "comb_p_star": 0.151,
+      "comb_exp_vorp": 2.991
     },
     {
       "player_name": "Mike Scott",
@@ -2283,8 +2349,8 @@
       "base_p_star": 0.101,
       "base_exp_vorp": 2.122,
       "base_tier": "bust",
-      "comb_p_star": 0.085,
-      "comb_exp_vorp": 1.911
+      "comb_p_star": 0.147,
+      "comb_exp_vorp": 1.847
     },
     {
       "player_name": "Kim English",
@@ -2299,8 +2365,8 @@
       "base_p_star": 0.105,
       "base_exp_vorp": 2.174,
       "base_tier": "bust",
-      "comb_p_star": 0.1,
-      "comb_exp_vorp": 2.287
+      "comb_p_star": 0.153,
+      "comb_exp_vorp": 3.314
     },
     {
       "player_name": "Justin Hamilton",
@@ -2315,8 +2381,8 @@
       "base_p_star": 0.108,
       "base_exp_vorp": 2.207,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 1.853
+      "comb_p_star": 0.148,
+      "comb_exp_vorp": 1.331
     },
     {
       "player_name": "Darius Miller",
@@ -2331,8 +2397,8 @@
       "base_p_star": 0.109,
       "base_exp_vorp": 2.21,
       "base_tier": "bust",
-      "comb_p_star": 0.1,
-      "comb_exp_vorp": 2.055
+      "comb_p_star": 0.153,
+      "comb_exp_vorp": 2.195
     },
     {
       "player_name": "Kevin Murphy",
@@ -2347,8 +2413,8 @@
       "base_p_star": 0.107,
       "base_exp_vorp": 2.18,
       "base_tier": "bust",
-      "comb_p_star": 0.076,
-      "comb_exp_vorp": 1.49
+      "comb_p_star": 0.143,
+      "comb_exp_vorp": -0.162
     },
     {
       "player_name": "Kyle O'Quinn",
@@ -2363,8 +2429,8 @@
       "base_p_star": 0.098,
       "base_exp_vorp": 2.025,
       "base_tier": "bust",
-      "comb_p_star": 0.082,
-      "comb_exp_vorp": 1.712
+      "comb_p_star": 0.146,
+      "comb_exp_vorp": 1.291
     },
     {
       "player_name": "Kris Joseph",
@@ -2379,8 +2445,8 @@
       "base_p_star": 0.084,
       "base_exp_vorp": 1.791,
       "base_tier": "bust",
-      "comb_p_star": 0.074,
-      "comb_exp_vorp": 1.645
+      "comb_p_star": 0.144,
+      "comb_exp_vorp": 1.735
     },
     {
       "player_name": "Darius Johnson-Odom",
@@ -2395,8 +2461,8 @@
       "base_p_star": 0.058,
       "base_exp_vorp": 1.398,
       "base_tier": "bust",
-      "comb_p_star": 0.067,
-      "comb_exp_vorp": 1.449
+      "comb_p_star": 0.143,
+      "comb_exp_vorp": 2.118
     },
     {
       "player_name": "Robbie Hummel",
@@ -2411,8 +2477,8 @@
       "base_p_star": 0.055,
       "base_exp_vorp": 1.348,
       "base_tier": "bust",
-      "comb_p_star": 0.053,
-      "comb_exp_vorp": 1.124
+      "comb_p_star": 0.138,
+      "comb_exp_vorp": 0.865
     },
     {
       "player_name": "Robert Sacre",
@@ -2427,8 +2493,8 @@
       "base_p_star": 0.062,
       "base_exp_vorp": 1.437,
       "base_tier": "bust",
-      "comb_p_star": 0.053,
-      "comb_exp_vorp": 1.119
+      "comb_p_star": 0.138,
+      "comb_exp_vorp": 0.561
     },
     {
       "player_name": "Anthony Bennett",
@@ -2443,8 +2509,8 @@
       "base_p_star": 0.513,
       "base_exp_vorp": 19.445,
       "base_tier": "superstar",
-      "comb_p_star": 0.423,
-      "comb_exp_vorp": 14.672
+      "comb_p_star": 0.292,
+      "comb_exp_vorp": 8.292
     },
     {
       "player_name": "Victor Oladipo",
@@ -2459,8 +2525,8 @@
       "base_p_star": 0.497,
       "base_exp_vorp": 18.727,
       "base_tier": "superstar",
-      "comb_p_star": 0.469,
-      "comb_exp_vorp": 17.264
+      "comb_p_star": 0.33,
+      "comb_exp_vorp": 16.872
     },
     {
       "player_name": "Otto Porter Jr.",
@@ -2475,8 +2541,8 @@
       "base_p_star": 0.479,
       "base_exp_vorp": 17.919,
       "base_tier": "superstar",
-      "comb_p_star": 0.468,
-      "comb_exp_vorp": 17.009
+      "comb_p_star": 0.332,
+      "comb_exp_vorp": 17.515
     },
     {
       "player_name": "Cody Zeller",
@@ -2491,8 +2557,8 @@
       "base_p_star": 0.459,
       "base_exp_vorp": 17.02,
       "base_tier": "superstar",
-      "comb_p_star": 0.382,
-      "comb_exp_vorp": 13.31
+      "comb_p_star": 0.267,
+      "comb_exp_vorp": 8.515
     },
     {
       "player_name": "Alex Len",
@@ -2507,8 +2573,8 @@
       "base_p_star": 0.437,
       "base_exp_vorp": 16.037,
       "base_tier": "superstar",
-      "comb_p_star": 0.366,
-      "comb_exp_vorp": 12.618
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 8.209
     },
     {
       "player_name": "Nerlens Noel",
@@ -2523,8 +2589,8 @@
       "base_p_star": 0.413,
       "base_exp_vorp": 14.984,
       "base_tier": "all_star",
-      "comb_p_star": 0.399,
-      "comb_exp_vorp": 14.492
+      "comb_p_star": 0.285,
+      "comb_exp_vorp": 15.314
     },
     {
       "player_name": "Ben McLemore",
@@ -2539,8 +2605,8 @@
       "base_p_star": 0.388,
       "base_exp_vorp": 13.88,
       "base_tier": "bust",
-      "comb_p_star": 0.353,
-      "comb_exp_vorp": 12.29
+      "comb_p_star": 0.255,
+      "comb_exp_vorp": 10.918
     },
     {
       "player_name": "Kentavious Caldwell-Pope",
@@ -2555,8 +2621,8 @@
       "base_p_star": 0.362,
       "base_exp_vorp": 12.753,
       "base_tier": "bust",
-      "comb_p_star": 0.391,
-      "comb_exp_vorp": 13.527
+      "comb_p_star": 0.285,
+      "comb_exp_vorp": 16.337
     },
     {
       "player_name": "Trey Burke",
@@ -2571,8 +2637,8 @@
       "base_p_star": 0.335,
       "base_exp_vorp": 11.634,
       "base_tier": "bust",
-      "comb_p_star": 0.38,
-      "comb_exp_vorp": 13.617
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 18.485
     },
     {
       "player_name": "CJ McCollum",
@@ -2587,8 +2653,8 @@
       "base_p_star": 0.309,
       "base_exp_vorp": 10.556,
       "base_tier": "bust",
-      "comb_p_star": 0.304,
-      "comb_exp_vorp": 10.628
+      "comb_p_star": 0.23,
+      "comb_exp_vorp": 11.807
     },
     {
       "player_name": "Michael Carter-Williams",
@@ -2603,8 +2669,8 @@
       "base_p_star": 0.285,
       "base_exp_vorp": 9.551,
       "base_tier": "bust",
-      "comb_p_star": 0.346,
-      "comb_exp_vorp": 11.725
+      "comb_p_star": 0.261,
+      "comb_exp_vorp": 16.625
     },
     {
       "player_name": "Steven Adams",
@@ -2619,8 +2685,8 @@
       "base_p_star": 0.263,
       "base_exp_vorp": 8.645,
       "base_tier": "bust",
-      "comb_p_star": 0.25,
-      "comb_exp_vorp": 8.023
+      "comb_p_star": 0.201,
+      "comb_exp_vorp": 7.626
     },
     {
       "player_name": "Kelly Olynyk",
@@ -2635,8 +2701,8 @@
       "base_p_star": 0.245,
       "base_exp_vorp": 7.856,
       "base_tier": "bust",
-      "comb_p_star": 0.2,
-      "comb_exp_vorp": 6.378
+      "comb_p_star": 0.174,
+      "comb_exp_vorp": 4.283
     },
     {
       "player_name": "Shabazz Muhammad",
@@ -2651,8 +2717,8 @@
       "base_p_star": 0.23,
       "base_exp_vorp": 7.189,
       "base_tier": "bust",
-      "comb_p_star": 0.218,
-      "comb_exp_vorp": 6.645
+      "comb_p_star": 0.185,
+      "comb_exp_vorp": 6.168
     },
     {
       "player_name": "Shane Larkin",
@@ -2667,8 +2733,8 @@
       "base_p_star": 0.197,
       "base_exp_vorp": 5.548,
       "base_tier": "bust",
-      "comb_p_star": 0.28,
-      "comb_exp_vorp": 8.374
+      "comb_p_star": 0.225,
+      "comb_exp_vorp": 13.857
     },
     {
       "player_name": "Tony Snell",
@@ -2683,8 +2749,8 @@
       "base_p_star": 0.187,
       "base_exp_vorp": 5.068,
       "base_tier": "bust",
-      "comb_p_star": 0.143,
-      "comb_exp_vorp": 3.984
+      "comb_p_star": 0.15,
+      "comb_exp_vorp": 2.185
     },
     {
       "player_name": "Gorgui Dieng",
@@ -2699,8 +2765,8 @@
       "base_p_star": 0.181,
       "base_exp_vorp": 4.848,
       "base_tier": "bust",
-      "comb_p_star": 0.142,
-      "comb_exp_vorp": 4.074
+      "comb_p_star": 0.15,
+      "comb_exp_vorp": 2.813
     },
     {
       "player_name": "Mason Plumlee",
@@ -2715,8 +2781,8 @@
       "base_p_star": 0.173,
       "base_exp_vorp": 4.628,
       "base_tier": "bust",
-      "comb_p_star": 0.134,
-      "comb_exp_vorp": 3.614
+      "comb_p_star": 0.147,
+      "comb_exp_vorp": 1.877
     },
     {
       "player_name": "Solomon Hill",
@@ -2731,8 +2797,8 @@
       "base_p_star": 0.165,
       "base_exp_vorp": 4.405,
       "base_tier": "bust",
-      "comb_p_star": 0.126,
-      "comb_exp_vorp": 3.652
+      "comb_p_star": 0.144,
+      "comb_exp_vorp": 2.363
     },
     {
       "player_name": "Tim Hardaway Jr.",
@@ -2747,8 +2813,8 @@
       "base_p_star": 0.156,
       "base_exp_vorp": 4.179,
       "base_tier": "bust",
-      "comb_p_star": 0.123,
-      "comb_exp_vorp": 3.489
+      "comb_p_star": 0.143,
+      "comb_exp_vorp": 2.281
     },
     {
       "player_name": "Reggie Bullock",
@@ -2763,8 +2829,8 @@
       "base_p_star": 0.147,
       "base_exp_vorp": 3.955,
       "base_tier": "bust",
-      "comb_p_star": 0.124,
-      "comb_exp_vorp": 3.727
+      "comb_p_star": 0.144,
+      "comb_exp_vorp": 3.336
     },
     {
       "player_name": "Andre Roberson",
@@ -2779,8 +2845,8 @@
       "base_p_star": 0.139,
       "base_exp_vorp": 3.737,
       "base_tier": "bust",
-      "comb_p_star": 0.155,
-      "comb_exp_vorp": 3.969
+      "comb_p_star": 0.16,
+      "comb_exp_vorp": 4.39
     },
     {
       "player_name": "Archie Goodwin",
@@ -2795,8 +2861,8 @@
       "base_p_star": 0.118,
       "base_exp_vorp": 3.17,
       "base_tier": "bust",
-      "comb_p_star": 0.14,
-      "comb_exp_vorp": 3.835
+      "comb_p_star": 0.153,
+      "comb_exp_vorp": 4.968
     },
     {
       "player_name": "Allen Crabbe",
@@ -2811,8 +2877,8 @@
       "base_p_star": 0.109,
       "base_exp_vorp": 2.881,
       "base_tier": "bust",
-      "comb_p_star": 0.102,
-      "comb_exp_vorp": 2.89
+      "comb_p_star": 0.137,
+      "comb_exp_vorp": 2.77
     },
     {
       "player_name": "Carrick Felix",
@@ -2827,8 +2893,8 @@
       "base_p_star": 0.104,
       "base_exp_vorp": 2.652,
       "base_tier": "bust",
-      "comb_p_star": 0.125,
-      "comb_exp_vorp": 3.176
+      "comb_p_star": 0.148,
+      "comb_exp_vorp": 3.969
     },
     {
       "player_name": "Isaiah Canaan",
@@ -2843,8 +2909,8 @@
       "base_p_star": 0.101,
       "base_exp_vorp": 2.555,
       "base_tier": "bust",
-      "comb_p_star": 0.087,
-      "comb_exp_vorp": 2.127
+      "comb_p_star": 0.131,
+      "comb_exp_vorp": 1.152
     },
     {
       "player_name": "Glen Rice Jr.",
@@ -2859,8 +2925,8 @@
       "base_p_star": 0.1,
       "base_exp_vorp": 2.468,
       "base_tier": "bust",
-      "comb_p_star": 0.112,
-      "comb_exp_vorp": 2.734
+      "comb_p_star": 0.142,
+      "comb_exp_vorp": 3.023
     },
     {
       "player_name": "Ray McCallum",
@@ -2875,8 +2941,8 @@
       "base_p_star": 0.098,
       "base_exp_vorp": 2.391,
       "base_tier": "bust",
-      "comb_p_star": 0.11,
-      "comb_exp_vorp": 2.895
+      "comb_p_star": 0.141,
+      "comb_exp_vorp": 3.612
     },
     {
       "player_name": "Tony Mitchell",
@@ -2891,8 +2957,8 @@
       "base_p_star": 0.097,
       "base_exp_vorp": 2.324,
       "base_tier": "bust",
-      "comb_p_star": 0.098,
-      "comb_exp_vorp": 2.462
+      "comb_p_star": 0.136,
+      "comb_exp_vorp": 2.493
     },
     {
       "player_name": "Nate Wolters",
@@ -2907,8 +2973,8 @@
       "base_p_star": 0.097,
       "base_exp_vorp": 2.269,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 2.685
+      "comb_p_star": 0.137,
+      "comb_exp_vorp": 3.218
     },
     {
       "player_name": "Jeff Withey",
@@ -2923,8 +2989,8 @@
       "base_p_star": 0.097,
       "base_exp_vorp": 2.228,
       "base_tier": "bust",
-      "comb_p_star": 0.085,
-      "comb_exp_vorp": 2.064
+      "comb_p_star": 0.13,
+      "comb_exp_vorp": 1.523
     },
     {
       "player_name": "Grant Jerrett",
@@ -2939,8 +3005,8 @@
       "base_p_star": 0.098,
       "base_exp_vorp": 2.2,
       "base_tier": "bust",
-      "comb_p_star": 0.103,
-      "comb_exp_vorp": 2.3
+      "comb_p_star": 0.138,
+      "comb_exp_vorp": 2.242
     },
     {
       "player_name": "Jamaal Franklin",
@@ -2955,8 +3021,8 @@
       "base_p_star": 0.099,
       "base_exp_vorp": 2.185,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 2.242
+      "comb_p_star": 0.136,
+      "comb_exp_vorp": 2.104
     },
     {
       "player_name": "Pierre Jackson",
@@ -2971,8 +3037,8 @@
       "base_p_star": 0.1,
       "base_exp_vorp": 2.178,
       "base_tier": "bust",
-      "comb_p_star": 0.087,
-      "comb_exp_vorp": 1.989
+      "comb_p_star": 0.131,
+      "comb_exp_vorp": 1.394
     },
     {
       "player_name": "Mike Muscala",
@@ -2987,8 +3053,8 @@
       "base_p_star": 0.103,
       "base_exp_vorp": 2.171,
       "base_tier": "bust",
-      "comb_p_star": 0.083,
-      "comb_exp_vorp": 1.986
+      "comb_p_star": 0.129,
+      "comb_exp_vorp": 1.396
     },
     {
       "player_name": "Erick Green",
@@ -3003,8 +3069,8 @@
       "base_p_star": 0.101,
       "base_exp_vorp": 2.127,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.063
+      "comb_p_star": 0.131,
+      "comb_exp_vorp": 1.693
     },
     {
       "player_name": "Ryan Kelly",
@@ -3019,8 +3085,8 @@
       "base_p_star": 0.095,
       "base_exp_vorp": 2.004,
       "base_tier": "bust",
-      "comb_p_star": 0.086,
-      "comb_exp_vorp": 1.752
+      "comb_p_star": 0.131,
+      "comb_exp_vorp": 1.014
     },
     {
       "player_name": "Erik Murphy",
@@ -3035,8 +3101,8 @@
       "base_p_star": 0.089,
       "base_exp_vorp": 1.912,
       "base_tier": "bust",
-      "comb_p_star": 0.079,
-      "comb_exp_vorp": 1.506
+      "comb_p_star": 0.128,
+      "comb_exp_vorp": 0.47
     },
     {
       "player_name": "James Ennis III",
@@ -3051,8 +3117,8 @@
       "base_p_star": 0.083,
       "base_exp_vorp": 1.804,
       "base_tier": "bust",
-      "comb_p_star": 0.09,
-      "comb_exp_vorp": 2.102
+      "comb_p_star": 0.134,
+      "comb_exp_vorp": 2.347
     },
     {
       "player_name": "Lorenzo Brown",
@@ -3067,8 +3133,8 @@
       "base_p_star": 0.069,
       "base_exp_vorp": 1.57,
       "base_tier": "bust",
-      "comb_p_star": 0.076,
-      "comb_exp_vorp": 1.685
+      "comb_p_star": 0.128,
+      "comb_exp_vorp": 1.557
     },
     {
       "player_name": "Peyton Siva",
@@ -3083,8 +3149,8 @@
       "base_p_star": 0.05,
       "base_exp_vorp": 1.224,
       "base_tier": "bust",
-      "comb_p_star": 0.07,
-      "comb_exp_vorp": 1.612
+      "comb_p_star": 0.127,
+      "comb_exp_vorp": 1.934
     },
     {
       "player_name": "Andrew Wiggins",
@@ -3099,8 +3165,8 @@
       "base_p_star": 0.494,
       "base_exp_vorp": 17.952,
       "base_tier": "superstar",
-      "comb_p_star": 0.463,
-      "comb_exp_vorp": 15.776
+      "comb_p_star": 0.504,
+      "comb_exp_vorp": 12.272
     },
     {
       "player_name": "Jabari Parker",
@@ -3115,8 +3181,8 @@
       "base_p_star": 0.478,
       "base_exp_vorp": 17.324,
       "base_tier": "superstar",
-      "comb_p_star": 0.449,
-      "comb_exp_vorp": 15.762
+      "comb_p_star": 0.417,
+      "comb_exp_vorp": 13.086
     },
     {
       "player_name": "Joel Embiid",
@@ -3131,8 +3197,8 @@
       "base_p_star": 0.462,
       "base_exp_vorp": 16.616,
       "base_tier": "all_star",
-      "comb_p_star": 0.39,
-      "comb_exp_vorp": 13.208
+      "comb_p_star": 0.417,
+      "comb_exp_vorp": 8.069
     },
     {
       "player_name": "Aaron Gordon",
@@ -3147,8 +3213,8 @@
       "base_p_star": 0.443,
       "base_exp_vorp": 15.83,
       "base_tier": "all_star",
-      "comb_p_star": 0.431,
-      "comb_exp_vorp": 14.265
+      "comb_p_star": 0.417,
+      "comb_exp_vorp": 11.601
     },
     {
       "player_name": "Marcus Smart",
@@ -3163,8 +3229,8 @@
       "base_p_star": 0.402,
       "base_exp_vorp": 14.054,
       "base_tier": "all_star",
-      "comb_p_star": 0.457,
-      "comb_exp_vorp": 16.327
+      "comb_p_star": 0.596,
+      "comb_exp_vorp": 18.817
     },
     {
       "player_name": "Julius Randle",
@@ -3179,8 +3245,8 @@
       "base_p_star": 0.38,
       "base_exp_vorp": 13.091,
       "base_tier": "bust",
-      "comb_p_star": 0.363,
-      "comb_exp_vorp": 11.896
+      "comb_p_star": 0.341,
+      "comb_exp_vorp": 9.754
     },
     {
       "player_name": "Nik Stauskas",
@@ -3195,8 +3261,8 @@
       "base_p_star": 0.357,
       "base_exp_vorp": 12.106,
       "base_tier": "bust",
-      "comb_p_star": 0.32,
-      "comb_exp_vorp": 10.653
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 8.178
     },
     {
       "player_name": "Noah Vonleh",
@@ -3211,8 +3277,8 @@
       "base_p_star": 0.334,
       "base_exp_vorp": 11.124,
       "base_tier": "bust",
-      "comb_p_star": 0.349,
-      "comb_exp_vorp": 10.962
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 10.225
     },
     {
       "player_name": "Elfrid Payton",
@@ -3227,8 +3293,8 @@
       "base_p_star": 0.311,
       "base_exp_vorp": 10.172,
       "base_tier": "bust",
-      "comb_p_star": 0.396,
-      "comb_exp_vorp": 14.136
+      "comb_p_star": 0.417,
+      "comb_exp_vorp": 18.929
     },
     {
       "player_name": "Doug McDermott",
@@ -3243,8 +3309,8 @@
       "base_p_star": 0.29,
       "base_exp_vorp": 9.276,
       "base_tier": "bust",
-      "comb_p_star": 0.233,
-      "comb_exp_vorp": 7.438
+      "comb_p_star": 0.25,
+      "comb_exp_vorp": 4.478
     },
     {
       "player_name": "Zach LaVine",
@@ -3259,8 +3325,8 @@
       "base_p_star": 0.253,
       "base_exp_vorp": 7.735,
       "base_tier": "bust",
-      "comb_p_star": 0.256,
-      "comb_exp_vorp": 7.568
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 6.859
     },
     {
       "player_name": "T.J. Warren",
@@ -3275,8 +3341,8 @@
       "base_p_star": 0.239,
       "base_exp_vorp": 7.113,
       "base_tier": "bust",
-      "comb_p_star": 0.251,
-      "comb_exp_vorp": 7.107
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 6.62
     },
     {
       "player_name": "Adreian Payne",
@@ -3291,8 +3357,8 @@
       "base_p_star": 0.226,
       "base_exp_vorp": 6.591,
       "base_tier": "bust",
-      "comb_p_star": 0.152,
-      "comb_exp_vorp": 4.746
+      "comb_p_star": 0.071,
+      "comb_exp_vorp": 1.803
     },
     {
       "player_name": "James Young",
@@ -3307,8 +3373,8 @@
       "base_p_star": 0.209,
       "base_exp_vorp": 5.807,
       "base_tier": "bust",
-      "comb_p_star": 0.236,
-      "comb_exp_vorp": 6.804
+      "comb_p_star": 0.25,
+      "comb_exp_vorp": 7.672
     },
     {
       "player_name": "Tyler Ennis",
@@ -3323,8 +3389,8 @@
       "base_p_star": 0.202,
       "base_exp_vorp": 5.512,
       "base_tier": "bust",
-      "comb_p_star": 0.253,
-      "comb_exp_vorp": 7.606
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 9.947
     },
     {
       "player_name": "Gary Harris",
@@ -3339,8 +3405,8 @@
       "base_p_star": 0.195,
       "base_exp_vorp": 5.258,
       "base_tier": "bust",
-      "comb_p_star": 0.249,
-      "comb_exp_vorp": 6.979
+      "comb_p_star": 0.28,
+      "comb_exp_vorp": 8.823
     },
     {
       "player_name": "Mitch McGary",
@@ -3355,8 +3421,8 @@
       "base_p_star": 0.181,
       "base_exp_vorp": 4.805,
       "base_tier": "bust",
-      "comb_p_star": 0.157,
-      "comb_exp_vorp": 4.302
+      "comb_p_star": 0.071,
+      "comb_exp_vorp": 3.176
     },
     {
       "player_name": "Jordan Adams",
@@ -3371,8 +3437,8 @@
       "base_p_star": 0.172,
       "base_exp_vorp": 4.584,
       "base_tier": "bust",
-      "comb_p_star": 0.221,
-      "comb_exp_vorp": 5.842
+      "comb_p_star": 0.25,
+      "comb_exp_vorp": 7.074
     },
     {
       "player_name": "Rodney Hood",
@@ -3387,8 +3453,8 @@
       "base_p_star": 0.163,
       "base_exp_vorp": 4.358,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 3.329
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.503
     },
     {
       "player_name": "Shabazz Napier",
@@ -3403,8 +3469,8 @@
       "base_p_star": 0.154,
       "base_exp_vorp": 4.129,
       "base_tier": "bust",
-      "comb_p_star": 0.158,
-      "comb_exp_vorp": 4.164
+      "comb_p_star": 0.071,
+      "comb_exp_vorp": 3.765
     },
     {
       "player_name": "P.J. Hairston",
@@ -3419,8 +3485,8 @@
       "base_p_star": 0.135,
       "base_exp_vorp": 3.668,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 3.284
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.328
     },
     {
       "player_name": "C.J. Wilcox",
@@ -3435,8 +3501,8 @@
       "base_p_star": 0.119,
       "base_exp_vorp": 3.237,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.718
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.588
     },
     {
       "player_name": "Josh Huestis",
@@ -3451,8 +3517,8 @@
       "base_p_star": 0.112,
       "base_exp_vorp": 3.043,
       "base_tier": "bust",
-      "comb_p_star": 0.093,
-      "comb_exp_vorp": 2.822
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.09
     },
     {
       "player_name": "Kyle Anderson",
@@ -3467,8 +3533,8 @@
       "base_p_star": 0.106,
       "base_exp_vorp": 2.867,
       "base_tier": "bust",
-      "comb_p_star": 0.132,
-      "comb_exp_vorp": 3.684
+      "comb_p_star": 0.071,
+      "comb_exp_vorp": 4.343
     },
     {
       "player_name": "K.J. McDaniels",
@@ -3483,8 +3549,8 @@
       "base_p_star": 0.098,
       "base_exp_vorp": 2.571,
       "base_tier": "bust",
-      "comb_p_star": 0.087,
-      "comb_exp_vorp": 2.535
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.058
     },
     {
       "player_name": "Joe Harris",
@@ -3499,8 +3565,8 @@
       "base_p_star": 0.095,
       "base_exp_vorp": 2.447,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.374
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.846
     },
     {
       "player_name": "Cleanthony Early",
@@ -3515,8 +3581,8 @@
       "base_p_star": 0.092,
       "base_exp_vorp": 2.339,
       "base_tier": "bust",
-      "comb_p_star": 0.069,
-      "comb_exp_vorp": 2.02
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.164
     },
     {
       "player_name": "Jarnell Stokes",
@@ -3531,8 +3597,8 @@
       "base_p_star": 0.09,
       "base_exp_vorp": 2.246,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.423
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.233
     },
     {
       "player_name": "Johnny O'Bryant",
@@ -3547,8 +3613,8 @@
       "base_p_star": 0.088,
       "base_exp_vorp": 2.166,
       "base_tier": "bust",
-      "comb_p_star": 0.084,
-      "comb_exp_vorp": 2.083
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.546
     },
     {
       "player_name": "Spencer Dinwiddie",
@@ -3563,8 +3629,8 @@
       "base_p_star": 0.087,
       "base_exp_vorp": 2.049,
       "base_tier": "bust",
-      "comb_p_star": 0.095,
-      "comb_exp_vorp": 2.575
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.853
     },
     {
       "player_name": "Jerami Grant",
@@ -3579,8 +3645,8 @@
       "base_p_star": 0.087,
       "base_exp_vorp": 2.014,
       "base_tier": "bust",
-      "comb_p_star": 0.092,
-      "comb_exp_vorp": 2.307
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.275
     },
     {
       "player_name": "Glenn Robinson III",
@@ -3595,8 +3661,8 @@
       "base_p_star": 0.087,
       "base_exp_vorp": 1.992,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.196
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 2.045
     },
     {
       "player_name": "Nick Johnson",
@@ -3611,8 +3677,8 @@
       "base_p_star": 0.09,
       "base_exp_vorp": 1.983,
       "base_tier": "bust",
-      "comb_p_star": 0.09,
-      "comb_exp_vorp": 2.141
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.93
     },
     {
       "player_name": "Markel Brown",
@@ -3627,8 +3693,8 @@
       "base_p_star": 0.092,
       "base_exp_vorp": 1.984,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.042
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.696
     },
     {
       "player_name": "Dwight Powell",
@@ -3643,8 +3709,8 @@
       "base_p_star": 0.092,
       "base_exp_vorp": 1.974,
       "base_tier": "bust",
-      "comb_p_star": 0.092,
-      "comb_exp_vorp": 1.937
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.464
     },
     {
       "player_name": "Jordan Clarkson",
@@ -3659,8 +3725,8 @@
       "base_p_star": 0.091,
       "base_exp_vorp": 1.947,
       "base_tier": "bust",
-      "comb_p_star": 0.08,
-      "comb_exp_vorp": 1.624
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 0.767
     },
     {
       "player_name": "Russ Smith",
@@ -3675,8 +3741,8 @@
       "base_p_star": 0.089,
       "base_exp_vorp": 1.902,
       "base_tier": "bust",
-      "comb_p_star": 0.067,
-      "comb_exp_vorp": 1.601
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 0.775
     },
     {
       "player_name": "Lamar Patterson",
@@ -3691,8 +3757,8 @@
       "base_p_star": 0.085,
       "base_exp_vorp": 1.836,
       "base_tier": "bust",
-      "comb_p_star": 0.082,
-      "comb_exp_vorp": 1.718
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.138
     },
     {
       "player_name": "Cameron Bairstow",
@@ -3707,8 +3773,8 @@
       "base_p_star": 0.08,
       "base_exp_vorp": 1.751,
       "base_tier": "bust",
-      "comb_p_star": 0.061,
-      "comb_exp_vorp": 1.426
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 0.568
     },
     {
       "player_name": "Semaj Christon",
@@ -3724,7 +3790,7 @@
       "base_exp_vorp": 1.185,
       "base_tier": "bust",
       "comb_p_star": 0.068,
-      "comb_exp_vorp": 1.442
+      "comb_exp_vorp": 1.372
     },
     {
       "player_name": "Devyn Marble",
@@ -3739,8 +3805,8 @@
       "base_p_star": 0.046,
       "base_exp_vorp": 1.135,
       "base_tier": "bust",
-      "comb_p_star": 0.062,
-      "comb_exp_vorp": 1.417
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 1.381
     },
     {
       "player_name": "Jordan McRae",
@@ -3755,8 +3821,8 @@
       "base_p_star": 0.046,
       "base_exp_vorp": 1.096,
       "base_tier": "bust",
-      "comb_p_star": 0.054,
-      "comb_exp_vorp": 1.148
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": 0.803
     },
     {
       "player_name": "Cory Jefferson",
@@ -3771,8 +3837,8 @@
       "base_p_star": 0.052,
       "base_exp_vorp": 1.133,
       "base_tier": "bust",
-      "comb_p_star": 0.042,
-      "comb_exp_vorp": 0.816
+      "comb_p_star": 0.068,
+      "comb_exp_vorp": -0.022
     },
     {
       "player_name": "Karl-Anthony Towns",
@@ -3787,8 +3853,8 @@
       "base_p_star": 0.484,
       "base_exp_vorp": 17.359,
       "base_tier": "superstar",
-      "comb_p_star": 0.426,
-      "comb_exp_vorp": 13.98
+      "comb_p_star": 0.423,
+      "comb_exp_vorp": 9.633
     },
     {
       "player_name": "D'Angelo Russell",
@@ -3803,8 +3869,8 @@
       "base_p_star": 0.47,
       "base_exp_vorp": 16.76,
       "base_tier": "all_star",
-      "comb_p_star": 0.48,
-      "comb_exp_vorp": 17.73
+      "comb_p_star": 0.667,
+      "comb_exp_vorp": 16.457
     },
     {
       "player_name": "Jahlil Okafor",
@@ -3819,8 +3885,8 @@
       "base_p_star": 0.454,
       "base_exp_vorp": 16.08,
       "base_tier": "all_star",
-      "comb_p_star": 0.425,
-      "comb_exp_vorp": 14.24
+      "comb_p_star": 0.423,
+      "comb_exp_vorp": 11.083
     },
     {
       "player_name": "Willie Cauley-Stein",
@@ -3835,8 +3901,8 @@
       "base_p_star": 0.397,
       "base_exp_vorp": 13.595,
       "base_tier": "all_star",
-      "comb_p_star": 0.29,
-      "comb_exp_vorp": 9.998
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 5.857
     },
     {
       "player_name": "Stanley Johnson",
@@ -3851,8 +3917,8 @@
       "base_p_star": 0.352,
       "base_exp_vorp": 11.697,
       "base_tier": "bust",
-      "comb_p_star": 0.392,
-      "comb_exp_vorp": 12.199
+      "comb_p_star": 0.423,
+      "comb_exp_vorp": 11.082
     },
     {
       "player_name": "Frank Kaminsky",
@@ -3867,8 +3933,8 @@
       "base_p_star": 0.329,
       "base_exp_vorp": 10.74,
       "base_tier": "bust",
-      "comb_p_star": 0.244,
-      "comb_exp_vorp": 8.07
+      "comb_p_star": 0.158,
+      "comb_exp_vorp": 4.845
     },
     {
       "player_name": "Justise Winslow",
@@ -3883,8 +3949,8 @@
       "base_p_star": 0.306,
       "base_exp_vorp": 9.811,
       "base_tier": "bust",
-      "comb_p_star": 0.337,
-      "comb_exp_vorp": 9.905
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 8.686
     },
     {
       "player_name": "Myles Turner",
@@ -3899,8 +3965,8 @@
       "base_p_star": 0.285,
       "base_exp_vorp": 8.936,
       "base_tier": "bust",
-      "comb_p_star": 0.292,
-      "comb_exp_vorp": 8.468
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 6.941
     },
     {
       "player_name": "Trey Lyles",
@@ -3915,8 +3981,8 @@
       "base_p_star": 0.265,
       "base_exp_vorp": 8.136,
       "base_tier": "bust",
-      "comb_p_star": 0.27,
-      "comb_exp_vorp": 7.418
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 5.794
     },
     {
       "player_name": "Devin Booker",
@@ -3931,8 +3997,8 @@
       "base_p_star": 0.248,
       "base_exp_vorp": 7.425,
       "base_tier": "bust",
-      "comb_p_star": 0.245,
-      "comb_exp_vorp": 6.763
+      "comb_p_star": 0.21,
+      "comb_exp_vorp": 5.245
     },
     {
       "player_name": "Cameron Payne",
@@ -3947,8 +4013,8 @@
       "base_p_star": 0.232,
       "base_exp_vorp": 6.812,
       "base_tier": "bust",
-      "comb_p_star": 0.302,
-      "comb_exp_vorp": 10.306
+      "comb_p_star": 0.259,
+      "comb_exp_vorp": 11.729
     },
     {
       "player_name": "Kelly Oubre Jr.",
@@ -3963,8 +4029,8 @@
       "base_p_star": 0.219,
       "base_exp_vorp": 6.294,
       "base_tier": "bust",
-      "comb_p_star": 0.223,
-      "comb_exp_vorp": 5.947
+      "comb_p_star": 0.158,
+      "comb_exp_vorp": 4.755
     },
     {
       "player_name": "Terry Rozier",
@@ -3979,8 +4045,8 @@
       "base_p_star": 0.209,
       "base_exp_vorp": 5.864,
       "base_tier": "bust",
-      "comb_p_star": 0.238,
-      "comb_exp_vorp": 6.632
+      "comb_p_star": 0.167,
+      "comb_exp_vorp": 6.255
     },
     {
       "player_name": "Rashad Vaughn",
@@ -3995,8 +4061,8 @@
       "base_p_star": 0.2,
       "base_exp_vorp": 5.509,
       "base_tier": "bust",
-      "comb_p_star": 0.23,
-      "comb_exp_vorp": 6.505
+      "comb_p_star": 0.158,
+      "comb_exp_vorp": 6.319
     },
     {
       "player_name": "Sam Dekker",
@@ -4011,8 +4077,8 @@
       "base_p_star": 0.192,
       "base_exp_vorp": 5.213,
       "base_tier": "bust",
-      "comb_p_star": 0.132,
-      "comb_exp_vorp": 4.357
+      "comb_p_star": 0.091,
+      "comb_exp_vorp": 2.914
     },
     {
       "player_name": "Jerian Grant",
@@ -4027,8 +4093,8 @@
       "base_p_star": 0.184,
       "base_exp_vorp": 4.959,
       "base_tier": "bust",
-      "comb_p_star": 0.217,
-      "comb_exp_vorp": 5.38
+      "comb_p_star": 0.158,
+      "comb_exp_vorp": 4.847
     },
     {
       "player_name": "Delon Wright",
@@ -4043,8 +4109,8 @@
       "base_p_star": 0.177,
       "base_exp_vorp": 4.733,
       "base_tier": "bust",
-      "comb_p_star": 0.215,
-      "comb_exp_vorp": 5.216
+      "comb_p_star": 0.158,
+      "comb_exp_vorp": 4.749
     },
     {
       "player_name": "Justin Anderson",
@@ -4059,8 +4125,8 @@
       "base_p_star": 0.17,
       "base_exp_vorp": 4.521,
       "base_tier": "bust",
-      "comb_p_star": 0.104,
-      "comb_exp_vorp": 3.41
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.858
     },
     {
       "player_name": "Bobby Portis",
@@ -4075,8 +4141,8 @@
       "base_p_star": 0.162,
       "base_exp_vorp": 4.315,
       "base_tier": "bust",
-      "comb_p_star": 0.148,
-      "comb_exp_vorp": 4.608
+      "comb_p_star": 0.091,
+      "comb_exp_vorp": 4.048
     },
     {
       "player_name": "Rondae Hollis-Jefferson",
@@ -4091,8 +4157,8 @@
       "base_p_star": 0.154,
       "base_exp_vorp": 4.111,
       "base_tier": "bust",
-      "comb_p_star": 0.144,
-      "comb_exp_vorp": 4.456
+      "comb_p_star": 0.091,
+      "comb_exp_vorp": 3.951
     },
     {
       "player_name": "Tyus Jones",
@@ -4107,8 +4173,8 @@
       "base_p_star": 0.146,
       "base_exp_vorp": 3.907,
       "base_tier": "bust",
-      "comb_p_star": 0.181,
-      "comb_exp_vorp": 5.204
+      "comb_p_star": 0.091,
+      "comb_exp_vorp": 5.379
     },
     {
       "player_name": "Jarell Martin",
@@ -4123,8 +4189,8 @@
       "base_p_star": 0.138,
       "base_exp_vorp": 3.705,
       "base_tier": "bust",
-      "comb_p_star": 0.117,
-      "comb_exp_vorp": 3.352
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.403
     },
     {
       "player_name": "Larry Nance Jr.",
@@ -4139,8 +4205,8 @@
       "base_p_star": 0.123,
       "base_exp_vorp": 3.316,
       "base_tier": "bust",
-      "comb_p_star": 0.117,
-      "comb_exp_vorp": 3.258
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.55
     },
     {
       "player_name": "R.J. Hunter",
@@ -4155,8 +4221,8 @@
       "base_p_star": 0.117,
       "base_exp_vorp": 3.136,
       "base_tier": "bust",
-      "comb_p_star": 0.122,
-      "comb_exp_vorp": 3.218
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.624
     },
     {
       "player_name": "Chris McCullough",
@@ -4171,8 +4237,8 @@
       "base_p_star": 0.111,
       "base_exp_vorp": 2.969,
       "base_tier": "bust",
-      "comb_p_star": 0.116,
-      "comb_exp_vorp": 3.285
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.869
     },
     {
       "player_name": "Kevon Looney",
@@ -4187,8 +4253,8 @@
       "base_p_star": 0.106,
       "base_exp_vorp": 2.817,
       "base_tier": "bust",
-      "comb_p_star": 0.115,
-      "comb_exp_vorp": 3.559
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 3.453
     },
     {
       "player_name": "Montrezl Harrell",
@@ -4203,8 +4269,8 @@
       "base_p_star": 0.098,
       "base_exp_vorp": 2.558,
       "base_tier": "bust",
-      "comb_p_star": 0.096,
-      "comb_exp_vorp": 2.779
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.337
     },
     {
       "player_name": "Jordan Mickey",
@@ -4219,8 +4285,8 @@
       "base_p_star": 0.094,
       "base_exp_vorp": 2.45,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.375
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.738
     },
     {
       "player_name": "Anthony Brown",
@@ -4235,8 +4301,8 @@
       "base_p_star": 0.091,
       "base_exp_vorp": 2.356,
       "base_tier": "bust",
-      "comb_p_star": 0.082,
-      "comb_exp_vorp": 2.428
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.901
     },
     {
       "player_name": "Rakeem Christmas",
@@ -4251,8 +4317,8 @@
       "base_p_star": 0.085,
       "base_exp_vorp": 2.205,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.303
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.808
     },
     {
       "player_name": "Richaun Holmes",
@@ -4267,8 +4333,8 @@
       "base_p_star": 0.083,
       "base_exp_vorp": 2.15,
       "base_tier": "bust",
-      "comb_p_star": 0.063,
-      "comb_exp_vorp": 1.825
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.043
     },
     {
       "player_name": "Darrun Hilliard",
@@ -4283,8 +4349,8 @@
       "base_p_star": 0.081,
       "base_exp_vorp": 2.107,
       "base_tier": "bust",
-      "comb_p_star": 0.092,
-      "comb_exp_vorp": 2.554
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.31
     },
     {
       "player_name": "Josh Richardson",
@@ -4299,8 +4365,8 @@
       "base_p_star": 0.081,
       "base_exp_vorp": 2.06,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.38
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 2.054
     },
     {
       "player_name": "Pat Connaughton",
@@ -4315,8 +4381,8 @@
       "base_p_star": 0.081,
       "base_exp_vorp": 2.051,
       "base_tier": "bust",
-      "comb_p_star": 0.078,
-      "comb_exp_vorp": 2.125
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.63
     },
     {
       "player_name": "Joe Young",
@@ -4331,8 +4397,8 @@
       "base_p_star": 0.083,
       "base_exp_vorp": 2.043,
       "base_tier": "bust",
-      "comb_p_star": 0.056,
-      "comb_exp_vorp": 1.521
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 0.613
     },
     {
       "player_name": "Andrew Harrison",
@@ -4347,8 +4413,8 @@
       "base_p_star": 0.083,
       "base_exp_vorp": 2.033,
       "base_tier": "bust",
-      "comb_p_star": 0.082,
-      "comb_exp_vorp": 1.966
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.375
     },
     {
       "player_name": "Norman Powell",
@@ -4363,8 +4429,8 @@
       "base_p_star": 0.082,
       "base_exp_vorp": 1.971,
       "base_tier": "bust",
-      "comb_p_star": 0.079,
-      "comb_exp_vorp": 2.086
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 1.625
     },
     {
       "player_name": "Dakari Johnson",
@@ -4379,8 +4445,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 1.832,
       "base_tier": "bust",
-      "comb_p_star": 0.077,
-      "comb_exp_vorp": 1.616
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 0.94
     },
     {
       "player_name": "Branden Dawson",
@@ -4395,8 +4461,8 @@
       "base_p_star": 0.042,
       "base_exp_vorp": 1.021,
       "base_tier": "bust",
-      "comb_p_star": 0.051,
-      "comb_exp_vorp": 1.26
+      "comb_p_star": 0.054,
+      "comb_exp_vorp": 0.977
     },
     {
       "player_name": "Ben Simmons",
@@ -4411,8 +4477,8 @@
       "base_p_star": 0.483,
       "base_exp_vorp": 17.023,
       "base_tier": "all_star",
-      "comb_p_star": 0.475,
-      "comb_exp_vorp": 16.761
+      "comb_p_star": 0.75,
+      "comb_exp_vorp": 14.314
     },
     {
       "player_name": "Brandon Ingram",
@@ -4427,8 +4493,8 @@
       "base_p_star": 0.467,
       "base_exp_vorp": 16.392,
       "base_tier": "all_star",
-      "comb_p_star": 0.427,
-      "comb_exp_vorp": 14.246
+      "comb_p_star": 0.414,
+      "comb_exp_vorp": 11.141
     },
     {
       "player_name": "Jaylen Brown",
@@ -4443,8 +4509,8 @@
       "base_p_star": 0.45,
       "base_exp_vorp": 15.685,
       "base_tier": "all_star",
-      "comb_p_star": 0.413,
-      "comb_exp_vorp": 12.993
+      "comb_p_star": 0.414,
+      "comb_exp_vorp": 9.762
     },
     {
       "player_name": "Kris Dunn",
@@ -4459,8 +4525,8 @@
       "base_p_star": 0.412,
       "base_exp_vorp": 14.064,
       "base_tier": "all_star",
-      "comb_p_star": 0.431,
-      "comb_exp_vorp": 14.532
+      "comb_p_star": 0.414,
+      "comb_exp_vorp": 12.739
     },
     {
       "player_name": "Buddy Hield",
@@ -4475,8 +4541,8 @@
       "base_p_star": 0.391,
       "base_exp_vorp": 13.171,
       "base_tier": "all_star",
-      "comb_p_star": 0.31,
-      "comb_exp_vorp": 9.286
+      "comb_p_star": 0.289,
+      "comb_exp_vorp": 5.903
     },
     {
       "player_name": "Jamal Murray",
@@ -4491,8 +4557,8 @@
       "base_p_star": 0.369,
       "base_exp_vorp": 12.245,
       "base_tier": "bust",
-      "comb_p_star": 0.358,
-      "comb_exp_vorp": 11.472
+      "comb_p_star": 0.289,
+      "comb_exp_vorp": 9.422
     },
     {
       "player_name": "Marquese Chriss",
@@ -4507,8 +4573,8 @@
       "base_p_star": 0.347,
       "base_exp_vorp": 11.307,
       "base_tier": "bust",
-      "comb_p_star": 0.342,
-      "comb_exp_vorp": 10.004
+      "comb_p_star": 0.289,
+      "comb_exp_vorp": 7.862
     },
     {
       "player_name": "Jakob Poeltl",
@@ -4523,8 +4589,8 @@
       "base_p_star": 0.326,
       "base_exp_vorp": 10.382,
       "base_tier": "bust",
-      "comb_p_star": 0.299,
-      "comb_exp_vorp": 9.791
+      "comb_p_star": 0.289,
+      "comb_exp_vorp": 8.044
     },
     {
       "player_name": "Domantas Sabonis",
@@ -4539,8 +4605,8 @@
       "base_p_star": 0.285,
       "base_exp_vorp": 8.665,
       "base_tier": "bust",
-      "comb_p_star": 0.295,
-      "comb_exp_vorp": 8.832
+      "comb_p_star": 0.289,
+      "comb_exp_vorp": 7.596
     },
     {
       "player_name": "Taurean Prince",
@@ -4555,8 +4621,8 @@
       "base_p_star": 0.267,
       "base_exp_vorp": 7.911,
       "base_tier": "bust",
-      "comb_p_star": 0.206,
-      "comb_exp_vorp": 5.905
+      "comb_p_star": 0.154,
+      "comb_exp_vorp": 3.913
     },
     {
       "player_name": "Denzel Valentine",
@@ -4571,8 +4637,8 @@
       "base_p_star": 0.237,
       "base_exp_vorp": 6.667,
       "base_tier": "bust",
-      "comb_p_star": 0.228,
-      "comb_exp_vorp": 6.183
+      "comb_p_star": 0.167,
+      "comb_exp_vorp": 4.941
     },
     {
       "player_name": "Wade Baldwin",
@@ -4587,8 +4653,8 @@
       "base_p_star": 0.206,
       "base_exp_vorp": 5.435,
       "base_tier": "bust",
-      "comb_p_star": 0.231,
-      "comb_exp_vorp": 6.917
+      "comb_p_star": 0.167,
+      "comb_exp_vorp": 6.598
     },
     {
       "player_name": "Henry Ellenson",
@@ -4603,8 +4669,8 @@
       "base_p_star": 0.197,
       "base_exp_vorp": 5.152,
       "base_tier": "bust",
-      "comb_p_star": 0.227,
-      "comb_exp_vorp": 6.576
+      "comb_p_star": 0.167,
+      "comb_exp_vorp": 6.268
     },
     {
       "player_name": "Malik Beasley",
@@ -4619,8 +4685,8 @@
       "base_p_star": 0.19,
       "base_exp_vorp": 4.909,
       "base_tier": "bust",
-      "comb_p_star": 0.178,
-      "comb_exp_vorp": 4.805
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 3.93
     },
     {
       "player_name": "Caris LeVert",
@@ -4635,8 +4701,8 @@
       "base_p_star": 0.182,
       "base_exp_vorp": 4.693,
       "base_tier": "bust",
-      "comb_p_star": 0.164,
-      "comb_exp_vorp": 4.297
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 3.335
     },
     {
       "player_name": "DeAndre' Bembry",
@@ -4651,8 +4717,8 @@
       "base_p_star": 0.175,
       "base_exp_vorp": 4.493,
       "base_tier": "bust",
-      "comb_p_star": 0.173,
-      "comb_exp_vorp": 4.797
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 4.133
     },
     {
       "player_name": "Malachi Richardson",
@@ -4667,8 +4733,8 @@
       "base_p_star": 0.167,
       "base_exp_vorp": 4.301,
       "base_tier": "bust",
-      "comb_p_star": 0.154,
-      "comb_exp_vorp": 4.151
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 3.334
     },
     {
       "player_name": "Brice Johnson",
@@ -4683,8 +4749,8 @@
       "base_p_star": 0.144,
       "base_exp_vorp": 3.734,
       "base_tier": "bust",
-      "comb_p_star": 0.134,
-      "comb_exp_vorp": 3.667
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 2.954
     },
     {
       "player_name": "Pascal Siakam",
@@ -4699,8 +4765,8 @@
       "base_p_star": 0.13,
       "base_exp_vorp": 3.368,
       "base_tier": "bust",
-      "comb_p_star": 0.138,
-      "comb_exp_vorp": 3.784
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 3.305
     },
     {
       "player_name": "Skal Labissi\u00e8re",
@@ -4715,8 +4781,8 @@
       "base_p_star": 0.124,
       "base_exp_vorp": 3.196,
       "base_tier": "bust",
-      "comb_p_star": 0.121,
-      "comb_exp_vorp": 3.148
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 2.509
     },
     {
       "player_name": "Dejounte Murray",
@@ -4731,8 +4797,8 @@
       "base_p_star": 0.119,
       "base_exp_vorp": 3.034,
       "base_tier": "bust",
-      "comb_p_star": 0.148,
-      "comb_exp_vorp": 3.967
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 3.732
     },
     {
       "player_name": "Damian Jones",
@@ -4747,8 +4813,8 @@
       "base_p_star": 0.114,
       "base_exp_vorp": 2.884,
       "base_tier": "bust",
-      "comb_p_star": 0.091,
-      "comb_exp_vorp": 2.542
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.827
     },
     {
       "player_name": "Deyonta Davis",
@@ -4763,8 +4829,8 @@
       "base_p_star": 0.109,
       "base_exp_vorp": 2.747,
       "base_tier": "bust",
-      "comb_p_star": 0.106,
-      "comb_exp_vorp": 2.723
+      "comb_p_star": 0.077,
+      "comb_exp_vorp": 2.15
     },
     {
       "player_name": "Cheick Diallo",
@@ -4779,8 +4845,8 @@
       "base_p_star": 0.099,
       "base_exp_vorp": 2.509,
       "base_tier": "bust",
-      "comb_p_star": 0.081,
-      "comb_exp_vorp": 2.205
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.551
     },
     {
       "player_name": "Tyler Ulis",
@@ -4795,8 +4861,8 @@
       "base_p_star": 0.095,
       "base_exp_vorp": 2.41,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 2.955
+      "comb_p_star": 0.077,
+      "comb_exp_vorp": 2.646
     },
     {
       "player_name": "Malcolm Brogdon",
@@ -4811,8 +4877,8 @@
       "base_p_star": 0.086,
       "base_exp_vorp": 2.25,
       "base_tier": "bust",
-      "comb_p_star": 0.072,
-      "comb_exp_vorp": 2.225
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.713
     },
     {
       "player_name": "Chinanu Onuaku",
@@ -4827,8 +4893,8 @@
       "base_p_star": 0.083,
       "base_exp_vorp": 2.191,
       "base_tier": "bust",
-      "comb_p_star": 0.076,
-      "comb_exp_vorp": 2.096
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.564
     },
     {
       "player_name": "Patrick McCaw",
@@ -4843,8 +4909,8 @@
       "base_p_star": 0.08,
       "base_exp_vorp": 2.147,
       "base_tier": "bust",
-      "comb_p_star": 0.12,
-      "comb_exp_vorp": 3.273
+      "comb_p_star": 0.089,
+      "comb_exp_vorp": 3.225
     },
     {
       "player_name": "Diamond Stone",
@@ -4859,8 +4925,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 2.097,
       "base_tier": "bust",
-      "comb_p_star": 0.073,
-      "comb_exp_vorp": 1.949
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.408
     },
     {
       "player_name": "Stephen Zimmerman",
@@ -4875,8 +4941,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 2.088,
       "base_tier": "bust",
-      "comb_p_star": 0.084,
-      "comb_exp_vorp": 2.194
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.754
     },
     {
       "player_name": "Isaiah Whitehead",
@@ -4891,8 +4957,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 2.084,
       "base_tier": "bust",
-      "comb_p_star": 0.077,
-      "comb_exp_vorp": 1.992
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.475
     },
     {
       "player_name": "Demetrius Jackson",
@@ -4907,8 +4973,8 @@
       "base_p_star": 0.078,
       "base_exp_vorp": 2.049,
       "base_tier": "bust",
-      "comb_p_star": 0.068,
-      "comb_exp_vorp": 1.775
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.19
     },
     {
       "player_name": "A.J. Hammons",
@@ -4923,8 +4989,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 2.01,
       "base_tier": "bust",
-      "comb_p_star": 0.054,
-      "comb_exp_vorp": 1.355
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 0.627
     },
     {
       "player_name": "Jake Layman",
@@ -4939,8 +5005,8 @@
       "base_p_star": 0.076,
       "base_exp_vorp": 1.951,
       "base_tier": "bust",
-      "comb_p_star": 0.075,
-      "comb_exp_vorp": 2.075
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.659
     },
     {
       "player_name": "Michael Gbinije",
@@ -4955,8 +5021,8 @@
       "base_p_star": 0.069,
       "base_exp_vorp": 1.77,
       "base_tier": "bust",
-      "comb_p_star": 0.056,
-      "comb_exp_vorp": 1.585
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.071
     },
     {
       "player_name": "Georges Niang",
@@ -4971,8 +5037,8 @@
       "base_p_star": 0.065,
       "base_exp_vorp": 1.654,
       "base_tier": "bust",
-      "comb_p_star": 0.06,
-      "comb_exp_vorp": 1.627
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.189
     },
     {
       "player_name": "Ben Bentil",
@@ -4987,8 +5053,8 @@
       "base_p_star": 0.06,
       "base_exp_vorp": 1.529,
       "base_tier": "bust",
-      "comb_p_star": 0.046,
-      "comb_exp_vorp": 1.414
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 0.958
     },
     {
       "player_name": "Joel Bolomboy",
@@ -5003,8 +5069,8 @@
       "base_p_star": 0.055,
       "base_exp_vorp": 1.403,
       "base_tier": "bust",
-      "comb_p_star": 0.058,
-      "comb_exp_vorp": 1.701
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.422
     },
     {
       "player_name": "Kay Felder",
@@ -5019,8 +5085,8 @@
       "base_p_star": 0.046,
       "base_exp_vorp": 1.175,
       "base_tier": "bust",
-      "comb_p_star": 0.056,
-      "comb_exp_vorp": 1.487
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.242
     },
     {
       "player_name": "Marcus Paige",
@@ -5035,8 +5101,8 @@
       "base_p_star": 0.042,
       "base_exp_vorp": 1.085,
       "base_tier": "bust",
-      "comb_p_star": 0.05,
-      "comb_exp_vorp": 1.293
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.017
     },
     {
       "player_name": "Daniel Hamilton",
@@ -5051,8 +5117,8 @@
       "base_p_star": 0.04,
       "base_exp_vorp": 1.016,
       "base_tier": "bust",
-      "comb_p_star": 0.051,
-      "comb_exp_vorp": 1.458
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.283
     },
     {
       "player_name": "Abdel Nader",
@@ -5067,8 +5133,8 @@
       "base_p_star": 0.04,
       "base_exp_vorp": 0.942,
       "base_tier": "bust",
-      "comb_p_star": 0.04,
-      "comb_exp_vorp": 1.071
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 0.783
     },
     {
       "player_name": "Tyrone Wallace",
@@ -5083,8 +5149,8 @@
       "base_p_star": 0.044,
       "base_exp_vorp": 0.945,
       "base_tier": "bust",
-      "comb_p_star": 0.056,
-      "comb_exp_vorp": 1.273
+      "comb_p_star": 0.053,
+      "comb_exp_vorp": 1.061
     },
     {
       "player_name": "Markelle Fultz",
@@ -5099,8 +5165,8 @@
       "base_p_star": 0.504,
       "base_exp_vorp": 16.594,
       "base_tier": "all_star",
-      "comb_p_star": 0.51,
-      "comb_exp_vorp": 16.697
+      "comb_p_star": 1.0,
+      "comb_exp_vorp": 14.498
     },
     {
       "player_name": "Lonzo Ball",
@@ -5115,8 +5181,8 @@
       "base_p_star": 0.488,
       "base_exp_vorp": 15.999,
       "base_tier": "all_star",
-      "comb_p_star": 0.484,
-      "comb_exp_vorp": 16.05
+      "comb_p_star": 0.8,
+      "comb_exp_vorp": 13.901
     },
     {
       "player_name": "Jayson Tatum",
@@ -5131,8 +5197,8 @@
       "base_p_star": 0.47,
       "base_exp_vorp": 15.334,
       "base_tier": "all_star",
-      "comb_p_star": 0.452,
-      "comb_exp_vorp": 14.317
+      "comb_p_star": 0.429,
+      "comb_exp_vorp": 11.89
     },
     {
       "player_name": "Josh Jackson",
@@ -5147,8 +5213,8 @@
       "base_p_star": 0.451,
       "base_exp_vorp": 14.601,
       "base_tier": "all_star",
-      "comb_p_star": 0.44,
-      "comb_exp_vorp": 13.5
+      "comb_p_star": 0.429,
+      "comb_exp_vorp": 11.13
     },
     {
       "player_name": "De'Aaron Fox",
@@ -5163,8 +5229,8 @@
       "base_p_star": 0.431,
       "base_exp_vorp": 13.807,
       "base_tier": "all_star",
-      "comb_p_star": 0.448,
-      "comb_exp_vorp": 14.053
+      "comb_p_star": 0.429,
+      "comb_exp_vorp": 12.223
     },
     {
       "player_name": "Jonathan Isaac",
@@ -5179,8 +5245,8 @@
       "base_p_star": 0.409,
       "base_exp_vorp": 12.963,
       "base_tier": "all_star",
-      "comb_p_star": 0.375,
-      "comb_exp_vorp": 11.332
+      "comb_p_star": 0.429,
+      "comb_exp_vorp": 8.972
     },
     {
       "player_name": "Lauri Markkanen",
@@ -5196,7 +5262,7 @@
       "base_exp_vorp": 12.084,
       "base_tier": "all_star",
       "comb_p_star": 0.35,
-      "comb_exp_vorp": 10.692
+      "comb_exp_vorp": 8.514
     },
     {
       "player_name": "Dennis Smith Jr.",
@@ -5211,8 +5277,8 @@
       "base_p_star": 0.34,
       "base_exp_vorp": 10.3,
       "base_tier": "bust",
-      "comb_p_star": 0.396,
-      "comb_exp_vorp": 13.35
+      "comb_p_star": 0.429,
+      "comb_exp_vorp": 12.858
     },
     {
       "player_name": "Zach Collins",
@@ -5227,8 +5293,8 @@
       "base_p_star": 0.317,
       "base_exp_vorp": 9.438,
       "base_tier": "bust",
-      "comb_p_star": 0.303,
-      "comb_exp_vorp": 8.519
+      "comb_p_star": 0.35,
+      "comb_exp_vorp": 6.803
     },
     {
       "player_name": "Malik Monk",
@@ -5243,8 +5309,8 @@
       "base_p_star": 0.295,
       "base_exp_vorp": 8.623,
       "base_tier": "bust",
-      "comb_p_star": 0.297,
-      "comb_exp_vorp": 8.261
+      "comb_p_star": 0.35,
+      "comb_exp_vorp": 6.825
     },
     {
       "player_name": "Luke Kennard",
@@ -5259,8 +5325,8 @@
       "base_p_star": 0.275,
       "base_exp_vorp": 7.873,
       "base_tier": "bust",
-      "comb_p_star": 0.219,
-      "comb_exp_vorp": 6.236
+      "comb_p_star": 0.133,
+      "comb_exp_vorp": 4.461
     },
     {
       "player_name": "Donovan Mitchell",
@@ -5275,8 +5341,8 @@
       "base_p_star": 0.256,
       "base_exp_vorp": 7.2,
       "base_tier": "bust",
-      "comb_p_star": 0.306,
-      "comb_exp_vorp": 8.3
+      "comb_p_star": 0.35,
+      "comb_exp_vorp": 7.514
     },
     {
       "player_name": "Bam Adebayo",
@@ -5291,8 +5357,8 @@
       "base_p_star": 0.239,
       "base_exp_vorp": 6.611,
       "base_tier": "bust",
-      "comb_p_star": 0.248,
-      "comb_exp_vorp": 7.305
+      "comb_p_star": 0.35,
+      "comb_exp_vorp": 6.453
     },
     {
       "player_name": "Justin Jackson",
@@ -5307,8 +5373,8 @@
       "base_p_star": 0.225,
       "base_exp_vorp": 6.107,
       "base_tier": "bust",
-      "comb_p_star": 0.145,
-      "comb_exp_vorp": 4.254
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 2.609
     },
     {
       "player_name": "Justin Patton",
@@ -5323,8 +5389,8 @@
       "base_p_star": 0.212,
       "base_exp_vorp": 5.685,
       "base_tier": "bust",
-      "comb_p_star": 0.201,
-      "comb_exp_vorp": 5.942
+      "comb_p_star": 0.133,
+      "comb_exp_vorp": 5.05
     },
     {
       "player_name": "D.J. Wilson",
@@ -5339,8 +5405,8 @@
       "base_p_star": 0.202,
       "base_exp_vorp": 5.334,
       "base_tier": "bust",
-      "comb_p_star": 0.123,
-      "comb_exp_vorp": 4.017
+      "comb_p_star": 0.1,
+      "comb_exp_vorp": 2.64
     },
     {
       "player_name": "T.J. Leaf",
@@ -5355,8 +5421,8 @@
       "base_p_star": 0.193,
       "base_exp_vorp": 5.044,
       "base_tier": "bust",
-      "comb_p_star": 0.177,
-      "comb_exp_vorp": 5.272
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 4.444
     },
     {
       "player_name": "John Collins",
@@ -5371,8 +5437,8 @@
       "base_p_star": 0.185,
       "base_exp_vorp": 4.801,
       "base_tier": "bust",
-      "comb_p_star": 0.196,
-      "comb_exp_vorp": 5.501
+      "comb_p_star": 0.133,
+      "comb_exp_vorp": 4.858
     },
     {
       "player_name": "Harry Giles",
@@ -5387,8 +5453,8 @@
       "base_p_star": 0.178,
       "base_exp_vorp": 4.594,
       "base_tier": "bust",
-      "comb_p_star": 0.166,
-      "comb_exp_vorp": 4.397
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 3.479
     },
     {
       "player_name": "Jarrett Allen",
@@ -5403,8 +5469,8 @@
       "base_p_star": 0.165,
       "base_exp_vorp": 4.24,
       "base_tier": "bust",
-      "comb_p_star": 0.161,
-      "comb_exp_vorp": 4.42
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 3.668
     },
     {
       "player_name": "OG Anunoby",
@@ -5419,8 +5485,8 @@
       "base_p_star": 0.159,
       "base_exp_vorp": 4.077,
       "base_tier": "bust",
-      "comb_p_star": 0.133,
-      "comb_exp_vorp": 4.039
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 3.233
     },
     {
       "player_name": "Tyler Lydon",
@@ -5435,8 +5501,8 @@
       "base_p_star": 0.153,
       "base_exp_vorp": 3.917,
       "base_tier": "bust",
-      "comb_p_star": 0.132,
-      "comb_exp_vorp": 3.759
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 2.931
     },
     {
       "player_name": "Caleb Swanigan",
@@ -5451,8 +5517,8 @@
       "base_p_star": 0.142,
       "base_exp_vorp": 3.596,
       "base_tier": "bust",
-      "comb_p_star": 0.156,
-      "comb_exp_vorp": 3.748
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 3.061
     },
     {
       "player_name": "Kyle Kuzma",
@@ -5467,8 +5533,8 @@
       "base_p_star": 0.138,
       "base_exp_vorp": 3.435,
       "base_tier": "bust",
-      "comb_p_star": 0.13,
-      "comb_exp_vorp": 3.318
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 2.559
     },
     {
       "player_name": "Tony Bradley",
@@ -5483,8 +5549,8 @@
       "base_p_star": 0.133,
       "base_exp_vorp": 3.275,
       "base_tier": "bust",
-      "comb_p_star": 0.119,
-      "comb_exp_vorp": 2.987
+      "comb_p_star": 0.1,
+      "comb_exp_vorp": 2.191
     },
     {
       "player_name": "Derrick White",
@@ -5499,8 +5565,8 @@
       "base_p_star": 0.128,
       "base_exp_vorp": 3.117,
       "base_tier": "bust",
-      "comb_p_star": 0.117,
-      "comb_exp_vorp": 3.059
+      "comb_p_star": 0.1,
+      "comb_exp_vorp": 2.357
     },
     {
       "player_name": "Josh Hart",
@@ -5515,8 +5581,8 @@
       "base_p_star": 0.123,
       "base_exp_vorp": 2.964,
       "base_tier": "bust",
-      "comb_p_star": 0.137,
-      "comb_exp_vorp": 3.532
+      "comb_p_star": 0.116,
+      "comb_exp_vorp": 3.057
     },
     {
       "player_name": "Frank Jackson",
@@ -5531,8 +5597,8 @@
       "base_p_star": 0.118,
       "base_exp_vorp": 2.817,
       "base_tier": "bust",
-      "comb_p_star": 0.098,
-      "comb_exp_vorp": 2.959
+      "comb_p_star": 0.065,
+      "comb_exp_vorp": 2.358
     },
     {
       "player_name": "Davon Reed",
@@ -5547,8 +5613,8 @@
       "base_p_star": 0.113,
       "base_exp_vorp": 2.679,
       "base_tier": "bust",
-      "comb_p_star": 0.09,
-      "comb_exp_vorp": 2.839
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 2.261
     },
     {
       "player_name": "Wes Iwundu",
@@ -5563,8 +5629,8 @@
       "base_p_star": 0.108,
       "base_exp_vorp": 2.55,
       "base_tier": "bust",
-      "comb_p_star": 0.091,
-      "comb_exp_vorp": 2.575
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.966
     },
     {
       "player_name": "Frank Mason III",
@@ -5579,8 +5645,8 @@
       "base_p_star": 0.103,
       "base_exp_vorp": 2.432,
       "base_tier": "bust",
-      "comb_p_star": 0.089,
-      "comb_exp_vorp": 2.416
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.807
     },
     {
       "player_name": "Ivan Rabb",
@@ -5595,8 +5661,8 @@
       "base_p_star": 0.097,
       "base_exp_vorp": 2.327,
       "base_tier": "bust",
-      "comb_p_star": 0.094,
-      "comb_exp_vorp": 2.463
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.917
     },
     {
       "player_name": "Jonah Bolden",
@@ -5611,8 +5677,8 @@
       "base_p_star": 0.093,
       "base_exp_vorp": 2.234,
       "base_tier": "bust",
-      "comb_p_star": 0.084,
-      "comb_exp_vorp": 2.167
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.564
     },
     {
       "player_name": "Semi Ojeleye",
@@ -5627,8 +5693,8 @@
       "base_p_star": 0.088,
       "base_exp_vorp": 2.156,
       "base_tier": "bust",
-      "comb_p_star": 0.084,
-      "comb_exp_vorp": 2.128
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.547
     },
     {
       "player_name": "Jordan Bell",
@@ -5643,8 +5709,8 @@
       "base_p_star": 0.084,
       "base_exp_vorp": 2.092,
       "base_tier": "bust",
-      "comb_p_star": 0.095,
-      "comb_exp_vorp": 2.346
+      "comb_p_star": 0.063,
+      "comb_exp_vorp": 1.866
     },
     {
       "player_name": "Jawun Evans",
@@ -5659,8 +5725,8 @@
       "base_p_star": 0.081,
       "base_exp_vorp": 2.042,
       "base_tier": "bust",
-      "comb_p_star": 0.082,
-      "comb_exp_vorp": 2.121
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.589
     },
     {
       "player_name": "Dwayne Bacon",
@@ -5675,8 +5741,8 @@
       "base_p_star": 0.079,
       "base_exp_vorp": 2.005,
       "base_tier": "bust",
-      "comb_p_star": 0.071,
-      "comb_exp_vorp": 2.053
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.514
     },
     {
       "player_name": "Tyler Dorsey",
@@ -5691,8 +5757,8 @@
       "base_p_star": 0.077,
       "base_exp_vorp": 1.978,
       "base_tier": "bust",
-      "comb_p_star": 0.071,
-      "comb_exp_vorp": 2.039
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.508
     },
     {
       "player_name": "Thomas Bryant",
@@ -5707,8 +5773,8 @@
       "base_p_star": 0.076,
       "base_exp_vorp": 1.957,
       "base_tier": "bust",
-      "comb_p_star": 0.059,
-      "comb_exp_vorp": 1.829
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 1.237
     },
     {
       "player_name": "Damyean Dotson",
@@ -5723,8 +5789,8 @@
       "base_p_star": 0.075,
       "base_exp_vorp": 1.914,
       "base_tier": "bust",
-      "comb_p_star": 0.074,
-      "comb_exp_vorp": 1.807
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.228
     },
     {
       "player_name": "Dillon Brooks",
@@ -5739,8 +5805,8 @@
       "base_p_star": 0.074,
       "base_exp_vorp": 1.881,
       "base_tier": "bust",
-      "comb_p_star": 0.068,
-      "comb_exp_vorp": 1.791
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.22
     },
     {
       "player_name": "Sterling Brown",
@@ -5755,8 +5821,8 @@
       "base_p_star": 0.072,
       "base_exp_vorp": 1.833,
       "base_tier": "bust",
-      "comb_p_star": 0.079,
-      "comb_exp_vorp": 2.217
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.81
     },
     {
       "player_name": "Ike Anigbogu",
@@ -5771,8 +5837,8 @@
       "base_p_star": 0.07,
       "base_exp_vorp": 1.768,
       "base_tier": "bust",
-      "comb_p_star": 0.064,
-      "comb_exp_vorp": 1.584
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 0.996
     },
     {
       "player_name": "Sindarius Thornwell",
@@ -5787,8 +5853,8 @@
       "base_p_star": 0.067,
       "base_exp_vorp": 1.685,
       "base_tier": "bust",
-      "comb_p_star": 0.071,
-      "comb_exp_vorp": 2.042
+      "comb_p_star": 0.058,
+      "comb_exp_vorp": 1.644
     },
     {
       "player_name": "Monte Morris",
@@ -5803,8 +5869,8 @@
       "base_p_star": 0.053,
       "base_exp_vorp": 1.351,
       "base_tier": "bust",
-      "comb_p_star": 0.057,
-      "comb_exp_vorp": 1.426
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 0.971
     },
     {
       "player_name": "Edmond Sumner",
@@ -5819,8 +5885,8 @@
       "base_p_star": 0.049,
       "base_exp_vorp": 1.231,
       "base_tier": "bust",
-      "comb_p_star": 0.055,
-      "comb_exp_vorp": 1.365
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 0.945
     },
     {
       "player_name": "Kadeem Allen",
@@ -5835,8 +5901,8 @@
       "base_p_star": 0.044,
       "base_exp_vorp": 1.116,
       "base_tier": "bust",
-      "comb_p_star": 0.047,
-      "comb_exp_vorp": 1.208
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 0.787
     },
     {
       "player_name": "Alec Peters",
@@ -5851,8 +5917,8 @@
       "base_p_star": 0.04,
       "base_exp_vorp": 1.014,
       "base_tier": "bust",
-      "comb_p_star": 0.038,
-      "comb_exp_vorp": 1.157
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 0.764
     },
     {
       "player_name": "Nigel Williams-Goss",
@@ -5867,8 +5933,8 @@
       "base_p_star": 0.037,
       "base_exp_vorp": 0.927,
       "base_tier": "bust",
-      "comb_p_star": 0.05,
-      "comb_exp_vorp": 1.363
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 1.079
     },
     {
       "player_name": "Jabari Bird",
@@ -5883,8 +5949,8 @@
       "base_p_star": 0.035,
       "base_exp_vorp": 0.858,
       "base_tier": "bust",
-      "comb_p_star": 0.031,
-      "comb_exp_vorp": 0.829
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 0.397
     },
     {
       "player_name": "Jaron Blossomgame",
@@ -5899,8 +5965,8 @@
       "base_p_star": 0.036,
       "base_exp_vorp": 0.761,
       "base_tier": "bust",
-      "comb_p_star": 0.033,
-      "comb_exp_vorp": 0.731
+      "comb_p_star": 0.04,
+      "comb_exp_vorp": 0.309
     },
     {
       "player_name": "Deandre Ayton",
@@ -5915,8 +5981,8 @@
       "base_p_star": 0.493,
       "base_exp_vorp": 16.013,
       "base_tier": "all_star",
-      "comb_p_star": 0.465,
-      "comb_exp_vorp": 14.656
+      "comb_p_star": 0.536,
+      "comb_exp_vorp": 11.847
     },
     {
       "player_name": "Marvin Bagley III",
@@ -5931,8 +5997,8 @@
       "base_p_star": 0.478,
       "base_exp_vorp": 15.461,
       "base_tier": "all_star",
-      "comb_p_star": 0.464,
-      "comb_exp_vorp": 14.331
+      "comb_p_star": 0.518,
+      "comb_exp_vorp": 11.667
     },
     {
       "player_name": "Jaren Jackson Jr.",
@@ -5947,8 +6013,8 @@
       "base_p_star": 0.444,
       "base_exp_vorp": 14.158,
       "base_tier": "all_star",
-      "comb_p_star": 0.423,
-      "comb_exp_vorp": 12.429
+      "comb_p_star": 0.419,
+      "comb_exp_vorp": 9.742
     },
     {
       "player_name": "Trae Young",
@@ -5963,8 +6029,8 @@
       "base_p_star": 0.425,
       "base_exp_vorp": 13.415,
       "base_tier": "all_star",
-      "comb_p_star": 0.424,
-      "comb_exp_vorp": 14.407
+      "comb_p_star": 0.419,
+      "comb_exp_vorp": 12.705
     },
     {
       "player_name": "Mo Bamba",
@@ -5979,8 +6045,8 @@
       "base_p_star": 0.405,
       "base_exp_vorp": 12.624,
       "base_tier": "all_star",
-      "comb_p_star": 0.363,
-      "comb_exp_vorp": 11.362
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 9.029
     },
     {
       "player_name": "Wendell Carter Jr.",
@@ -5995,8 +6061,8 @@
       "base_p_star": 0.383,
       "base_exp_vorp": 11.801,
       "base_tier": "all_star",
-      "comb_p_star": 0.404,
-      "comb_exp_vorp": 11.8
+      "comb_p_star": 0.419,
+      "comb_exp_vorp": 9.987
     },
     {
       "player_name": "Collin Sexton",
@@ -6011,8 +6077,8 @@
       "base_p_star": 0.362,
       "base_exp_vorp": 10.962,
       "base_tier": "bust",
-      "comb_p_star": 0.356,
-      "comb_exp_vorp": 10.431
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 8.554
     },
     {
       "player_name": "Kevin Knox",
@@ -6027,8 +6093,8 @@
       "base_p_star": 0.339,
       "base_exp_vorp": 10.129,
       "base_tier": "bust",
-      "comb_p_star": 0.354,
-      "comb_exp_vorp": 9.515
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 7.72
     },
     {
       "player_name": "Mikal Bridges",
@@ -6043,8 +6109,8 @@
       "base_p_star": 0.318,
       "base_exp_vorp": 9.321,
       "base_tier": "bust",
-      "comb_p_star": 0.261,
-      "comb_exp_vorp": 7.161
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 4.968
     },
     {
       "player_name": "Shai Gilgeous-Alexander",
@@ -6059,8 +6125,8 @@
       "base_p_star": 0.297,
       "base_exp_vorp": 8.557,
       "base_tier": "bust",
-      "comb_p_star": 0.341,
-      "comb_exp_vorp": 10.479
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 9.717
     },
     {
       "player_name": "Miles Bridges",
@@ -6075,8 +6141,8 @@
       "base_p_star": 0.278,
       "base_exp_vorp": 7.853,
       "base_tier": "bust",
-      "comb_p_star": 0.267,
-      "comb_exp_vorp": 7.477
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 6.059
     },
     {
       "player_name": "Jerome Robinson",
@@ -6091,8 +6157,8 @@
       "base_p_star": 0.261,
       "base_exp_vorp": 7.219,
       "base_tier": "bust",
-      "comb_p_star": 0.203,
-      "comb_exp_vorp": 5.71
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 4.006
     },
     {
       "player_name": "Michael Porter Jr.",
@@ -6107,8 +6173,8 @@
       "base_p_star": 0.246,
       "base_exp_vorp": 6.662,
       "base_tier": "bust",
-      "comb_p_star": 0.255,
-      "comb_exp_vorp": 6.881
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 5.814
     },
     {
       "player_name": "Troy Brown Jr.",
@@ -6123,8 +6189,8 @@
       "base_p_star": 0.233,
       "base_exp_vorp": 6.182,
       "base_tier": "bust",
-      "comb_p_star": 0.303,
-      "comb_exp_vorp": 8.491
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 8.168
     },
     {
       "player_name": "Zhaire Smith",
@@ -6139,8 +6205,8 @@
       "base_p_star": 0.222,
       "base_exp_vorp": 5.775,
       "base_tier": "bust",
-      "comb_p_star": 0.22,
-      "comb_exp_vorp": 5.738
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 4.703
     },
     {
       "player_name": "Donte DiVincenzo",
@@ -6155,8 +6221,8 @@
       "base_p_star": 0.213,
       "base_exp_vorp": 5.435,
       "base_tier": "bust",
-      "comb_p_star": 0.177,
-      "comb_exp_vorp": 4.767
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 3.572
     },
     {
       "player_name": "Lonnie Walker IV",
@@ -6171,8 +6237,8 @@
       "base_p_star": 0.205,
       "base_exp_vorp": 5.15,
       "base_tier": "bust",
-      "comb_p_star": 0.216,
-      "comb_exp_vorp": 5.475
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 4.641
     },
     {
       "player_name": "Kevin Huerter",
@@ -6187,8 +6253,8 @@
       "base_p_star": 0.198,
       "base_exp_vorp": 4.911,
       "base_tier": "bust",
-      "comb_p_star": 0.176,
-      "comb_exp_vorp": 4.506
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 3.465
     },
     {
       "player_name": "Josh Okogie",
@@ -6203,8 +6269,8 @@
       "base_p_star": 0.192,
       "base_exp_vorp": 4.706,
       "base_tier": "bust",
-      "comb_p_star": 0.25,
-      "comb_exp_vorp": 6.903
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 6.737
     },
     {
       "player_name": "Grayson Allen",
@@ -6219,8 +6285,8 @@
       "base_p_star": 0.186,
       "base_exp_vorp": 4.523,
       "base_tier": "bust",
-      "comb_p_star": 0.21,
-      "comb_exp_vorp": 4.912
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 4.18
     },
     {
       "player_name": "Chandler Hutchison",
@@ -6235,8 +6301,8 @@
       "base_p_star": 0.18,
       "base_exp_vorp": 4.354,
       "base_tier": "bust",
-      "comb_p_star": 0.182,
-      "comb_exp_vorp": 4.027
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 3.085
     },
     {
       "player_name": "Aaron Holiday",
@@ -6251,8 +6317,8 @@
       "base_p_star": 0.174,
       "base_exp_vorp": 4.191,
       "base_tier": "bust",
-      "comb_p_star": 0.17,
-      "comb_exp_vorp": 4.045
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 3.184
     },
     {
       "player_name": "Moritz Wagner",
@@ -6267,8 +6333,8 @@
       "base_p_star": 0.163,
       "base_exp_vorp": 3.864,
       "base_tier": "bust",
-      "comb_p_star": 0.144,
-      "comb_exp_vorp": 3.632
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 2.785
     },
     {
       "player_name": "Landry Shamet",
@@ -6283,8 +6349,8 @@
       "base_p_star": 0.157,
       "base_exp_vorp": 3.695,
       "base_tier": "bust",
-      "comb_p_star": 0.125,
-      "comb_exp_vorp": 3.447
+      "comb_p_star": 0.143,
+      "comb_exp_vorp": 2.618
     },
     {
       "player_name": "Robert Williams",
@@ -6299,8 +6365,8 @@
       "base_p_star": 0.151,
       "base_exp_vorp": 3.522,
       "base_tier": "bust",
-      "comb_p_star": 0.145,
-      "comb_exp_vorp": 3.361
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 2.582
     },
     {
       "player_name": "Jacob Evans",
@@ -6315,8 +6381,8 @@
       "base_p_star": 0.145,
       "base_exp_vorp": 3.345,
       "base_tier": "bust",
-      "comb_p_star": 0.115,
-      "comb_exp_vorp": 2.873
+      "comb_p_star": 0.062,
+      "comb_exp_vorp": 2.016
     },
     {
       "player_name": "Omari Spellman",
@@ -6331,8 +6397,8 @@
       "base_p_star": 0.133,
       "base_exp_vorp": 2.992,
       "base_tier": "bust",
-      "comb_p_star": 0.107,
-      "comb_exp_vorp": 3.046
+      "comb_p_star": 0.062,
+      "comb_exp_vorp": 2.407
     },
     {
       "player_name": "Jevon Carter",
@@ -6347,8 +6413,8 @@
       "base_p_star": 0.119,
       "base_exp_vorp": 2.652,
       "base_tier": "bust",
-      "comb_p_star": 0.165,
-      "comb_exp_vorp": 3.626
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 3.332
     },
     {
       "player_name": "Jalen Brunson",
@@ -6363,8 +6429,8 @@
       "base_p_star": 0.112,
       "base_exp_vorp": 2.495,
       "base_tier": "bust",
-      "comb_p_star": 0.096,
-      "comb_exp_vorp": 2.547
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.973
     },
     {
       "player_name": "Devonte' Graham",
@@ -6379,8 +6445,8 @@
       "base_p_star": 0.104,
       "base_exp_vorp": 2.35,
       "base_tier": "bust",
-      "comb_p_star": 0.088,
-      "comb_exp_vorp": 2.075
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.413
     },
     {
       "player_name": "Melvin Frazier",
@@ -6395,8 +6461,8 @@
       "base_p_star": 0.098,
       "base_exp_vorp": 2.219,
       "base_tier": "bust",
-      "comb_p_star": 0.138,
-      "comb_exp_vorp": 3.26
+      "comb_p_star": 0.155,
+      "comb_exp_vorp": 3.044
     },
     {
       "player_name": "Gary Trent Jr.",
@@ -6411,8 +6477,8 @@
       "base_p_star": 0.085,
       "base_exp_vorp": 2.008,
       "base_tier": "bust",
-      "comb_p_star": 0.076,
-      "comb_exp_vorp": 2.204
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.741
     },
     {
       "player_name": "Khyri Thomas",
@@ -6427,8 +6493,8 @@
       "base_p_star": 0.081,
       "base_exp_vorp": 1.93,
       "base_tier": "bust",
-      "comb_p_star": 0.094,
-      "comb_exp_vorp": 2.615
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 2.321
     },
     {
       "player_name": "Jarred Vanderbilt",
@@ -6443,8 +6509,8 @@
       "base_p_star": 0.072,
       "base_exp_vorp": 1.788,
       "base_tier": "bust",
-      "comb_p_star": 0.071,
-      "comb_exp_vorp": 1.744
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.231
     },
     {
       "player_name": "Bruce Brown",
@@ -6459,8 +6525,8 @@
       "base_p_star": 0.07,
       "base_exp_vorp": 1.764,
       "base_tier": "bust",
-      "comb_p_star": 0.076,
-      "comb_exp_vorp": 1.982
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.558
     },
     {
       "player_name": "Hamidou Diallo",
@@ -6475,8 +6541,8 @@
       "base_p_star": 0.067,
       "base_exp_vorp": 1.692,
       "base_tier": "bust",
-      "comb_p_star": 0.069,
-      "comb_exp_vorp": 1.596
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.079
     },
     {
       "player_name": "De'Anthony Melton",
@@ -6491,8 +6557,8 @@
       "base_p_star": 0.066,
       "base_exp_vorp": 1.652,
       "base_tier": "bust",
-      "comb_p_star": 0.087,
-      "comb_exp_vorp": 2.126
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.8
     },
     {
       "player_name": "Svi Mykhailiuk",
@@ -6507,8 +6573,8 @@
       "base_p_star": 0.063,
       "base_exp_vorp": 1.597,
       "base_tier": "bust",
-      "comb_p_star": 0.063,
-      "comb_exp_vorp": 1.749
+      "comb_p_star": 0.05,
+      "comb_exp_vorp": 1.325
     },
     {
       "player_name": "Keita Bates-Diop",
@@ -6523,8 +6589,8 @@
       "base_p_star": 0.06,
       "base_exp_vorp": 1.527,
       "base_tier": "bust",
-      "comb_p_star": 0.039,
-      "comb_exp_vorp": 1.114
+      "comb_p_star": 0.004,
+      "comb_exp_vorp": 0.515
     },
     {
       "player_name": "Chimezie Metu",
@@ -6539,8 +6605,8 @@
       "base_p_star": 0.057,
       "base_exp_vorp": 1.442,
       "base_tier": "bust",
-      "comb_p_star": 0.048,
-      "comb_exp_vorp": 1.271
+      "comb_p_star": 0.033,
+      "comb_exp_vorp": 0.762
     },
     {
       "player_name": "Alize Johnson",
@@ -6555,8 +6621,8 @@
       "base_p_star": 0.053,
       "base_exp_vorp": 1.346,
       "base_tier": "bust",
-      "comb_p_star": 0.039,
-      "comb_exp_vorp": 1.123
+      "comb_p_star": 0.006,
+      "comb_exp_vorp": 0.61
     },
     {
       "player_name": "Vince Edwards",
@@ -6571,8 +6637,8 @@
       "base_p_star": 0.044,
       "base_exp_vorp": 1.138,
       "base_tier": "bust",
-      "comb_p_star": 0.034,
-      "comb_exp_vorp": 0.819
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.302
     },
     {
       "player_name": "Devon Hall",
@@ -6587,8 +6653,8 @@
       "base_p_star": 0.04,
       "base_exp_vorp": 1.038,
       "base_tier": "bust",
-      "comb_p_star": 0.052,
-      "comb_exp_vorp": 1.169
+      "comb_p_star": 0.033,
+      "comb_exp_vorp": 0.812
     },
     {
       "player_name": "Shake Milton",
@@ -6603,8 +6669,8 @@
       "base_p_star": 0.036,
       "base_exp_vorp": 0.946,
       "base_tier": "bust",
-      "comb_p_star": 0.045,
-      "comb_exp_vorp": 1.273
+      "comb_p_star": 0.033,
+      "comb_exp_vorp": 0.992
     },
     {
       "player_name": "Ray Spalding",
@@ -6619,8 +6685,8 @@
       "base_p_star": 0.032,
       "base_exp_vorp": 0.804,
       "base_tier": "bust",
-      "comb_p_star": 0.054,
-      "comb_exp_vorp": 1.402
+      "comb_p_star": 0.033,
+      "comb_exp_vorp": 1.228
     },
     {
       "player_name": "Kevin Hervey",
@@ -6635,8 +6701,8 @@
       "base_p_star": 0.031,
       "base_exp_vorp": 0.756,
       "base_tier": "bust",
-      "comb_p_star": 0.028,
-      "comb_exp_vorp": 0.928
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.621
     },
     {
       "player_name": "Thomas Welsh",
@@ -6651,8 +6717,8 @@
       "base_p_star": 0.031,
       "base_exp_vorp": 0.724,
       "base_tier": "bust",
-      "comb_p_star": 0.027,
-      "comb_exp_vorp": 0.662
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.283
     },
     {
       "player_name": "George King",
@@ -6667,8 +6733,8 @@
       "base_p_star": 0.032,
       "base_exp_vorp": 0.707,
       "base_tier": "bust",
-      "comb_p_star": 0.023,
-      "comb_exp_vorp": 0.503
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.081
     },
     {
       "player_name": "Kostas Antetokounmpo",
@@ -6683,8 +6749,8 @@
       "base_p_star": 0.035,
       "base_exp_vorp": 0.703,
       "base_tier": "bust",
-      "comb_p_star": 0.025,
-      "comb_exp_vorp": 0.402
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": -0.053
     },
     {
       "player_name": "Zion Williamson",
@@ -6699,8 +6765,8 @@
       "base_p_star": 0.473,
       "base_exp_vorp": 15.497,
       "base_tier": "all_star",
-      "comb_p_star": 0.462,
-      "comb_exp_vorp": 15.149
+      "comb_p_star": 0.421,
+      "comb_exp_vorp": 12.642
     },
     {
       "player_name": "Ja Morant",
@@ -6715,8 +6781,8 @@
       "base_p_star": 0.46,
       "base_exp_vorp": 14.982,
       "base_tier": "all_star",
-      "comb_p_star": 0.471,
-      "comb_exp_vorp": 16.641
+      "comb_p_star": 0.625,
+      "comb_exp_vorp": 14.961
     },
     {
       "player_name": "RJ Barrett",
@@ -6731,8 +6797,8 @@
       "base_p_star": 0.445,
       "base_exp_vorp": 14.403,
       "base_tier": "all_star",
-      "comb_p_star": 0.434,
-      "comb_exp_vorp": 13.151
+      "comb_p_star": 0.421,
+      "comb_exp_vorp": 10.455
     },
     {
       "player_name": "De'Andre Hunter",
@@ -6747,8 +6813,8 @@
       "base_p_star": 0.43,
       "base_exp_vorp": 13.764,
       "base_tier": "all_star",
-      "comb_p_star": 0.276,
-      "comb_exp_vorp": 8.882
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 4.906
     },
     {
       "player_name": "Darius Garland",
@@ -6763,8 +6829,8 @@
       "base_p_star": 0.412,
       "base_exp_vorp": 13.071,
       "base_tier": "all_star",
-      "comb_p_star": 0.384,
-      "comb_exp_vorp": 11.635
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 9.052
     },
     {
       "player_name": "Jarrett Culver",
@@ -6779,8 +6845,8 @@
       "base_p_star": 0.394,
       "base_exp_vorp": 12.333,
       "base_tier": "all_star",
-      "comb_p_star": 0.405,
-      "comb_exp_vorp": 12.167
+      "comb_p_star": 0.375,
+      "comb_exp_vorp": 10.163
     },
     {
       "player_name": "Coby White",
@@ -6795,8 +6861,8 @@
       "base_p_star": 0.374,
       "base_exp_vorp": 11.564,
       "base_tier": "starter",
-      "comb_p_star": 0.377,
-      "comb_exp_vorp": 11.282
+      "comb_p_star": 0.364,
+      "comb_exp_vorp": 9.34
     },
     {
       "player_name": "Jaxson Hayes",
@@ -6811,8 +6877,8 @@
       "base_p_star": 0.354,
       "base_exp_vorp": 10.779,
       "base_tier": "bust",
-      "comb_p_star": 0.33,
-      "comb_exp_vorp": 10.089
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 8.102
     },
     {
       "player_name": "Rui Hachimura",
@@ -6827,8 +6893,8 @@
       "base_p_star": 0.333,
       "base_exp_vorp": 9.995,
       "base_tier": "bust",
-      "comb_p_star": 0.275,
-      "comb_exp_vorp": 7.897
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 5.487
     },
     {
       "player_name": "Cam Reddish",
@@ -6843,8 +6909,8 @@
       "base_p_star": 0.313,
       "base_exp_vorp": 9.23,
       "base_tier": "bust",
-      "comb_p_star": 0.334,
-      "comb_exp_vorp": 9.315
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 7.832
     },
     {
       "player_name": "Cameron Johnson",
@@ -6859,8 +6925,8 @@
       "base_p_star": 0.294,
       "base_exp_vorp": 8.501,
       "base_tier": "bust",
-      "comb_p_star": 0.245,
-      "comb_exp_vorp": 6.35
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 4.125
     },
     {
       "player_name": "P.J. Washington",
@@ -6875,8 +6941,8 @@
       "base_p_star": 0.275,
       "base_exp_vorp": 7.821,
       "base_tier": "bust",
-      "comb_p_star": 0.23,
-      "comb_exp_vorp": 7.11
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 5.521
     },
     {
       "player_name": "Tyler Herro",
@@ -6891,8 +6957,8 @@
       "base_p_star": 0.258,
       "base_exp_vorp": 7.2,
       "base_tier": "bust",
-      "comb_p_star": 0.272,
-      "comb_exp_vorp": 7.6
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 6.514
     },
     {
       "player_name": "Romeo Langford",
@@ -6907,8 +6973,8 @@
       "base_p_star": 0.243,
       "base_exp_vorp": 6.646,
       "base_tier": "bust",
-      "comb_p_star": 0.245,
-      "comb_exp_vorp": 6.623
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 5.454
     },
     {
       "player_name": "Chuma Okeke",
@@ -6923,8 +6989,8 @@
       "base_p_star": 0.219,
       "base_exp_vorp": 5.743,
       "base_tier": "bust",
-      "comb_p_star": 0.233,
-      "comb_exp_vorp": 6.221
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 5.365
     },
     {
       "player_name": "Nickeil Alexander-Walker",
@@ -6939,8 +7005,8 @@
       "base_p_star": 0.209,
       "base_exp_vorp": 5.387,
       "base_tier": "bust",
-      "comb_p_star": 0.265,
-      "comb_exp_vorp": 7.194
+      "comb_p_star": 0.352,
+      "comb_exp_vorp": 6.886
     },
     {
       "player_name": "Matisse Thybulle",
@@ -6955,8 +7021,8 @@
       "base_p_star": 0.185,
       "base_exp_vorp": 4.618,
       "base_tier": "bust",
-      "comb_p_star": 0.229,
-      "comb_exp_vorp": 5.409
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 4.825
     },
     {
       "player_name": "Brandon Clarke",
@@ -6971,8 +7037,8 @@
       "base_p_star": 0.179,
       "base_exp_vorp": 4.429,
       "base_tier": "bust",
-      "comb_p_star": 0.188,
-      "comb_exp_vorp": 4.414
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 3.553
     },
     {
       "player_name": "Grant Williams",
@@ -6987,8 +7053,8 @@
       "base_p_star": 0.173,
       "base_exp_vorp": 4.259,
       "base_tier": "bust",
-      "comb_p_star": 0.165,
-      "comb_exp_vorp": 4.229
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 3.386
     },
     {
       "player_name": "Ty Jerome",
@@ -7003,8 +7069,8 @@
       "base_p_star": 0.161,
       "base_exp_vorp": 3.947,
       "base_tier": "bust",
-      "comb_p_star": 0.172,
-      "comb_exp_vorp": 4.273
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 3.606
     },
     {
       "player_name": "Nassir Little",
@@ -7019,8 +7085,8 @@
       "base_p_star": 0.156,
       "base_exp_vorp": 3.795,
       "base_tier": "bust",
-      "comb_p_star": 0.141,
-      "comb_exp_vorp": 3.548
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 2.685
     },
     {
       "player_name": "Dylan Windler",
@@ -7035,8 +7101,8 @@
       "base_p_star": 0.15,
       "base_exp_vorp": 3.643,
       "base_tier": "bust",
-      "comb_p_star": 0.18,
-      "comb_exp_vorp": 4.322
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 3.829
     },
     {
       "player_name": "Mfiondu Kabengele",
@@ -7051,8 +7117,8 @@
       "base_p_star": 0.146,
       "base_exp_vorp": 3.489,
       "base_tier": "bust",
-      "comb_p_star": 0.096,
-      "comb_exp_vorp": 2.645
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.599
     },
     {
       "player_name": "Jordan Poole",
@@ -7067,8 +7133,8 @@
       "base_p_star": 0.141,
       "base_exp_vorp": 3.333,
       "base_tier": "bust",
-      "comb_p_star": 0.106,
-      "comb_exp_vorp": 3.066
+      "comb_p_star": 0.079,
+      "comb_exp_vorp": 2.26
     },
     {
       "player_name": "Keldon Johnson",
@@ -7083,8 +7149,8 @@
       "base_p_star": 0.136,
       "base_exp_vorp": 3.175,
       "base_tier": "bust",
-      "comb_p_star": 0.118,
-      "comb_exp_vorp": 3.287
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 2.646
     },
     {
       "player_name": "Kevin Porter Jr.",
@@ -7099,8 +7165,8 @@
       "base_p_star": 0.13,
       "base_exp_vorp": 3.016,
       "base_tier": "bust",
-      "comb_p_star": 0.125,
-      "comb_exp_vorp": 3.008
+      "comb_p_star": 0.145,
+      "comb_exp_vorp": 2.343
     },
     {
       "player_name": "Nic Claxton",
@@ -7115,8 +7181,8 @@
       "base_p_star": 0.125,
       "base_exp_vorp": 2.858,
       "base_tier": "bust",
-      "comb_p_star": 0.102,
-      "comb_exp_vorp": 2.779
+      "comb_p_star": 0.079,
+      "comb_exp_vorp": 2.109
     },
     {
       "player_name": "KZ Okpala",
@@ -7131,8 +7197,8 @@
       "base_p_star": 0.118,
       "base_exp_vorp": 2.703,
       "base_tier": "bust",
-      "comb_p_star": 0.089,
-      "comb_exp_vorp": 2.352
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.6
     },
     {
       "player_name": "Carsen Edwards",
@@ -7147,8 +7213,8 @@
       "base_p_star": 0.112,
       "base_exp_vorp": 2.553,
       "base_tier": "bust",
-      "comb_p_star": 0.101,
-      "comb_exp_vorp": 2.427
+      "comb_p_star": 0.079,
+      "comb_exp_vorp": 1.78
     },
     {
       "player_name": "Bruno Fernando",
@@ -7163,8 +7229,8 @@
       "base_p_star": 0.105,
       "base_exp_vorp": 2.411,
       "base_tier": "bust",
-      "comb_p_star": 0.093,
-      "comb_exp_vorp": 2.106
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.411
     },
     {
       "player_name": "Cody Martin",
@@ -7179,8 +7245,8 @@
       "base_p_star": 0.092,
       "base_exp_vorp": 2.161,
       "base_tier": "bust",
-      "comb_p_star": 0.099,
-      "comb_exp_vorp": 2.28
+      "comb_p_star": 0.079,
+      "comb_exp_vorp": 1.781
     },
     {
       "player_name": "Daniel Gafford",
@@ -7195,8 +7261,8 @@
       "base_p_star": 0.08,
       "base_exp_vorp": 1.969,
       "base_tier": "bust",
-      "comb_p_star": 0.074,
-      "comb_exp_vorp": 1.834
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.265
     },
     {
       "player_name": "Justin James",
@@ -7211,8 +7277,8 @@
       "base_p_star": 0.072,
       "base_exp_vorp": 1.84,
       "base_tier": "bust",
-      "comb_p_star": 0.059,
-      "comb_exp_vorp": 1.57
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.968
     },
     {
       "player_name": "Eric Paschall",
@@ -7227,8 +7293,8 @@
       "base_p_star": 0.069,
       "base_exp_vorp": 1.795,
       "base_tier": "bust",
-      "comb_p_star": 0.075,
-      "comb_exp_vorp": 1.748
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.235
     },
     {
       "player_name": "Admiral Schofield",
@@ -7243,8 +7309,8 @@
       "base_p_star": 0.067,
       "base_exp_vorp": 1.759,
       "base_tier": "bust",
-      "comb_p_star": 0.065,
-      "comb_exp_vorp": 1.68
+      "comb_p_star": 0.045,
+      "comb_exp_vorp": 1.16
     },
     {
       "player_name": "Jaylen Nowell",
@@ -7259,8 +7325,8 @@
       "base_p_star": 0.066,
       "base_exp_vorp": 1.728,
       "base_tier": "bust",
-      "comb_p_star": 0.073,
-      "comb_exp_vorp": 1.964
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.568
     },
     {
       "player_name": "Bol Bol",
@@ -7275,8 +7341,8 @@
       "base_p_star": 0.064,
       "base_exp_vorp": 1.694,
       "base_tier": "bust",
-      "comb_p_star": 0.042,
-      "comb_exp_vorp": 1.397
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.805
     },
     {
       "player_name": "Isaiah Roby",
@@ -7291,8 +7357,8 @@
       "base_p_star": 0.063,
       "base_exp_vorp": 1.655,
       "base_tier": "bust",
-      "comb_p_star": 0.074,
-      "comb_exp_vorp": 2.127
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.83
     },
     {
       "player_name": "Talen Horton-Tucker",
@@ -7307,8 +7373,8 @@
       "base_p_star": 0.061,
       "base_exp_vorp": 1.604,
       "base_tier": "bust",
-      "comb_p_star": 0.079,
-      "comb_exp_vorp": 1.902
+      "comb_p_star": 0.047,
+      "comb_exp_vorp": 1.546
     },
     {
       "player_name": "Ignas Brazdeikis",
@@ -7323,8 +7389,8 @@
       "base_p_star": 0.059,
       "base_exp_vorp": 1.54,
       "base_tier": "bust",
-      "comb_p_star": 0.043,
-      "comb_exp_vorp": 1.22
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.64
     },
     {
       "player_name": "Terance Mann",
@@ -7339,8 +7405,8 @@
       "base_p_star": 0.055,
       "base_exp_vorp": 1.461,
       "base_tier": "bust",
-      "comb_p_star": 0.053,
-      "comb_exp_vorp": 1.08
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.489
     },
     {
       "player_name": "Quinndary Weatherspoon",
@@ -7355,8 +7421,8 @@
       "base_p_star": 0.052,
       "base_exp_vorp": 1.369,
       "base_tier": "bust",
-      "comb_p_star": 0.055,
-      "comb_exp_vorp": 1.484
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 1.092
     },
     {
       "player_name": "Jarrell Brantley",
@@ -7371,8 +7437,8 @@
       "base_p_star": 0.048,
       "base_exp_vorp": 1.267,
       "base_tier": "bust",
-      "comb_p_star": 0.043,
-      "comb_exp_vorp": 1.283
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.868
     },
     {
       "player_name": "Tremont Waters",
@@ -7387,8 +7453,8 @@
       "base_p_star": 0.043,
       "base_exp_vorp": 1.16,
       "base_tier": "bust",
-      "comb_p_star": 0.047,
-      "comb_exp_vorp": 1.38
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 1.055
     },
     {
       "player_name": "Jalen McDaniels",
@@ -7403,8 +7469,8 @@
       "base_p_star": 0.039,
       "base_exp_vorp": 1.052,
       "base_tier": "bust",
-      "comb_p_star": 0.03,
-      "comb_exp_vorp": 0.926
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.486
     },
     {
       "player_name": "Justin Wright-Foreman",
@@ -7419,8 +7485,8 @@
       "base_p_star": 0.035,
       "base_exp_vorp": 0.95,
       "base_tier": "bust",
-      "comb_p_star": 0.04,
-      "comb_exp_vorp": 1.025
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.675
     },
     {
       "player_name": "Marial Shayok",
@@ -7435,8 +7501,8 @@
       "base_p_star": 0.032,
       "base_exp_vorp": 0.857,
       "base_tier": "bust",
-      "comb_p_star": 0.037,
-      "comb_exp_vorp": 0.879
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.521
     },
     {
       "player_name": "Kyle Guy",
@@ -7451,8 +7517,8 @@
       "base_p_star": 0.029,
       "base_exp_vorp": 0.777,
       "base_tier": "bust",
-      "comb_p_star": 0.041,
-      "comb_exp_vorp": 0.939
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.645
     },
     {
       "player_name": "Jordan Bone",
@@ -7467,8 +7533,8 @@
       "base_p_star": 0.027,
       "base_exp_vorp": 0.662,
       "base_tier": "bust",
-      "comb_p_star": 0.043,
-      "comb_exp_vorp": 0.881
+      "comb_p_star": 0.03,
+      "comb_exp_vorp": 0.625
     },
     {
       "player_name": "Miye Oni",
@@ -7483,8 +7549,8 @@
       "base_p_star": 0.027,
       "base_exp_vorp": 0.627,
       "base_tier": "bust",
-      "comb_p_star": 0.021,
-      "comb_exp_vorp": 0.664
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": 0.343
     },
     {
       "player_name": "Dewan Hernandez",
@@ -7499,8 +7565,8 @@
       "base_p_star": 0.028,
       "base_exp_vorp": 0.606,
       "base_tier": "bust",
-      "comb_p_star": 0.021,
-      "comb_exp_vorp": 0.353
+      "comb_p_star": 0.0,
+      "comb_exp_vorp": -0.073
     }
   ]
 }

@@ -106,25 +106,61 @@ Reproduce with `make backtest`.
 | Metric | Scouting model | Draft-position baseline | Combined |
 |--------|:---:|:---:|:---:|
 | Within-1-tier accuracy | **0.75** | 0.71 | — |
-| P(all-star+) AUC | **0.78** | 0.76 | 0.77 |
+| P(all-star+) AUC | **0.78** | 0.76 | 0.75 |
 | P(all-star+) calibration (ECE ↓) | **0.023** | 0.029 | 0.026 |
-| Career-VORP ranking (Spearman ↑) | **0.38** | 0.36 | 0.38 |
+| Career-VORP ranking (Spearman ↑) | **0.38** | 0.36 | 0.37 |
 
-**The scouting model beats the draft-position baseline** on star detection,
-calibration, career-value ranking, and tier accuracy — and holds up on the
-strict held-out cohorts (AUC 0.79 vs 0.80; ranking 0.42 vs 0.41). The
-generalizable levers (draft capital + strength of competition) carry the signal;
-**recruiting rank, conference, age-vs-class and combine athleticism were all
-tested and did *not* improve out-of-sample** prediction — draft capital already
-encodes them — so they were left out rather than added as noise. An honest
-negative result. (Profile stats *alone* still lose to draft position; the value
-is in combining profile with draft capital.)
+The scouting model is **numerically ahead** of the draft-position baseline on
+every metric — but, scored honestly with a paired bootstrap, the gap is **not
+statistically significant**: ΔAUC +0.018 (95% CI −0.009 to +0.045), ΔSpearman
++0.020 (CI −0.015 to +0.057). Both intervals straddle zero. We report this
+rather than rounding it into a "win" (`make backtest` prints the CIs).
+
+**Where the model *does* demonstrably add value — within draft-pick bands.** The
+draft-position baseline is nearly flat inside a narrow band, so any
+discrimination there is signal the *profile* contributes. Splitting star-AUC by
+pick:
+
+| Picks | n | Model AUC | Baseline AUC | Δ |
+|------|:--:|:--:|:--:|:--:|
+| 1–5 | 43 | **0.66** | 0.55 | +0.11 |
+| 15–30 | 131 | **0.59** | 0.44 | +0.15 |
+| 31–60 | 202 | **0.58** | 0.52 | +0.06 |
+
+This is the real result: the model separates players picked *near each other*,
+which is exactly the job — the overall AUC just washes it out because base rates
+differ across bands.
+
+The generalizable levers (draft capital + strength of competition) carry the
+signal; **recruiting rank, conference, age-vs-class and combine athleticism were
+all tested and did *not* improve out-of-sample** prediction — draft capital
+already encodes them. Two further **honest negative results** from the bake-off:
+
+- **Combining** profile + draft position (naive average, a leakage-free
+  walk-forward logistic *stack*, and isotonic recalibration — `eval/stacker.py`)
+  does **not** beat the standalone profile model out-of-sample. We keep the
+  principled stacker but report the standalone model.
+- A **directly-supervised GBM** (`make supervised`) on the same features
+  *underperforms* the kNN (AUC 0.74 vs 0.78, significantly) — with ~460 matured
+  examples and a 15% star rate, the kNN's local averaging wins. It also barely
+  changes the **range compression** below, confirming that's not a kNN artifact.
 
 ![Calibration and accuracy vs baseline](eval/calibration.png)
 
-**Limitations** (stated honestly): small early-cohort samples; survivorship and
-era effects; training uses earlier cohorts' eventually-realized careers (fair to
-both model and baseline). See `eval/backtest.py` / `eval/tune_context.py`.
+**Known weakness — the point estimate compresses the range.** `expected_career_vorp`
+is a similarity-weighted *mean*, so it cannot reach the tails: eventual
+superstars get a predicted ~11 career VORP (they average ~40). This is inherent
+to any conditional-*mean* predictor (the GBM does it too). The honest signal for
+upside lives in the **distribution's upper quantiles**, which the model already
+computes and which *do* separate the tiers (superstar p90 ≈ 31 vs bust p90 ≈ 11)
+— so feature the `career_vorp_band` p90/p95, not the mean, for "ceiling".
+
+**Limitations** (stated honestly): small early-cohort samples (only ~15
+superstars in the test window, so high-confidence calibration is barely
+measurable); survivorship and era effects; career VORP is cumulative, so it
+rewards longevity (corr 0.65 with games played) and is era-confounded; training
+uses earlier cohorts' eventually-realized careers (fair to both model and
+baseline). See `eval/backtest.py`, `eval/supervised.py`, `eval/tune_context.py`.
 
 ## Web app (Phase 7)
 
@@ -152,7 +188,10 @@ scouting & strategy report. Run with `make agent` (or pass your own question:
 
 Two modes over the same tools:
 - **Autonomous** — with `ANTHROPIC_API_KEY` set (and `uv sync --extra agent`), an
-  LLM plans and chooses tool calls itself, then synthesizes the report.
+  LLM plans and chooses tool calls itself, then synthesizes the report. Easiest
+  setup: `cp .env.example .env` and paste your key into the git-ignored `.env` —
+  the runner auto-loads it (via `python-dotenv`). An invalid/absent key falls
+  back to scripted mode instead of erroring.
 - **Scripted** — with no key, a deterministic orchestrator routes the request to
   the relevant tools and synthesizes the report from their outputs, so the agent
   is fully demonstrable offline.

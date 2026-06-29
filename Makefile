@@ -1,4 +1,4 @@
-.PHONY: install data data-sample test lint clean
+.PHONY: install data data-sample backtest tune supervised test lint clean
 
 install:
 	uv sync --extra dev
@@ -52,6 +52,11 @@ enrich:
 # Tune the scouting model's hyperparameters on the back-test (not on AJ).
 tune:
 	uv run python -m eval.tune_context
+
+# Phase 4+: directly-supervised GBM prototype vs the kNN model + baseline
+# (significance CIs + range-compression check). An honest model bake-off.
+supervised:
+	uv run python -m eval.supervised
 
 # Phase 6: run the agent. Scripted (no key) by default; autonomous LLM mode if
 # ANTHROPIC_API_KEY is set and `uv sync --extra agent` has been run.
